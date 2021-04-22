@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,6 +26,7 @@ import { UploadingComponent } from './components/uploading/uploading.component';
 import { VideoComponent } from './components/video/video.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { ModalsComponent } from './components/modals/modals.component';
+import { UploaderComponent } from './components/uploader/uploader.component';
 
 @NgModule({
   declarations: [
@@ -46,14 +48,16 @@ import { ModalsComponent } from './components/modals/modals.component';
     UploadingComponent,
     VideoComponent,
     TopbarComponent,
-    ModalsComponent
+    ModalsComponent,
+    UploaderComponent
   ],
   imports: [
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FileUploadModule
   ],
   exports: [
     SidebarComponent
