@@ -30,7 +30,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/bootstrap.js",
+              "src/assets/js/owl.carousel.js"
+              
+            ]
           },
           "configurations": {
             "production": {
