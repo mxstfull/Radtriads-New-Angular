@@ -1,0 +1,126 @@
+<div id="wrapper" class="auth-wrapper">
+  <div class="sign-up-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="sign-logo">
+            <a routerLink="/"
+              ><img
+                src="../../../assets/img/main-logo.png"
+                width="100px"
+                alt="logo"
+            /></a>
+          </div>
+        </div>
+        <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="sign-box-outer">
+            <div class="sign-box">
+              <h3>Sign Up</h3>
+              <a routerLink="/login" class="sign-in">Sign In</a>
+              <div class="clear"></div>
+              <form
+                class="form-signin"
+                [formGroup]="registerForm"
+                (ngSubmit)="onSubmit()"
+              >
+                <div class="input-box">
+                  <i class="fa fa-user"></i
+                  ><input
+                    type="text"
+                    placeholder="Username"
+                    formControlName="name"
+                  />
+                  <div
+                    *ngIf="f.name.touched && f.name.invalid"
+                    class="alert alert-danger"
+                  >
+                    <div *ngIf="f.name.errors.required">Name is required.</div>
+                  </div>
+                </div>
+                <div class="input-box">
+                  <i class="fa fa-envelope"></i
+                  ><input
+                    type="email"
+                    placeholder="Email"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="f.email.touched && f.email.invalid"
+                    class="alert alert-danger"
+                  >
+                    <div *ngIf="f.email.errors.required">
+                      Email is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="input-box input-box-left">
+                  <i class="fa fa-lock"></i
+                  ><input
+                    type="password"
+                    placeholder="Password"
+                    formControlName="password"
+                  />
+                  <div
+                    *ngIf="f.password.touched && f.password.invalid"
+                    class="alert alert-danger"
+                  >
+                    <div *ngIf="f.password.errors.required">
+                      Password is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="input-box input-box-right">
+                  <i class="fa fa-lock"></i
+                  ><input
+                    type="password"
+                    placeholder="Confirm"
+                    formControlName="password_confirmation"
+                  />
+                  <div
+                    *ngIf="
+                      f.password_confirmation.touched &&
+                      f.password_confirmation.invalid
+                    "
+                    class="alert alert-danger"
+                  >
+                    <div *ngIf="f.password_confirmation.errors.required">
+                      Password is required.
+                    </div>
+                    <div
+                      *ngIf="f.password_confirmation.errors.confirmedValidator"
+                    >
+                      Password and Confirm Password must be match.
+                    </div>
+                  </div>
+                </div>
+                <div class="clear"></div>
+                <label class="sign-check"
+                  >By creating an account, you agree to the Terms and Conditions
+                  and Privacy Policy
+                  <input type="checkbox" />
+                  <span class="my-checkmark"></span>
+                </label>
+                <button type="submit" [disabled]="!registerForm.valid">
+                  Register
+                </button>
+              </form>
+              <div class="or-sign-up">
+                <p>Or sign up with</p>
+                <a routerLink="/" target="_blank"
+                  ><i class="fa fa-google"></i
+                ></a>
+                <a routerLink="/" target="_blank"
+                  ><i class="fa fa-twitter"></i
+                ></a>
+                <a routerLink="/" target="_blank"
+                  ><i class="fa fa-facebook"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- sign-up-section-->
+</div>

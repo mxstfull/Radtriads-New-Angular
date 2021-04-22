@@ -1,0 +1,84 @@
+<div class="dashboard-sidebar" id="mySidebar">
+    <button class="closebtn" onclick="closeNav()">×</button>
+    <div class="logo"><a routerLink="/" class="user-account"><i class="fa fa-user" aria-hidden="true"></i></a><a
+        routerLink="/"><img src="../../../assets/img/logo.png" alt="" /></a></div>
+    <div class="my-files-outer" id="myBox">
+      <h5>My Files</h5>
+      <div class="my-files">
+        <ul>
+          <li [ngClass]="{'selected':currentActiveNav == '/total'}"><a routerLink="/total" ><img src="../../../assets/img/Folder.png" alt="" />All Files<span class="total-files">(2112)</span></a></li>
+          <li [ngClass]="{'selected':currentActiveNav == '/photos'}"><a routerLink="/photos"><img src="../../../assets/img/photo.png" alt="" />Photo<span
+                class="total-files">(3)</span></a>
+            <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+            <div class="sub-tab">
+              <ul>
+                <li><a routerLink="/">Home</a>
+                  <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+                  <div class="sub-tab">
+                    <ul>
+                      <li><a routerLink="/">1.1</a></li>
+                      <li><a routerLink="/">1.2</a></li>
+                      <li><a routerLink="/">1.3</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a routerLink="/">First </a></li>
+                <li><a routerLink="/">Second</a>
+                  <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+                  <div class="sub-tab">
+                    <ul>
+                      <li><a routerLink="/">2.1</a></li>
+                      <li><a routerLink="/">2.2</a></li>
+                      <li><a routerLink="/">2.3</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li [ngClass]="{'selected':currentActiveNav == '/music'}"><a routerLink="/music"><img src="../../../assets/img/music.png" alt="" />Music<span class="total-files">(2)</span></a>
+            <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+          </li>
+          <li [ngClass]="{'selected':currentActiveNav == '/video'}"><a routerLink="/video"><img src="../../../assets/img/video.png" alt="" />Video<span class="total-files">(34)</span></a></li>
+          <li [ngClass]="{'selected':currentActiveNav == '/code'}"><a routerLink="/code"><img src="../../../assets/img/code.png" alt="" />Code<span class="total-files">(12)</span></a>
+            <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+            <div class="sub-tab">
+              <ul>
+                <li><a routerLink="/">Home</a>
+                  <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+                  <div class="sub-tab">
+                    <ul>
+                      <li><a routerLink="/">1.1</a></li>
+                      <li><a routerLink="/">1.2</a></li>
+                      <li><a routerLink="/">1.3</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a routerLink="/">First </a></li>
+                <li><a routerLink="/">Second</a>
+                  <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+                  <div class="sub-tab">
+                    <ul>
+                      <li><a routerLink="/">2.1</a></li>
+                      <li><a routerLink="/">2.2</a></li>
+                      <li><a routerLink="/">2.3</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li><a routerLink="/"><img src="../../../assets/img/trash.png" alt="" />Trash<span class="total-files">(34)</span></a>
+            <div class="open-sub"><i class="fa fa-angle-right"></i></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar-logout"><a routerLink="/"><i class="fa fa-sign-out"></i> Logout</a></div>
+    <div class="disk-space">
+      <h5>Disk Space Usage</h5>
+      <div class="space-count">3.76Gb / 10Gb</div>
+      <div class="space-bar"><span class="space-bar-fill"></span></div>
+      <a routerLink="/account">Upgrade Account</a>
+    </div>
+  </div>

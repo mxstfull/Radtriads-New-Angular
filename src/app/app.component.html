@@ -1,0 +1,114 @@
+<div id="wrapper">
+  <header id="header" *ngIf="!isLoginRegisterUrl">
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-8 order-2 order-lg-1"
+        >
+          <nav class="navbar navbar-expand-lg">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="true"
+              aria-label="Toggle navigation"
+            >
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> About </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Services </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Projects </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Contacts </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div
+          class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2"
+        >
+          <div class="logo">
+            <a routerLink="/"
+              ><img src="../assets/img/main-logo.png" width="100px" alt="logo"
+            /></a>
+          </div>
+        </div>
+        <div
+          class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3"
+        >
+          <div class="header-right">
+            <a routerLink="/login" *ngIf="!isSignedIn">Log In</a>
+            <a routerLink="/register" *ngIf="!isSignedIn" class="sign-up-btn"
+              >Sign Up</a
+            >
+            <button
+              class="btn btn-outline-primary"
+              (click)="signOut()"
+              *ngIf="isSignedIn"
+            >
+              Log out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <router-outlet></router-outlet>
+
+  <!--footer -->
+  <footer id="footer" *ngIf="!isLoginRegisterUrl">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <img src="../../../assets/img/logo.png" alt="" />
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+            <ul>
+              <li><a routerLink="/">About us</a></li>
+              <li><a routerLink="/">Contact us</a></li>
+              <li><a routerLink="/">Terms of use</a></li>
+              <li><a routerLink="/">Privacy Policy</a></li>
+              <li><a routerLink="/">Support</a></li>
+              <li><a routerLink="/">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <div class="footer-social">
+              <a routerLink="/" target="_blank"
+                ><i class="fa fa-facebook"></i
+              ></a>
+              <a routerLink="/" target="_blank"
+                ><i class="fa fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-top-->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="copy-right">Copyright RadTriads Inc. 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-bottom-->
+  </footer>
+  <!--footer -->
+</div>
