@@ -11,5 +11,7 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  arrayOne(n: number): any[] {
+    return Array(n);
+  }
 }
