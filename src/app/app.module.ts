@@ -30,6 +30,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
 import { NavService } from './components/sidebar/nav-service';
 import { MenuListItemComponent } from './components/sidebar/menu-list-item/menu-list-item.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {
   MatIconModule,
@@ -84,7 +85,8 @@ export class MaterialModule { }
     HttpClientModule,
     FileUploadModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   exports: [
     SidebarComponent

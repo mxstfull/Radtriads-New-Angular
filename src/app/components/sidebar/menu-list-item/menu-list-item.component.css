@@ -14,12 +14,10 @@
     background-color: rgb(255, 255, 255) !important;
 }
 
-.mat-list-item {
-    padding: 8px 0;
-    display: flex;
-    width: auto;
+.mat-list-item .routeIcon {
+    margin-right: 5px;
 }
 
-.mat-list-item .routeIcon {
-    margin-right: 40px;
+:host /deep/ .mat-list-item-content {
+    justify-content: space-between;
 }

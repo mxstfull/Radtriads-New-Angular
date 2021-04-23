@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   navItems: NavItem[] = [
     {
       displayName: 'DevFestFL',
-      iconName: 'recent_actors',
+      iconName: 'folder',
       route: 'devfestfl',
       children: [
         {
