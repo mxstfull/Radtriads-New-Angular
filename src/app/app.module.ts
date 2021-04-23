@@ -44,6 +44,9 @@ import {
 import {
   MatSidenavModule
 } from '@angular/material/sidenav';
+import { CardComponent } from './tools/card/card.component';
+
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   exports: [
@@ -75,7 +78,8 @@ export class MaterialModule { }
     VideoComponent,
     TopbarComponent,
     ModalsComponent,
-    MenuListItemComponent
+    MenuListItemComponent,
+    CardComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -86,6 +90,7 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
+    MatGridListModule,
     NgxFlowModule
   ],
   exports: [

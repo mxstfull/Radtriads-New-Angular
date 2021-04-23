@@ -79,7 +79,15 @@
                     class="fa fa-clone"></i>Copy</a>
                 <div class="clear"></div>
               </div>
-              <div class="media-boxes">
+              
+              <mat-grid-list cols="5">
+                <mat-grid-tile *ngFor="let item of arrayOne(8); let i = index;">
+                  <app-card>
+                    
+                  </app-card>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <!-- <div class="media-boxes">
                 <div class="media-box">
                   <div class="media-file">
                     <img src="assets/img/Bitmap.png" alt="" />
@@ -382,7 +390,7 @@
                   </div>
                 </div>
                 <div class="clear"></div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div id="fm-list-view" class="tab-pane fade ">
