@@ -27,6 +27,30 @@ import { VideoComponent } from './components/video/video.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { ModalsComponent } from './components/modals/modals.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
+import { NavService } from './components/sidebar/nav-service';
+import { MenuListItemComponent } from './components/sidebar/menu-list-item/menu-list-item.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {
+  MatIconModule,
+} from '@angular/material/icon';
+
+import {
+  MatListModule
+} from '@angular/material/list';
+
+import {
+  MatSidenavModule
+} from '@angular/material/sidenav';
+
+@NgModule({
+  exports: [
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+  ]
+})
+export class MaterialModule { }
 
 @NgModule({
   declarations: [
@@ -49,7 +73,8 @@ import { UploaderComponent } from './components/uploader/uploader.component';
     VideoComponent,
     TopbarComponent,
     ModalsComponent,
-    UploaderComponent
+    UploaderComponent,
+    MenuListItemComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -57,12 +82,15 @@ import { UploaderComponent } from './components/uploader/uploader.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FileUploadModule
+    FileUploadModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   exports: [
     SidebarComponent
   ],
   providers: [
+    NavService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

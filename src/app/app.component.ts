@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.auth.userAuthState.subscribe((val) => {
       this.isSignedIn = val;
     });
