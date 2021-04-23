@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { FileUploadModule } from 'ng2-file-upload';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -26,11 +25,13 @@ import { UploadingComponent } from './components/uploading/uploading.component';
 import { VideoComponent } from './components/video/video.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { ModalsComponent } from './components/modals/modals.component';
-import { UploaderComponent } from './components/uploader/uploader.component';
 import { NavService } from './components/sidebar/nav-service';
 import { MenuListItemComponent } from './components/sidebar/menu-list-item/menu-list-item.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { NgxFlowModule, FlowInjectionToken } from '@flowjs/ngx-flow';
+import Flow from '@flowjs/flow.js';
 
 import {
   MatIconModule,
@@ -74,7 +75,6 @@ export class MaterialModule { }
     VideoComponent,
     TopbarComponent,
     ModalsComponent,
-    UploaderComponent,
     MenuListItemComponent
   ],
   imports: [
@@ -83,15 +83,20 @@ export class MaterialModule { }
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FileUploadModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxFlowModule
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
+    ModalsComponent
   ],
   providers: [
+    {
+      provide: FlowInjectionToken,
+      useValue: Flow
+    },
     NavService,
     {
       provide: HTTP_INTERCEPTORS,

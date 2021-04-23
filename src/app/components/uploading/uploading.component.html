@@ -1,31 +1,30 @@
 <div id="dashobard">
-  <div class="header-dashobard-mobile">
-    <div class="container-fluid">
-      <button class="sidebar-icon" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></button>
-      <div class="logo"><img src="../../../assets/img/logo-mobile.png" alt="" /></div>
-      <div class="mobile-right">
-        <a routerLink="/"><img src="../../../assets/img/search-mobile.png" alt="" /></a>
-        <a routerLink="/"><img src="../../../assets/img/folder-mobile.png" alt="" /></a>
-        <a routerLink="/"><img src="../../../assets/img/file-mobile.png" alt="" /></a>
-      </div>
-      <div class="clear"></div>
-    </div>
-  </div>
-  <!--header-dashobard-->
-
-  <div class="main-dashboard">
-
-    <!--dashobard-sidebar-->
-    <app-sidebar></app-sidebar>
-    <div class="dashboard-content">
-      <app-topbar></app-topbar>
-      <div class="dashboard-bottom">
-        <div class="dash-bot-top">
-          <h2><i class="fa fa-arrow-left" aria-hidden="true"></i> Upload files</h2>
-          <div class="clear"></div>
+    <div class="header-dashobard-mobile">
+        <div class="container-fluid">
+            <button class="sidebar-icon" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <div class="logo"><img src="../../../assets/img/logo-mobile.png" alt="" /></div>
+            <div class="mobile-right">
+                <a routerLink="/"><img src="../../../assets/img/search-mobile.png" alt="" /></a>
+                <a routerLink="/"><img src="../../../assets/img/folder-mobile.png" alt="" /></a>
+                <a routerLink="/"><img src="../../../assets/img/file-mobile.png" alt="" /></a>
+            </div>
+            <div class="clear"></div>
         </div>
-        <app-uploader></app-uploader>
-        <!-- <div class="upload-file-box">
+    </div>
+    <!--header-dashobard-->
+
+    <div class="main-dashboard">
+
+        <!--dashobard-sidebar-->
+        <app-sidebar></app-sidebar>
+        <div class="dashboard-content">
+            <app-topbar></app-topbar>
+            <div class="dashboard-bottom">
+                <div class="dash-bot-top">
+                    <h2><i class="fa fa-arrow-left" aria-hidden="true"></i> Upload files</h2>
+                    <div class="clear"></div>
+                </div>
+                <!-- <div class="upload-file-box">
           <div class="upload-btn-wrapper">
             <button class="upload-btn"><i class="fa fa-upload" aria-hidden="true"></i> Drag files here or
               browse</button>
@@ -98,14 +97,56 @@
           </div>
           <div class="fu-time">Time Remaining: <span>23 minutes</span></div>
         </div> -->
-        <div class="fu-message"><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success! <div
-            class="fu-msg-name">file name.jpg</div>
+                <div class="fu-message"><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success!
+                    <div class="fu-msg-name">file name.jpg</div>
+                </div>
+            </div>
         </div>
-      </div>
+        <!--dashobard-content-->
+
+        <div class="clear"></div>
+        <div class="upload-file-box">
+
+            <div>
+                <input type="checkbox" [(ngModel)]="autoupload"> Autoupload
+            </div>
+
+            <ng-container #flowAdvanced="flow" [flowConfig]="{target: 'http://127.0.0.1:8000/api/fileupload/upload'}"></ng-container>
+
+            <input type="file" flowButton [flow]="flowAdvanced.flowJs" />
+            <!-- <input type="file" flowButton [flow]="flowAdvanced.flowJs" [flowAttributes]="{accept: 'image/*'}"> -->
+
+            <div class="drop-area" flowDrop [flow]="flowAdvanced.flowJs">
+                <span>Drop files here</span>
+            </div>
+
+            <div class="transfers">
+                <div class="transfer" [ngClass]="{'transfer--error': transfer.error, 'transfer--success': transfer.success}" *ngFor="let transfer of (flowAdvanced.transfers$ | async).transfers; trackBy: trackTransfer">
+                    <div class="name">name: {{transfer.name}}</div>
+                    <div>progress: {{transfer.progress | percent}}</div>
+                    <div>size: {{transfer.size | number: '1.0'}} bytes</div>
+                    <div>current speed: {{transfer.currentSpeed | number: '1.0'}} bytes/s</div>
+                    <div>average speed: {{transfer.averageSpeed | number: '1.0'}} bytes/s</div>
+                    <div>time ramining: {{transfer.timeRemaining}}s</div>
+                    <div>paused: {{transfer.paused}}</div>
+                    <div>success: {{transfer.success}}</div>
+                    <div>complete: {{transfer.complete}}</div>
+                    <div>error: {{transfer.error}}</div>
+
+                    <div>
+                        <img [flowSrc]="transfer">
+                    </div>
+
+                    <div>
+                        <button (click)="flowAdvanced.pauseFile(transfer)">pause</button>
+                        <button (click)="flowAdvanced.resumeFile(transfer)">resume</button>
+                        <button (click)="flowAdvanced.cancelFile(transfer)">cancel</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" (click)="flowAdvanced.upload()" [disabled]="!(flow?.somethingToUpload$ | async)">Start upload</button>
+            <button type="button" (click)="flowAdvanced.cancel()" [disabled]="!(flowAdvanced?.transfers$ | async).transfers.length">Cancel all</button> Total progress: {{(flowAdvanced.transfers$ | async).totalProgress | percent}}
+
+        </div>
     </div>
-    <!--dashobard-content-->
-
-    <div class="clear"></div>
-  </div>
-
 </div>
