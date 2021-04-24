@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap");
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* CSS Document */
 * {
@@ -553,7 +554,7 @@ h2 {
   display: block;
 }
 .media-edit-inner::before {
-  background: url("../src/assets/img/arrow.png") no-repeat 92% 0;
+  /* background: url("../src/assets/img/arrow.png") no-repeat 92% 0; */
   content: "";
   position: absolute;
   left: 0;

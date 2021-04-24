@@ -1,3 +1,52 @@
-<div class="media-file">
+<div class="media-box">
+  <label class="check-media table-check">
+    <input type="checkbox" checked="checked">
+    <span class="table-checkmark"></span>
+  </label>
+  <div class="lock-media"><img src="assets/img/lock-icon.png" alt=""></div>
+  <div class="media-file">
     <img src="assets/img/Bitmap.png" alt="" />
+    <div class="video-icon" data-toggle="modal" data-target="#video-modal"><img src="assets/img/video-icon.png" alt="">
+    </div>
+  </div>
+  <div class="media-content">
+    <div class="media-info">
+      <div class="file-name">File Name</div>
+      <div class="file-date">Added 5 Aug 2016</div>
+    </div>
+    <div class="media-edit">
+      <i class="fa fa-ellipsis-v"></i>
+      <div class="media-edit-inner">
+        <div class="media-edit-box">
+          <a mat-button (click)="openDialog()"><img src="assets/img/edit.png" alt="" />Edit
+          Privacy</a>
+          <a href="#" data-toggle="modal" data-target="#share-modal"><img src="assets/img/share.png" alt="" />Share</a>
+          <a href="#" data-toggle="modal" data-target="#rename-modal"><img src="assets/img/rename.png"
+              alt="" />Rename</a>
+          <a href="#" data-toggle="modal" data-target="#delete-modal"><img src="assets/img/delete.png"
+              alt="" />Delete</a>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
 </div>
+
+<!-- <mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <div class="test">test</div>
+    <p>
+      The Shiba
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card> -->

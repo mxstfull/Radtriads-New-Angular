@@ -5,13 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.css']
 })
-export class PhotosComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class PhotosComponent {
+  
   arrayOne(n: number): any[] {
     return Array(n);
   }
+
 }

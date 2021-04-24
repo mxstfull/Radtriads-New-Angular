@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,11 +38,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NgxFlowModule, FlowInjectionToken } from '@flowjs/ngx-flow';
 import Flow from '@flowjs/flow.js';
-
-import {
-  MatIconModule,
-} from '@angular/material/icon';
-
+import { MatIconModule } from '@angular/material/icon';
 import {
   MatListModule
 } from '@angular/material/list';
@@ -45,8 +47,8 @@ import {
   MatSidenavModule
 } from '@angular/material/sidenav';
 import { CardComponent } from './tools/card/card.component';
+import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
 
-import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   exports: [
@@ -79,7 +81,8 @@ export class MaterialModule { }
     TopbarComponent,
     ModalsComponent,
     MenuListItemComponent,
-    CardComponent
+    CardComponent,
+    PrivacyModalComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -91,7 +94,11 @@ export class MaterialModule { }
     MaterialModule,
     FlexLayoutModule,
     MatGridListModule,
-    NgxFlowModule
+    NgxFlowModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule
   ],
   exports: [
     SidebarComponent,
@@ -109,6 +116,7 @@ export class MaterialModule { }
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

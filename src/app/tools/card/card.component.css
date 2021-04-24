@@ -1,0 +1,63 @@
+.media-box {
+  width: 100%;
+}
+::ng-deep app-card{
+    width: 100%;
+    height: 100%;
+}
+::ng-deep .check-media{
+    position: absolute;
+    left:15px;
+    top: 15px !important;
+    z-index: 1;
+}
+::ng-deep .mat-grid-tile{
+  overflow:visible !important;
+}
+a{
+  color:black !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.test {
+  position: relative;
+  top: -32px;
+  left: 30px;
+} */
