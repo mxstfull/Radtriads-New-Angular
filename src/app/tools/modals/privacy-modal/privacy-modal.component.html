@@ -2,18 +2,24 @@
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
 
-<h1 mat-dialog-title>Favorite Animal</h1>
+<h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Edit Privacy?</h1>
 <div mat-dialog-content>
-  My favorite animal is:
-  <ul>
-    <li>
-      <span *ngIf="data.animal === 'panda'">&#10003;</span> Panda
-    </li>
-    <li>
-      <span *ngIf="data.animal === 'unicorn'">&#10003;</span> Unicorn
-    </li>
-    <li>
-      <span *ngIf="data.animal === 'lion'">&#10003;</span> Lion
-    </li>
-  </ul>
+  <div class="privacy-select">
+    <mat-select>
+      <mat-option value="option1" selected>🐼Public
+        <img src="assets/img/edit-icon.png"/>
+
+      </mat-option>
+      <mat-option value="option2">Private
+        <img with="10" height="10" src="assets/img/edit-icon.png">
+
+      </mat-option>
+
+      <mat-option value="option3">No Prefences</mat-option>
+    </mat-select>
+  </div>
+  <div class="modal-btn">
+    <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
+    <button mat-button class="btn-ok">Confirm</button>
+  </div>
 </div>

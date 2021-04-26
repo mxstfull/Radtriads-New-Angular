@@ -1,23 +1,41 @@
 .media-box {
   width: 100%;
 }
-::ng-deep app-card{
-    width: 100%;
-    height: 100%;
-}
-::ng-deep .check-media{
-    position: absolute;
-    left:15px;
-    top: 15px !important;
-    z-index: 1;
-}
-::ng-deep .mat-grid-tile{
-  overflow:visible !important;
-}
-a{
-  color:black !important;
+
+::ng-deep app-card {
+  width: 100%;
+  height: 100%;
 }
 
+::ng-deep .check-media {
+  position: absolute;
+  left: 15px;
+  top: 15px !important;
+  z-index: 1;
+}
+
+::ng-deep .mat-grid-tile {
+  overflow: visible !important;
+}
+
+a {
+  color: black !important;
+}
+
+mat-checkbox {
+  position: absolute;
+  left: 15px;
+  top: 8px !important;
+  z-index: 1;
+  border-color: #828D99;
+}
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #828D99;
+  /* background-color: #dddddd */
+}
+::ng-deep .mat-checkbox-frame{
+  border-width: 1px !important;
+}
 
 
 

@@ -1,0 +1,13 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  
+  <h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Rename selected files?</h1>
+  <div mat-dialog-content>
+    <p>If you rename the file all links will break. Are you sure you want to proceed?</p>
+    <div class="modal-btn">
+      <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
+      <button mat-button class="btn-ok" (click)="openDialog('rename-confirm')">Confirm</button>
+    </div>
+  </div>
+  

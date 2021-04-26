@@ -1,8 +1,9 @@
 <div class="media-box">
-  <label class="check-media table-check">
-    <input type="checkbox" checked="checked">
+  <!-- <label class="check-media table-check">
+    <input type="checkbox">
     <span class="table-checkmark"></span>
-  </label>
+  </label> -->
+  <mat-checkbox></mat-checkbox>
   <div class="lock-media"><img src="assets/img/lock-icon.png" alt=""></div>
   <div class="media-file">
     <img src="assets/img/Bitmap.png" alt="" />
@@ -18,13 +19,10 @@
       <i class="fa fa-ellipsis-v"></i>
       <div class="media-edit-inner">
         <div class="media-edit-box">
-          <a mat-button (click)="openDialog()"><img src="assets/img/edit.png" alt="" />Edit
-          Privacy</a>
-          <a href="#" data-toggle="modal" data-target="#share-modal"><img src="assets/img/share.png" alt="" />Share</a>
-          <a href="#" data-toggle="modal" data-target="#rename-modal"><img src="assets/img/rename.png"
-              alt="" />Rename</a>
-          <a href="#" data-toggle="modal" data-target="#delete-modal"><img src="assets/img/delete.png"
-              alt="" />Delete</a>
+          <a mat-button (click)="openDialog('privacy')"><img src="assets/img/edit.png" alt="" />Edit Privacy</a>
+          <a mat-button (click)="openDialog('share')"><img src="assets/img/share.png" alt="" />Share</a>
+          <a mat-button (click)="openDialog('rename')"><img src="assets/img/rename.png" alt="" />Rename</a>
+          <a mat-button (click)="openDialog('delete')"><img src="assets/img/delete.png" alt="" />Delete</a>
         </div>
       </div>
     </div>

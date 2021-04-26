@@ -20,16 +20,9 @@
     <div class="dashboard-content">
       <app-topbar></app-topbar>
       <div class="dashboard-bottom">
-        <div class="account-tab">
-          <ul class="nav nav-tabs">
-            <li><a class="active" data-toggle="tab" routerLink="/">MY Info</a></li>
-            <li><a data-toggle="tab" routerLink="/">Plan & Usage</a></li>
-            <li><a data-toggle="tab" routerLink="/">Setting</a></li>
-            <li><a data-toggle="tab" routerLink="/">Privacy & Security</a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="acc-my-info" class="tab-pane fade in active show">
-              <h2>My Info</h2>
+        <mat-tab-group dynamicHeight>
+          <mat-tab label="MY INFO">
+            <h2>My Info</h2>
               <form>
                 <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2 order-lg-1">
@@ -80,100 +73,100 @@
                     Account</a>
                 </div>
               </form>
-            </div>
-            <div id="acc-plan-usage" class="tab-pane fade ">
-              <div class="plan-top">
-                <div class="plan-top-left">
-                  <h2>Silver Plan</h2>
-                  <p>You are currently on a FREE TRIAL until 03/18/2021.<br />
-                    $3.75 per month</p>
-                </div>
-                <div class="plan-top-right">
-                  <a class="sky-blue-btn" routerLink="/">Update Plan</a>
-                  <div class="cancel-btn"><a routerLink="/">Cancel Plan</a></div>
-                </div>
-                <div class="clear"></div>
+          </mat-tab>
+          <mat-tab label="Plan & Usage">
+            <div class="plan-top">
+              <div class="plan-top-left">
+                <h2>Silver Plan</h2>
+                <p>You are currently on a FREE TRIAL until 03/18/2021.<br />
+                  $3.75 per month</p>
               </div>
-              <div class="plan-bottom">
-                <p>Disk Space Usage<br />
-                  You have uploaded 3 files in your account.</p>
-                <div class="storage-box">
-                  <div class="storage-tab">
-                    <div class="storage-line photo-line" style="width:25%;"></div>
-                    <div class="storage-line video-line" style="width:10%;"></div>
-                    <div class="storage-line music-line" style="width:8%;"></div>
-                    <div class="storage-line doc-line" style="width:20%;"></div>
-                    <div class="storage-line trash-line" style="width:5%;"></div>
-                    <div class="clear"></div>
-                  </div>
-                  <div class="remain-space">24,5 GB / 500 GB is free</div>
-                  <ul>
-                    <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">720 kb</span></li>
-                    <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">720 kb</span></li>
-                    <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">720 kb</span></li>
-                    <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">720 kb</span>
-                    </li>
-                    <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">720 kb</span></li>
-                  </ul>
-
+              <div class="plan-top-right">
+                <a class="sky-blue-btn" routerLink="/">Update Plan</a>
+                <div class="cancel-btn"><a routerLink="/">Cancel Plan</a></div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="plan-bottom">
+              <p>Disk Space Usage<br />
+                You have uploaded 3 files in your account.</p>
+              <div class="storage-box">
+                <div class="storage-tab">
+                  <div class="storage-line photo-line" style="width:25%;"></div>
+                  <div class="storage-line video-line" style="width:10%;"></div>
+                  <div class="storage-line music-line" style="width:8%;"></div>
+                  <div class="storage-line doc-line" style="width:20%;"></div>
+                  <div class="storage-line trash-line" style="width:5%;"></div>
                   <div class="clear"></div>
                 </div>
+                <div class="remain-space">24,5 GB / 500 GB is free</div>
+                <ul>
+                  <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">720 kb</span></li>
+                  <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">720 kb</span></li>
+                  <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">720 kb</span></li>
+                  <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">720 kb</span>
+                  </li>
+                  <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">720 kb</span></li>
+                </ul>
+
+                <div class="clear"></div>
               </div>
             </div>
-            <div id="acc-setting" class="tab-pane fade ">
-              <h2>Settings</h2>
-              <form action="">
-                <h4>Quick Link Share Show / Hide links below your files</h4>
-                <div class="switch-box">
-                  <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                  </label>
-                  Show Direct Link
+          </mat-tab>
+          <mat-tab label="SETTING">
+            <h2>Settings</h2>
+            <form action="">
+              <h4>Quick Link Share Show / Hide links below your files</h4>
+              <div class="switch-box">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+                Show Direct Link
+              </div>
+              <div class="switch-box">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+                Show HTML Code
+              </div>
+              <div class="switch-box">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+                Show Bulletin Boards & Forums Code
+              </div>
+              <div class="switch-box">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+                Show Social Share Buttons
+              </div>
+              <button type="submit" class="sky-blue-btn">Save Settings</button>
+            </form>
+          </mat-tab>
+          <mat-tab label="PRIVACY & SECURITY">
+            <h2>Privacy & Security</h2>
+            <form action="">
+              <h4>Set your account privacy to private if you don't want anyone to be able to access your files or
+                public if you want to allow anyone who has the links to your files to access them.</h4>
+              <div class="privacy-select">
+                <div class="ps-selectd"><img src="../../../assets/img/public.png" alt="" />Account is Public <i
+                    class="fa fa-angle-down"></i></div>
+                <div class="ps-dropdown">
+                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Public</div>
+                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Private</div>
+                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />No Prefences</div>
                 </div>
-                <div class="switch-box">
-                  <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                  </label>
-                  Show HTML Code
-                </div>
-                <div class="switch-box">
-                  <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                  </label>
-                  Show Bulletin Boards & Forums Code
-                </div>
-                <div class="switch-box">
-                  <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                  </label>
-                  Show Social Share Buttons
-                </div>
-                <button type="submit" class="sky-blue-btn">Save Settings</button>
-              </form>
-            </div>
-            <div id="acc-pri-sec" class="tab-pane fade ">
-              <h2>Privacy & Security</h2>
-              <form action="">
-                <h4>Set your account privacy to private if you don't want anyone to be able to access your files or
-                  public if you want to allow anyone who has the links to your files to access them.</h4>
-                <div class="privacy-select">
-                  <div class="ps-selectd"><img src="../../../assets/img/public.png" alt="" />Account is Public <i
-                      class="fa fa-angle-down"></i></div>
-                  <div class="ps-dropdown">
-                    <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Public</div>
-                    <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Private</div>
-                    <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />No Prefences</div>
-                  </div>
-                </div>
-                <button type="submit" class="sky-blue-btn">Save Settings</button>
-              </form>
-            </div>
-          </div>
-        </div>
+              </div>
+              <button type="submit" class="sky-blue-btn">Save Settings</button>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+        
       </div>
     </div>
     <!--dashobard-content-->

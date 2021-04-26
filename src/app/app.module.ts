@@ -6,7 +6,6 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
@@ -39,6 +38,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxFlowModule, FlowInjectionToken } from '@flowjs/ngx-flow';
 import Flow from '@flowjs/flow.js';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 import {
   MatListModule
 } from '@angular/material/list';
@@ -46,8 +47,18 @@ import {
 import {
   MatSidenavModule
 } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+
+import {CdkTableModule} from '@angular/cdk/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
+
 import { CardComponent } from './tools/card/card.component';
 import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
+import { ShareModalComponent } from './tools/modals/share-modal/share-modal.component';
+import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.component';
+import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.component';
+import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
 
 
 @NgModule({
@@ -55,7 +66,18 @@ import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-moda
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-  ]
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatTableModule,
+    CdkTableModule,
+    MatCheckboxModule,
+    MatTabsModule
+  ],
 })
 export class MaterialModule { }
 
@@ -82,7 +104,11 @@ export class MaterialModule { }
     ModalsComponent,
     MenuListItemComponent,
     CardComponent,
-    PrivacyModalComponent
+    PrivacyModalComponent,
+    ShareModalComponent,
+    RenameModalComponent,
+    DeleteModalComponent,
+    RenameConfirmModalComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -93,12 +119,8 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    MatGridListModule,
     NgxFlowModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatDialogModule
+    
   ],
   exports: [
     SidebarComponent,

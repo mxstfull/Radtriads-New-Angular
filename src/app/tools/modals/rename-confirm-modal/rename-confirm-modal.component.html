@@ -1,0 +1,20 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  
+  <h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Rename folder?</h1>
+  <div mat-dialog-content>
+    <div class="rename-folder">
+      <div class="rename-imgs">
+        <img src="assets/img/rename-folder.png" alt="">
+        <span class="rename-check"><img src="assets/img/rename-check.png" alt=""></span>
+      </div>
+      <input type="text" value="Portrait Album">
+      <div class="clear"></div>
+    </div>
+    <div class="modal-btn">
+      <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
+      <button mat-button class="btn-ok">Confirm</button>
+    </div>
+  </div>
+  
