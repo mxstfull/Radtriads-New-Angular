@@ -33,28 +33,28 @@
             <input type="file" name="myfile" flowButton [flow]="flowAdvanced.flowJs"/>
           </div>
           <h4>Recent Uploads</h4>
-          <div class="file-upload-list" id="fu-list">
+          <div class="file-upload-list scroll-support" id="fu-list">
             <div class="file-upload-line" *ngFor="let transfer of (flowAdvanced.transfers$ | async).transfers; trackBy: trackTransfer">
               <div class="file-upload-desc">
                 <img src="assets/img/file-1.png" alt="" />
                 <div class="fu-name">{{transfer.name}}</div>
-                <div class="fu-size">{{transfer.progress | percent}}% {{transfer.size | number: '1.0'}} bytes:  {{transfer.timeRemaining}} seconds left</div>
+                <div class="fu-size">{{transfer.progress | percent}} {{transfer.size | number: '1.0'}} bytes:  {{transfer.timeRemaining}} seconds left</div>
               </div>
               <div class="file-upload-btns">
-                <a class="file-resume" (click)="flowAdvanced.resumeFile(transfer)"><i class="fa fa-pause" aria-hidden="true"></i></a>
-                <a class="file-pause" (click)="flowAdvanced.pauseFile(transfer)"><i class="fa fa-pause" aria-hidden="true"></i></a>
-                <a class="file-close" (click)="flowAdvanced.cancelFile(transfer)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <a class="file-resume" [hidden]="!transfer.paused" (click)="flowAdvanced.resumeFile(transfer)"><i class="fa fa-play" aria-hidden="true"></i></a>
+                <a class="file-pause" [hidden]="transfer.paused || transfer.complete" (click)="flowAdvanced.pauseFile(transfer)"><i class="fa fa-pause" aria-hidden="true"></i></a>
+                <a class="file-close" [hidden]="transfer.complete" (click)="flowAdvanced.cancelFile(transfer)"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <a class="file-ok" [hidden]="!transfer.complete" ><i class="fa fa-check" aria-hidden="true"></i></a>
               </div>
               <div class="clear"></div>
               <!-- <div class="fu-progess"><span class="fu-progess-fill" style="width:50%;"></span></div> -->
-              <!-- <mat-progress-bar mode="determinate" value="{{transfer.progress | percent}}"></mat-progress-bar> -->
+              <mat-progress-bar mode="determinate" value="{{transfer.progress * 100}}"></mat-progress-bar>
             </div>
-            
           </div>
-          <div class="fu-time">Time Remaining: <span>23 minutes</span></div>
+          <!-- <div class="fu-time">Time Remaining: <span>23 minutes</span></div> -->
         </div>
-        <div class="fu-message"><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success!
-          <div class="fu-msg-name">file name.jpg</div>
+        <div class="fu-message" [hidden]="(flowAdvanced.transfers$ | async).totalProgress != 1" ><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success!
+          <div class="fu-msg-name"></div>
         </div>
       </div>
     </div>

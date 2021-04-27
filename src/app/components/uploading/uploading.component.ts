@@ -22,7 +22,7 @@ export class UploadingComponent implements OnInit {
 
   autoUploadSubscription: Subscription;
 
-  autoupload = false;
+  autoupload = true;
 
   ngAfterViewInit() {
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {

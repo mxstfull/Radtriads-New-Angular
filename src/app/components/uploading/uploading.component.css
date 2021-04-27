@@ -36,6 +36,3 @@ img {
     align-items: center;
     justify-content: center;
 }
-.file-upload-list {
-    overflow: hidden scroll;
-}

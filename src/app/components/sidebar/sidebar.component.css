@@ -40,3 +40,21 @@
     float: right;
     padding: 8px;
 }
+mat-sidenav-container {
+    height: 100% !important;
+}
+mat-sidenav {
+    background-color: #0c1f28;
+}
+.my-files {
+    height: 100% !important;
+ }
+/*.my-files > ul > li > a {
+    color: white;
+} */
+::ng-deep .mat-list-item-content {
+    color: white;
+}
+::ng-deep .mat-list-item-content:hover {
+    color: black;
+}

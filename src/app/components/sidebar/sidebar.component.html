@@ -98,7 +98,7 @@
     </div>
     <div class="my-files-outer" id="myBox">
         <h5>My Files</h5>
-        <div class="my-files">
+        <div class="my-files scroll-support">
             <mat-sidenav-container>
                 <mat-sidenav mode="over" opened="true">
                     <mat-nav-list>
@@ -108,5 +108,11 @@
             </mat-sidenav-container>
         </div>
     </div>
-
+    <div class="sidebar-logout"><a routerLink="/"><i class="fa fa-sign-out"></i> Logout</a></div>
+    <div class="disk-space">
+        <h5>Disk Space Usage</h5>
+        <div class="space-count">3.76Gb / 10Gb</div>
+        <div class="space-bar"><span class="space-bar-fill"></span></div>
+        <a routerLink="/account">Upgrade Account</a>
+    </div>
 </div>
