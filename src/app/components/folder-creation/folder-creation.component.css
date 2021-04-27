@@ -1,0 +1,16 @@
+::ng-deep.mat-pseudo-checkbox {
+  display: none !important;
+}
+
+a {
+  cursor: pointer;
+}
+
+.last-item span {
+  display: none;
+}
+
+.mat-list-base {
+  border-top: 1px solid #EFF2F6;
+  border-bottom: 1px solid #EFF2F6;
+}

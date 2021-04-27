@@ -24,24 +24,29 @@
           <h2><i class="fa fa-arrow-left" aria-hidden="true"></i> Create Folder</h2>
           <div class="clear"></div>
         </div>
-        <form action="" class="create-folder-form">
-          <input type="text" placeholder="Add a Title" />
+        <form action="" class="create-folder-form"> 
+          <input type="text" placeholder="Add a Title" [(ngModel)]="newFolderTitle" #ctrl="ngModel" [ngModelOptions]="{standalone: true}"/>
           <div class="cf-btns desktop-div">
-            <a href="#">Cancel</a>
-            <a href="#" class="create-btn"><i class="fa fa-check" aria-hidden="true"></i> Create</a>
+            <a href="javascript:history.back();">Cancel</a>
+            <a class="create-btn" (click)="onCreateFolder()"><i class="fa fa-check" aria-hidden="true"></i> Create</a>
           </div>
           <div class="folder-location">
             <p>Create folder in Home or select another location...</p>
-            <div class="folder-path">
-              <a href="#">Home</a><span><i class='fa fa-angle-right'></i></span>
-              <a href="#">Potraits</a><span><i class='fa fa-angle-right'></i></span>
-              <a href="#">2021</a>
+            <div class="folder-path" fxLayout="row">
+
+              <div *ngFor="let folder of rootFoldersOfCurrent; let last = last" [class.last-item]="last">
+                <a (click) = "onFolderClicked(folder)">
+                  {{ folder.title }}
+                </a>
+                <span><i class='fa fa-angle-right'></i></span>
+              </div>
             </div>
-            <div class="folder-list">
-              <div class="folder-list-item">January</div>
-              <div class="folder-list-item fl-item-selected">February <i class='fa fa-angle-right'></i></div>
-              <div class="folder-list-item">March</div>
-            </div>
+
+            <mat-selection-list #link>
+              <mat-list-option *ngFor="let folder of subFoldersOfCurrent">
+                <a mat-list-item (click) = "onFolderClicked(folder)"> <span class="contact-names">{{ folder.title }}</span> </a>
+              </mat-list-option>
+            </mat-selection-list>
           </div>
           <div class="upload-file-box">
             <div class="upload-btn-wrapper">

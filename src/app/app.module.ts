@@ -1,10 +1,10 @@
-import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,10 +48,11 @@ import {
   MatSidenavModule
 } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import {CdkTableModule} from '@angular/cdk/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatTabsModule} from '@angular/material/tabs';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { CardComponent } from './tools/card/card.component';
 import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
@@ -76,7 +77,8 @@ import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal
     MatTableModule,
     CdkTableModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule
   ],
 })
 export class MaterialModule { }
@@ -120,7 +122,7 @@ export class MaterialModule { }
     MaterialModule,
     FlexLayoutModule,
     NgxFlowModule,
-    
+
   ],
   exports: [
     SidebarComponent,
@@ -138,7 +140,7 @@ export class MaterialModule { }
       multi: true
     }
   ],
-  bootstrap: [AppComponent], 
-  schemas: [CUSTOM_ELEMENTS_SCHEMA ]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
