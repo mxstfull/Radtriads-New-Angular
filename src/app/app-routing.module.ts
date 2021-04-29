@@ -8,6 +8,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { PublicMediaBoardComponent } from './components/public-media-board/public-media-board.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
+import { ImageEditorNewComponent } from './components/image-editor-new/image-editor-new.component';
 import { AccountComponent } from './components/account/account.component';
 import { CodeComponent } from './components/code/code.component';
 import { FolderCreationComponent } from './components/folder-creation/folder-creation.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'public-media-board', component: PublicMediaBoardComponent },
   { path: 'photo-detail', component: PhotoDetailComponent },
   { path: 'image-editor', component: ImageEditorComponent },
+  { path: 'image-editor-new', component: ImageEditorNewComponent },
   { path: 'account', component: AccountComponent },
   { path: 'code', component: CodeComponent },
   { path: 'folder-creation', component: FolderCreationComponent },

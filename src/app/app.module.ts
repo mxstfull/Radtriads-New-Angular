@@ -19,6 +19,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { PublicMediaBoardComponent } from './components/public-media-board/public-media-board.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
+import { ImageEditorNewComponent } from './components/image-editor-new/image-editor-new.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AccountComponent } from './components/account/account.component';
 import { CodeComponent } from './components/code/code.component';
@@ -60,7 +61,7 @@ import { ShareModalComponent } from './tools/modals/share-modal/share-modal.comp
 import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.component';
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
-
+import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 
 @NgModule({
   exports: [
@@ -110,7 +111,9 @@ export class MaterialModule { }
     ShareModalComponent,
     RenameModalComponent,
     DeleteModalComponent,
-    RenameConfirmModalComponent
+    RenameConfirmModalComponent,
+    ImageEditorNewComponent,
+    ToastUiImageEditorComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -121,12 +124,12 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgxFlowModule,
-
+    NgxFlowModule
   ],
   exports: [
     SidebarComponent,
-    ModalsComponent
+    ModalsComponent,
+    ToastUiImageEditorComponent
   ],
   providers: [
     {
