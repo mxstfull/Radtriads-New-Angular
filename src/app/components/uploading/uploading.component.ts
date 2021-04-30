@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
+import {Globals} from '../../global';
 
 const URL = 'http://127.0.0.1:8000/api/fileupload/upload';
 @Component({
@@ -10,8 +11,9 @@ const URL = 'http://127.0.0.1:8000/api/fileupload/upload';
 })
 export class UploadingComponent implements OnInit {
 
-  constructor() {
-
+  currentPath = "home";
+  constructor(private globals: Globals) {
+    this.currentPath = this.globals.gl_currentPath;
   }
 
   ngOnInit(): void {
@@ -25,6 +27,12 @@ export class UploadingComponent implements OnInit {
   autoupload = true;
 
   ngAfterViewInit() {
+
+    this.flow.flowJs.opts.query = {
+      user_id: localStorage.getItem('user_id'),
+      unique_id: localStorage.getItem('unique_id'),
+      currentPath: this.currentPath
+    }
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
       // to get rid of incorrect `event.type` type you need Typescript 2.8+
       if (this.autoupload && event.type === 'filesSubmitted') {

@@ -1,7 +1,16 @@
-::ng-deep .mat-grid-tile .mat-figure{
-    margin: 0 0px 0.9375em !important;
-    padding: 0 0.4375em !important;
+::ng-deep .mat-grid-tile .mat-figure {
+  margin: 0 0px 0.9375em !important;
+  padding: 0 0.4375em !important;
 }
-.media-file{
-    width: 100%;
+
+.media-file {
+  width: 100%;
+}
+
+.file-name-img img {
+  width: 31px;
+}
+
+a {
+  cursor: pointer;
 }

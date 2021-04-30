@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { TokenService } from './shared/token.service';
 import { AuthStateService } from './shared/auth-state.service';
+import { SidebarBroadcastService } from './shared/sidebar-broadcast.service';
 
 @Component({
   selector: 'app-root',
@@ -16,29 +17,35 @@ export class AppComponent implements OnInit, OnDestroy {
   isSignedIn: boolean;
   event$;
   isLoginRegisterUrl: boolean = true;
-  noHeaderUrls: string[] = [
-    '/login',
-    '/register',
-    '/photo-detail',
+  yesHeaderUrls: string[] = [
+    '/landing',
     '/image-editor',
-    '/account',
-    '/code',
-    '/folder-creation',
-    '/music',
-    '/photos',
-    '/total',
-    '/uploading',
-    '/video'
+    '/public-mdeia-board',
+    '/photo-detail',
+    '/profile'
+    // '/login',
+    // '/register',
+    // '/photo-detail',
+    // '/image-editor',
+    // '/account',
+    // '/code',
+    // '/folder-creation',
+    // '/music',
+    // '/photos',
+    // '/total',
+    // '/uploading',
+    // '/video'
   ];
 
   constructor(
     private auth: AuthStateService,
     public router: Router,
-    public token: TokenService
+    public token: TokenService,
+    private broadcastService: SidebarBroadcastService
   ) {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
-        this.isLoginRegisterUrl = this.noHeaderUrls.includes(event.url);
+        this.isLoginRegisterUrl = !this.yesHeaderUrls.includes(event.url);
       }
     });
   }
@@ -47,6 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.auth.userAuthState.subscribe((val) => {
       this.isSignedIn = val;
     });
+    this.broadcastService.boradcast("NAVITEMS_CHANGED", null);
   }
 
   ngOnDestroy() {

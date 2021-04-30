@@ -27,13 +27,13 @@ const routes: Routes = [
   { path: 'photo-detail', component: PhotoDetailComponent },
   { path: 'image-editor', component: ImageEditorComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'code', component: CodeComponent },
+  { path: 'code/:path', component: CodeComponent },
   { path: 'folder-creation', component: FolderCreationComponent },
-  { path: 'music', component: MusicComponent },
-  { path: 'photos', component: PhotosComponent },
+  { path: 'music/:path', component: MusicComponent },
+  { path: 'photos/:path', component: PhotosComponent },
   { path: 'total', component: TotalComponent },
   { path: 'uploading', component: UploadingComponent },
-  { path: 'video', component: VideoComponent },
+  { path: 'video/:path', component: VideoComponent },
 ];
 
 @NgModule({

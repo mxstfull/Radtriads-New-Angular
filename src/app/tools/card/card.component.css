@@ -36,7 +36,9 @@ mat-checkbox {
 ::ng-deep .mat-checkbox-frame{
   border-width: 1px !important;
 }
-
+.media-file img {
+  max-height: 300px;
+}
 
 
 
