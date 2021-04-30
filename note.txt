@@ -1,0 +1,6 @@
+file_category('file' table 'category' field)
+    this is for specifying the type of files.
+    0: photo
+    1: music
+    2: video
+    3: code

@@ -1,8 +1,9 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { NavItem } from '../nav-item';
+import { NavItem } from '../../interfaces/nav-item';
 import { Router } from '@angular/router';
 import { NavService } from '../nav-service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Globals } from '../../../global';
 @Component({
   selector: 'app-menu-list-item',
   templateUrl: './menu-list-item.component.html',
@@ -19,13 +20,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class MenuListItemComponent implements OnInit {
 
-  expanded: boolean = true;
+  expanded: boolean = false;
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem;
   @Input() depth: number;
 
   constructor(public navService: NavService,
-    public router: Router) {
+    public router: Router, private globals: Globals) {
     if (this.depth === undefined) {
       this.depth = 0;
     }
@@ -33,9 +34,9 @@ export class MenuListItemComponent implements OnInit {
 
   ngOnInit() {
     this.navService.currentUrl.subscribe((url: string) => {
-      if (this.item.route && url) {
+      if (this.item.path && url) {
         // console.log(`Checking '/${this.item.route}' against '${url}'`);
-        this.expanded = url.indexOf(`/${this.item.route}`) === 0;
+        this.expanded = url.indexOf(`${this.item.path}`) === 0;
         this.ariaExpanded = this.expanded;
         // console.log(`${this.item.route} is expanded: ${this.expanded}`);
       }
@@ -43,10 +44,19 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: NavItem) {
-    if (!item.children || !item.children.length) {
-      this.router.navigate([item.route]);
-      this.navService.closeNav();
-    }
+    this.globals.gl_currentPath = item.path;
+    this.router.navigate([item.category, item.path]);
+    // if (!item.children || !item.children.length) {
+    //   this.router.navigate([item.route]);
+    //   this.navService.closeNav();
+    // }
+  }
+
+  onIconSelected(item: NavItem) {
+    // if (!item.children || !item.children.length) {
+    //   this.router.navigate([item.route]);
+    //   this.navService.closeNav();
+    // }
     if (item.children && item.children.length) {
       this.expanded = !this.expanded;
     }

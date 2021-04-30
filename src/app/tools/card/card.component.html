@@ -1,18 +1,15 @@
 <div class="media-box">
-  <!-- <label class="check-media table-check">
-    <input type="checkbox">
-    <span class="table-checkmark"></span>
-  </label> -->
-  <mat-checkbox></mat-checkbox>
-  <div class="lock-media"><img src="assets/img/lock-icon.png" alt=""></div>
+  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_list.toggle(item) : null"
+  [checked]="selection_list.isSelected(item)"></mat-checkbox>
+  <div class="lock-media" *ngIf = "item.is_protected!=0"><img src="assets/img/lock-icon.png" alt=""></div>
   <div class="media-file">
-    <img src="assets/img/Bitmap.png" alt="" />
+    <img src="http://127.0.0.1:8000/files/{{jsEncode(item.url)}} " alt="" />
     <div class="video-icon" data-toggle="modal" data-target="#video-modal"><img src="assets/img/video-icon.png" alt="">
     </div>
   </div>
   <div class="media-content">
     <div class="media-info">
-      <div class="file-name">File Name</div>
+      <div class="file-name">{{item.filename}}</div>
       <div class="file-date">Added 5 Aug 2016</div>
     </div>
     <div class="media-edit">
@@ -29,22 +26,4 @@
     <div class="clear"></div>
   </div>
 </div>
-
-<!-- <mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <div class="test">test</div>
-    <p>
-      The Shiba
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card> -->
+<!-- http://127.0.0.1:8000/files/{{jsEncode(item.url)}}  -->

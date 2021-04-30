@@ -62,6 +62,7 @@ import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.c
 import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.component';
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
 import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
+import { Globals } from './global';
 
 @NgModule({
   exports: [
@@ -141,7 +142,8 @@ export class MaterialModule { }
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    Globals 
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

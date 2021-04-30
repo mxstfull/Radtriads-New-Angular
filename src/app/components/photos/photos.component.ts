@@ -1,39 +1,84 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { FileviewService } from '../../shared/fileview.service';
+import { CardItem } from '../interfaces/CardItem';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.css']
 })
-export class PhotosComponent {
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol', 'action'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+export class PhotosComponent implements OnInit {
+  displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
+  cardItems: CardItem[];
+  dataSource;
+  selection_list = new SelectionModel<CardItem>(true, []);
+  currentPath = "";
+  category = 0; // this means we need photos.
+  viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
+  
 
+  constructor(
+    private router: ActivatedRoute ,
+    private fileviewService: FileviewService, 
+    private router_1: Router
+    ) { 
+    this.router_1.events.subscribe((val) => {
+      
+      if(val instanceof NavigationEnd) {
+        this.currentPath = this.router.snapshot.paramMap.get("path");
+        let requestPayload = {
+          user_id: localStorage.getItem('user_id'),
+          unique_id: localStorage.getItem('unique_id'),
+          currentPath: this.currentPath,
+          category: this.category
+        };
+        this.fileviewService.getFileByCategory(requestPayload).subscribe(
+          result => {
+            this.cardItems = result;
+            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+          },
+          error => {
+            
+          }, () => {
+            //
+            
+          }
+        );
+      }
+    });    
+  }
+ 
+  ngOnInit(): void {
+    
+  }
+  onDownloadFiles() {
+    let requestPayload = {
+
+    };
+    this.fileviewService.downloadFiles(requestPayload).subscribe(
+      result => {
+        console.log(result);
+      },
+      error => {
+        
+      }, () => {
+        //
+        
+      }
+    );
+  }
+  onMoveFiles() {
+    console.log("download");
+  }
+  onCopyFiles() {
+    console.log("download");
+  }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
+    const numSelected = this.selection_list.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
@@ -41,18 +86,31 @@ export class PhotosComponent {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection_list.clear() :
+      this.dataSource.data.forEach(row => this.selection_list.select(row));
   }
-  viewMode: number = 0;
-  arrayOne(n: number): any[] {
-    return Array(n);
-  }
+  
+  // arrayOne(n: number): any[] {
+  //   return Array(n);
+  // }
   setGridViewMode(): void {
     this.viewMode = 0;
   }
   setListViewMode(): void {
     this.viewMode = 1;
   }
-
+  convertToPrivacyString(param: number) {
+    if(param === 0) return "public";
+    else return "private";
+  }
+  convertoToString(param: any)
+  {
+    return new Date(param).toLocaleDateString('en-us');
+  }
+  jsEncode(param: string){
+    let re = /\//gi;
+    param = param.replace(re, '>');
+    return param;
+    //return encodeURIComponent(param);
+  }
 }

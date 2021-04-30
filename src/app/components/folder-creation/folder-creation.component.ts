@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../../shared/upload.service';
 import { TokenService } from '../../shared/token.service';
-
-export interface FolderItem {
-  id: number,
-  title: string,
-  is_protected: number,
-  path: string
-};
+import { SidebarBroadcastService } from '../../shared/sidebar-broadcast.service';
+import { FolderItem } from '../interfaces/FolderItem';
 
 @Component({
   selector: 'app-folder-creation',
@@ -30,7 +25,7 @@ export class FolderCreationComponent implements OnInit {
   public subFoldersOfCurrent: FolderItem[]; // 
   public rootFoldersOfCurrent: FolderItem[]; // also contains itself.
 
-  constructor(public uploadService: UploadService, private token: TokenService,) {
+  constructor(public uploadService: UploadService, private token: TokenService, private broadcastService: SidebarBroadcastService) {
     this.currentFolder = Object.assign({}, this.initialFolder);
     this.user_id = localStorage.getItem('user_id');
     this.rootFoldersOfCurrent = [this.initialFolder];
@@ -80,6 +75,7 @@ export class FolderCreationComponent implements OnInit {
   }
 
   onCreateFolder() {
+    
     if(this.newFolderTitle == undefined || this.newFolderTitle == "" ) return;
     let requestPayload = {
       user_id: this.user_id,
@@ -101,5 +97,6 @@ export class FolderCreationComponent implements OnInit {
   addSubFolder(p_newSubFolder) {
     this.subFoldersOfCurrent.push(p_newSubFolder);
     this.newFolderTitle = "";
+    this.broadcastService.boradcast("NAVITEMS_CHANGED", null);
   }
 }

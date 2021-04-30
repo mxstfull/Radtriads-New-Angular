@@ -1,17 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { HttpUrlEncodingCodec } from '@angular/common/http';
+
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PrivacyModalComponent } from '../modals/privacy-modal/privacy-modal.component';
 import { ShareModalComponent } from '../modals/share-modal/share-modal.component';
 import { RenameModalComponent } from '../modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from '../modals/delete-modal/delete-modal.component';
+import { CardItem } from '../../components/interfaces/CardItem';
+
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) { }
+  public item: CardItem;
+  @Input() set SetItem(value: CardItem) {
+    this.item = value;
+  }
+  @Input() selection_list;
+  // @Input() item_checked: boolean;
+  // @Output() itemSelected = new EventEmitter<CardItem>();
+  
+  // @Input() item: CardItem;
+  constructor(public dialog: MatDialog) {
+  }
 
   openDialog(type: string) {
     if (type === "privacy") {
@@ -50,6 +64,12 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  jsEncode(param: string){
+    let re = /\//gi;
+    param = param.replace(re, '>');
+    return param;
+    //return encodeURIComponent(param);
   }
 
 }
