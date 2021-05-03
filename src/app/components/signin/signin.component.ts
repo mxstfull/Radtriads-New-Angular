@@ -14,6 +14,12 @@ import { AuthStateService } from '../../shared/auth-state.service';
 export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   errors = null;
+  loading = false;
+  submitted = false;
+
+  get f(){
+    return this.loginForm.controls;
+  }
 
   constructor(
     public router: Router,
@@ -31,15 +37,19 @@ export class SigninComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
+    this.submitted = true;
+    this.loading = true;
+
       this.authService.signin(this.loginForm.value).subscribe(
         result => {
           this.responseHandler(result);
         },
         error => {
           this.errors = error.error;
+          this.loading = false;
         },() => {
           this.authState.setAuthState(true);
-          this.loginForm.reset()
+          this.loginForm.reset();
           this.router.navigate(['profile']);
         }
       );

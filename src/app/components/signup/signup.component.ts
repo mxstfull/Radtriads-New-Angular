@@ -11,8 +11,11 @@ import { ConfirmedValidator } from '../../confirmed.validator';
 
 export class SignupComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
+  verifyForm: FormGroup = new FormGroup({});
   errors = null;
-    
+  loading = false;
+  submitted = false;
+  sucess_register = false;
   get f(){
     return this.registerForm.controls;
   }
@@ -26,7 +29,8 @@ export class SignupComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      password_confirmation: ['', [Validators.required]]
+      password_confirmation: ['', [Validators.required]],
+      acceptTerms: ['']
     }, { 
       validator: ConfirmedValidator('password', 'password_confirmation')
     })
@@ -35,15 +39,18 @@ export class SignupComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit() {
+    this.submitted = true;
+    this.loading = true;
     this.authService.register(this.registerForm.value).subscribe(
       result => {
         console.log(result)
       },
       error => {
         this.errors = error.error;
+        this.loading = false;
       },
       () => {
-        this.registerForm.reset()
+        this.registerForm.reset();
         this.router.navigate(['login']);
       }
     )
