@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,iBADa,CACb,gBAAgB,CAAC;EACb,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;CAChB",
+    "sources": [
+        "image-editor-new.component.scss"
+    ],
+    "names": [],
+    "file": "image-editor-new.component.css"
+}
