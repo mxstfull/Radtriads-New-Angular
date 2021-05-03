@@ -4,7 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,6 +64,7 @@ import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.c
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
 import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 import { Globals } from './global';
+import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
 
 @NgModule({
   exports: [
@@ -81,6 +83,8 @@ import { Globals } from './global';
     MatCheckboxModule,
     MatTabsModule,
     MatProgressBarModule
+  ],
+  declarations: [
   ],
 })
 export class MaterialModule { }
@@ -114,7 +118,8 @@ export class MaterialModule { }
     DeleteModalComponent,
     RenameConfirmModalComponent,
     ImageEditorNewComponent,
-    ToastUiImageEditorComponent
+    ToastUiImageEditorComponent,
+    MoveModalComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -125,7 +130,8 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgxFlowModule
+    NgxFlowModule,
+    MatTreeModule
   ],
   exports: [
     SidebarComponent,
@@ -143,7 +149,11 @@ export class MaterialModule { }
       useClass: AuthInterceptor,
       multi: true
     },
-    Globals 
+    Globals,
+    { 
+      provide: MatDialogRef,
+      useValue: []
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
