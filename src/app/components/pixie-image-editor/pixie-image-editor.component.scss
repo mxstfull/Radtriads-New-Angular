@@ -1,0 +1,47 @@
+.pixie-image-editor-container {
+    width: 100%;
+    max-height: 100px;
+
+    image-editor{
+        toolbar {
+            background: #fff !important;
+            color: #475f7b;
+        }
+        editor-controls {
+            height: 624px;
+            navigation-bar > .scroll-container {
+                display: flex;
+                width: 333px;
+                height: 624px;
+                flex-flow: wrap;
+                button {
+                    display: block;
+                    border-radius: 4px;
+                    background: rgba(236, 245, 253, 0.5);
+                    border: 1px solid rgba(141, 171, 196, 0.5);
+                    padding: 20px 0 12px;
+                    line-height: 100%;
+                    color: #8dabc4;
+                    font-size: 0.8125em;
+                    font-family: "Heebo", sans-serif;
+                    min-width: 140px;
+                    height: 103px;
+                    font-weight: 100;
+                    color: #0093ee;
+                    text-align: center;
+                    margin: 5px;
+                    image-or-icon {
+                        color: #0093ee;
+                    }
+                    &:hover {
+                        color: #e74a3b;
+                        border-color: rgba(231, 74, 59, 0.5);
+                        image-or-icon {
+                            color: #e74a3b;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
