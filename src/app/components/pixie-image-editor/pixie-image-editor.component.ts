@@ -1,6 +1,14 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import './pixie/scripts.min.js';
 
+/**
+ * pixie-image-editor
+ * Username: alexisd22
+ * Password:  8hQhE#m**U124*bHQPY6gE
+ * https://support.vebto.com/
+ */
+
+
 declare var Pixie: any;
 
 let Iu = (function (t: any) {
