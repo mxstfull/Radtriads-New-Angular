@@ -1,6 +1,6 @@
 export interface NavItem {
     displayName: string;
-    disabled: boolean;
+    // disabled: boolean;
     iconName: string;
     path: string;
     category: string;
