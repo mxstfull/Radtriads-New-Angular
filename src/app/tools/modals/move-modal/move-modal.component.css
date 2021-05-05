@@ -36,9 +36,14 @@ mat-select{
   padding: 0 1em 0 1.5em;
   cursor: pointer;
 }
-input {
-  border: 2px solid #DFE4EA;
-  border-radius: 8px;
-  padding: 0 1em 0 1.5em;
-  width: 100%;
+.txtColor:hover{
+  cursor: pointer;
+}
+
+.background-highlight{
+  background: rgba(58, 138, 250,0.1);
+}
+
+.file-move {
+  margin-bottom: 20px;
 }

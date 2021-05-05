@@ -13,7 +13,7 @@ export class UploadingComponent implements OnInit {
 
   currentPath = "home";
   constructor(private globals: Globals) {
-    this.currentPath = this.globals.gl_currentPath;
+    this.currentPath = localStorage.getItem("current_path");
   }
 
   ngOnInit(): void {
@@ -27,7 +27,6 @@ export class UploadingComponent implements OnInit {
   autoupload = true;
 
   ngAfterViewInit() {
-
     this.flow.flowJs.opts.query = {
       user_id: localStorage.getItem('user_id'),
       unique_id: localStorage.getItem('unique_id'),

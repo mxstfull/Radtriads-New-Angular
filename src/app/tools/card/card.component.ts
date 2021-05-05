@@ -30,9 +30,7 @@ export class CardComponent implements OnInit {
   openDialog(type: string) {
     if (type === "privacy") {
       this.dialog.open(PrivacyModalComponent, {
-        data: {
-          animal: 'panda'
-        },
+        data: this.item,
         width: '600px',
       });
     }
@@ -71,5 +69,8 @@ export class CardComponent implements OnInit {
     return param;
     //return encodeURIComponent(param);
   }
-
+  dispDate(m_date: string): string {
+    let date = new Date(m_date);
+    return date.toLocaleString('default', {day: 'numeric', month: 'short', year: 'numeric'});
+  }
 }

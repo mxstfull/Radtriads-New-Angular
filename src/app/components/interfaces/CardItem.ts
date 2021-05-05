@@ -6,5 +6,6 @@ export interface CardItem {
   diskspace: number,
   category: number, 
   is_protected: number,
+  created_at: string,
   updated_at: string,
 }

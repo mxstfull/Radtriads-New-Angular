@@ -4,7 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,6 +65,7 @@ import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal
 import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 import { Globals } from './global';
 import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie-image-editor.component';
+import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
 
 @NgModule({
   exports: [
@@ -82,6 +84,8 @@ import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie
     MatCheckboxModule,
     MatTabsModule,
     MatProgressBarModule
+  ],
+  declarations: [
   ],
 })
 export class MaterialModule { }
@@ -116,7 +120,8 @@ export class MaterialModule { }
     RenameConfirmModalComponent,
     ImageEditorNewComponent,
     ToastUiImageEditorComponent,
-    PixieImageEditorComponent
+    PixieImageEditorComponent,
+    MoveModalComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -127,7 +132,8 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgxFlowModule
+    NgxFlowModule,
+    MatTreeModule
   ],
   exports: [
     SidebarComponent,
@@ -146,7 +152,11 @@ export class MaterialModule { }
       useClass: AuthInterceptor,
       multi: true
     },
-    Globals 
+    Globals,
+    { 
+      provide: MatDialogRef,
+      useValue: []
+    }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

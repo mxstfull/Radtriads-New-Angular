@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, Output, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -14,11 +14,12 @@ import { SidebarService } from '../../shared/sidebar.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
-
+  
   private ngUnsubscribe = new Subject();
   public currentActiveNav: string = "";
   @ViewChild('appDrawer') appDrawer: ElementRef;
   navItems: NavItem[] = [];
+  folderTree: NavItem;
 
   constructor(
     private router: Router, 
@@ -62,6 +63,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       // this.navItems[i] = Object.assign({}, result) ;
       this.navItems[i]['displayName'] = label[i];
       this.navItems[i]['path'] = 'home';
+      if(i == 0) {
+        this.folderTree = this.navItems[i];
+        this.folderTree['displayName'] = 'Home';
+      }
     }
   }
   ngAfterViewInit() {
