@@ -24,7 +24,7 @@ export class PhotosComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
-  dataSource;
+  dataSource: MatTableDataSource<CardItem>;
   selection_list = new SelectionModel<CardItem>(true, []);
   currentPath = "";
   category = 0; // this means we need photos.
@@ -92,11 +92,11 @@ export class PhotosComponent implements OnInit {
       },error => {
         // this.errors = error.error;
       }, () => {
-        window.location.reload();
+        this.selection_list.clear();
       }
     );
   }
-  onMoveOrCopyFiles(m_action) {
+  onMoveOrCopyFiles(m_action: any) {
     let requestPayload = this.selection_list.selected;
     if (requestPayload.length == 0) return;
 
@@ -118,9 +118,14 @@ export class PhotosComponent implements OnInit {
       width: '600px',
     });
     this.dialogRef.afterClosed().subscribe(
-      result => {
-        // console.log(result);
-        if(result == "refresh") window.location.reload();
+      (result: any) => {
+        if(m_action == 'Move') {
+          this.cardItems = this.cardItems.filter(function(item) {
+            return !requestPayload.includes(item);
+          });
+          this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+        }
+        this.selection_list.clear() ;
       });
   }
   /** Whether the number of selected elements matches the total number of rows. */
@@ -134,7 +139,7 @@ export class PhotosComponent implements OnInit {
   masterToggle() {
     this.isAllSelected() ?
       this.selection_list.clear() :
-      this.dataSource.data.forEach(row => this.selection_list.select(row));
+      this.dataSource.data.forEach((row: CardItem) => this.selection_list.select(row));
   }
 
   // arrayOne(n: number): any[] {
@@ -159,15 +164,17 @@ export class PhotosComponent implements OnInit {
     return param;
     //return encodeURIComponent(param);
   }
-  openDialog(type: string) {
-
+  openDialog(type: string, item: CardItem) {
+    
     if (type === "privacy") {
-      this.dialog.open(PrivacyModalComponent, {
-        data: {
-          
-        },
+      this.dialogRef = this.dialog.open(PrivacyModalComponent, {
+        data: item,
         width: '600px',
       });
+      this.dialogRef.afterClosed().subscribe(
+        (        result: any) => {
+          item.is_protected = Number(result);
+        });
     }
     else if (type === "share") {
       this.dialog.open(ShareModalComponent, {
@@ -178,22 +185,40 @@ export class PhotosComponent implements OnInit {
       });
     }
     else if (type === "rename") {
-      this.dialog.open(RenameModalComponent, {
-        data: {
-          animal: 'panda'
-        },
+      this.dialogRef = this.dialog.open(RenameModalComponent, {
+        data: item,
         width: '600px',
       });
     }
     else if (type === "delete") {
-      this.dialog.open(DeleteModalComponent, {
-        data: {
-          animal: 'panda'
-        },
+      this.dialogRef = this.dialog.open(DeleteModalComponent, {
+        data: [item],
         width: '600px',
       });
+      this.dialogRef.afterClosed().subscribe(
+        (result: any) => {
+          if(result != true) {
+            this.deleteItems(result);
+          }
+      })
     }
-
-
+  }
+  deleteItems(deletedItems: [CardItem]) {
+    this.cardItems = this.cardItems.filter(function(item) {
+      return !deletedItems.includes(item);
+    });
+    this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+  }
+  onDeleteFiles() {
+    if(this.selection_list.selected.length == 0) return;
+    this.dialogRef = this.dialog.open(DeleteModalComponent, {
+      data: this.selection_list.selected,
+      width: '600px',
+    });
+    this.dialogRef.afterClosed().subscribe(
+      (result: any) => {
+        this.deleteItems(result);
+        this.selection_list.clear();
+    })
   }
 }

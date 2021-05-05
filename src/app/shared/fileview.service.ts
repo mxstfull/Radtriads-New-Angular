@@ -24,4 +24,10 @@ export class FileviewService {
   editFilePrivacy(requestPayload: object): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/fileview/editFilePrivacy', requestPayload);
   }
+  renameFile(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/renameFile', requestPayload);
+  }
+  deleteFile(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/deleteFile', requestPayload);
+  }
 }
