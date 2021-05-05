@@ -64,6 +64,7 @@ import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.c
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
 import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 import { Globals } from './global';
+import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie-image-editor.component';
 import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
 
 @NgModule({
@@ -119,6 +120,7 @@ export class MaterialModule { }
     RenameConfirmModalComponent,
     ImageEditorNewComponent,
     ToastUiImageEditorComponent,
+    PixieImageEditorComponent,
     MoveModalComponent
   ],
   imports: [
@@ -136,7 +138,8 @@ export class MaterialModule { }
   exports: [
     SidebarComponent,
     ModalsComponent,
-    ToastUiImageEditorComponent
+    ToastUiImageEditorComponent,
+    PixieImageEditorComponent
   ],
   providers: [
     {
