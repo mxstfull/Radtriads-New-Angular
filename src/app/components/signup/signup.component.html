@@ -18,92 +18,54 @@
               <h3>Sign Up</h3>
               <a routerLink="/login" class="sign-in">Sign In</a>
               <div class="clear"></div>
-              <form
-                class="form-signin"
-                [formGroup]="registerForm"
-                (ngSubmit)="onSubmit()"
-              >
-                <div class="input-box">
-                  <i class="fa fa-user"></i
-                  ><input
-                    type="text"
-                    placeholder="Username"
-                    formControlName="name"
-                  />
-                  <div
-                    *ngIf="f.name.touched && f.name.invalid"
-                    class="alert alert-danger"
-                  >
-                    <div *ngIf="f.name.errors.required">Name is required.</div>
-                  </div>
-                </div>
-                <div class="input-box">
-                  <i class="fa fa-envelope"></i
-                  ><input
-                    type="email"
-                    placeholder="Email"
-                    formControlName="email"
-                  />
-                  <div
-                    *ngIf="f.email.touched && f.email.invalid"
-                    class="alert alert-danger"
-                  >
-                    <div *ngIf="f.email.errors.required">
-                      Email is required.
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="input-box">
+                      <i class="fa fa-user"></i>
+                      <input type="text" formControlName="name" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && this.errors.name }" />
+                        <div *ngIf="submitted && this.errors.name" class="invalid-feedback">
+                            <div *ngIf="this.errors.name">{{this.errors.name}}</div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="input-box input-box-left">
-                  <i class="fa fa-lock"></i
-                  ><input
-                    type="password"
-                    placeholder="Password"
-                    formControlName="password"
-                  />
-                  <div
-                    *ngIf="f.password.touched && f.password.invalid"
-                    class="alert alert-danger"
-                  >
-                    <div *ngIf="f.password.errors.required">
-                      Password is required.
+                <div class="form-row">
+                  <div class="input-box">
+                  <i class="fa fa-envelope"></i>
+                  <input type="text" formControlName="email" placeholder="Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.email }" />
+                    <div *ngIf="submitted && this.errors.email" class="invalid-feedback">
+                        <div *ngIf="this.errors.email">{{this.errors.email}}</div>
                     </div>
-                  </div>
                 </div>
-                <div class="input-box input-box-right">
-                  <i class="fa fa-lock"></i
-                  ><input
-                    type="password"
-                    placeholder="Confirm"
-                    formControlName="password_confirmation"
-                  />
-                  <div
-                    *ngIf="
-                      f.password_confirmation.touched &&
-                      f.password_confirmation.invalid
-                    "
-                    class="alert alert-danger"
-                  >
-                    <div *ngIf="f.password_confirmation.errors.required">
-                      Password is required.
-                    </div>
-                    <div
-                      *ngIf="f.password_confirmation.errors.confirmedValidator"
-                    >
-                      Password and Confirm Password must be match.
-                    </div>
-                  </div>
                 </div>
-                <div class="clear"></div>
-                <label class="sign-check"
-                  >By creating an account, you agree to the Terms and Conditions
-                  and Privacy Policy
-                  <input type="checkbox" />
-                  <span class="my-checkmark"></span>
-                </label>
-                <button type="submit" [disabled]="!registerForm.valid">
-                  Register
-                </button>
-              </form>
+                <div class="form-row">
+                    <div class="input-box input-box-left">
+                      <i class="fa fa-lock"></i>
+                      <input type="password" formControlName="password" placeholder="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.password }" />
+                        <div *ngIf="submitted && this.errors.password" class="invalid-feedback">
+                            <div *ngIf="this.errors.password">{{this.errors.password}}</div>
+                        </div>
+                    </div>
+                    <div class="input-box input-box-right">
+                      <i class="fa fa-lock"></i>
+                        <input type="password" formControlName="password_confirmation" placeholder="Confirm" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.password }" />
+                        <div *ngIf="submitted && this.errors.password" class="invalid-feedback">
+                            <div *ngIf="this.errors.password">Confirm must match password.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && this.errors.acceptTerms }" />
+                    <label for="acceptTerms" class="form-check-label">By creating an account, you agree to the Terms and Conditions
+                      and Privacy Policy</label>
+                    <div *ngIf="submitted && this.errors.acceptTerms" class="invalid-feedback">Accept Ts & Cs is required</div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register
+                    </button>
+                </div>
+            </form>
               <div class="or-sign-up">
                 <p>Or sign up with</p>
                 <a routerLink="/" target="_blank"
@@ -124,3 +86,95 @@
   </div>
   <!-- sign-up-section-->
 </div>
+
+<!-- <form
+class="form-signin"
+[formGroup]="registerForm"
+(ngSubmit)="onSubmit()"
+>
+<div class="alert alert-danger" *ngIf="this.errors.email || this.errors.password">
+Please accept the terms and conditions. 
+<div>{{this.errors.email}}</div>
+<div>{{this.errors.password}}</div>
+</div>
+<div class="input-box">
+  <i class="fa fa-user"></i
+  ><input
+    type="text"
+    placeholder="Username"
+    formControlName="name"
+  />
+  <div
+    *ngIf="f.name.touched && f.name.invalid"
+    class="alert alert-danger"
+  >
+    <div *ngIf="f.name.errors.required">Name is required.</div>
+  </div>
+</div>
+<div class="input-box">
+  <i class="fa fa-envelope"></i
+  ><input
+    type="email"
+    placeholder="Email"
+    formControlName="email"
+  />
+  <div
+    *ngIf="f.email.touched && f.email.invalid"
+    class="alert alert-danger"
+  >
+    <div *ngIf="f.email.errors.required">
+      Email is required.
+    </div>
+  </div>
+</div>
+<div class="input-box input-box-left">
+  <i class="fa fa-lock"></i
+  ><input
+    type="password"
+    placeholder="Password"
+    formControlName="password"
+  />
+  <div
+    *ngIf="f.password.touched && f.password.invalid"
+    class="alert alert-danger"
+  >
+    <div *ngIf="f.password.errors.required">
+      Password is required.
+    </div>
+  </div>
+</div>
+<div class="input-box input-box-right">
+  <i class="fa fa-lock"></i
+  ><input
+    type="password"
+    placeholder="Confirm"
+    formControlName="password_confirmation"
+  />
+  <div
+    *ngIf="
+      f.password_confirmation.touched &&
+      f.password_confirmation.invalid
+    "
+    class="alert alert-danger"
+  >
+    <div *ngIf="f.password_confirmation.errors.required">
+      Password is required.
+    </div>
+    <div
+      *ngIf="f.password_confirmation.errors.confirmedValidator"
+    >
+      Password and Confirm Password must be match.
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<label class="sign-check"
+  >By creating an account, you agree to the Terms and Conditions
+  and Privacy Policy
+  <input type="checkbox" />
+  <span class="my-checkmark"></span>
+</label>
+<button type="submit" [disabled]="!registerForm.valid">
+  Register
+</button>
+</form> -->
