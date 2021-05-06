@@ -64,7 +64,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.navItems[i]['displayName'] = label[i];
       this.navItems[i]['path'] = 'home';
       if(i == 0) {
-        this.folderTree = this.navItems[i];
+        this.folderTree = Object.assign({}, this.navItems[i]);
         this.folderTree['displayName'] = 'Home';
       }
     }

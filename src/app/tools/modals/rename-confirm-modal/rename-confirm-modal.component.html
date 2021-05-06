@@ -6,15 +6,15 @@
   <div mat-dialog-content>
     <div class="rename-folder">
       <div class="rename-imgs">
-        <img src="assets/img/rename-folder.png" alt="">
+        <img src="http://127.0.0.1:8000/files/{{jsEncode(data.url)}} " alt="">
         <span class="rename-check"><img src="assets/img/rename-check.png" alt=""></span>
       </div>
-      <input type="text" value="Portrait Album">
+      <input type="text" [(ngModel)]="newFileName">
       <div class="clear"></div>
     </div>
     <div class="modal-btn">
       <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
-      <button mat-button class="btn-ok">Confirm</button>
+      <button mat-button class="btn-ok" (click)="onRenameConfirm();">Confirm</button>
     </div>
   </div>
   

@@ -15,8 +15,10 @@ export class PrivacyModalComponent {
   password = "";
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: CardItem,
-    private fileviewService: FileviewService
+    private fileviewService: FileviewService,
+    private dialogRef: MatDialogRef<PrivacyModalComponent>
   ) { 
+    
     this.privacy_select = data.is_protected.toString();
   }
   onPrivacyConfirm() {
@@ -30,7 +32,7 @@ export class PrivacyModalComponent {
     };
     this.fileviewService.editFilePrivacy(requestPayload).subscribe(
       result => {
-        console.log(result);
+          this.dialogRef.close(this.privacy_select);
       },
       error => {
 

@@ -31,20 +31,17 @@
             </ul>
           </div>
           <div class="select-all desktop-div">
-            <mat-checkbox color='primary' (change)="$event ? masterToggle() : null"
+            <mat-checkbox  (change)="$event ? masterToggle() : null"
             [checked]="selection_list.hasValue() && isAllSelected()"
             [indeterminate]="selection_list.hasValue() && !isAllSelected()">Select All</mat-checkbox>
           </div>
-          <div class="drag-drop-wrapper">
-            <button class="drag-drop-btn"><span>+</span> Drad and Drop or Browse Files</button>
-            <input type="file" name="drap-drop">
-          </div>
+          
           <div class="clear"></div>
           <div class="changing-btn mobile-div">
             <a class="grey-btn" (click) = "onDownloadFiles()"><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-            <a class="grey-btn" data-toggle="modal" data-target="#move-modal"  (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+            <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
                 aria-hidden="true"></i>Move</a>
-            <a  class="grey-btn" data-toggle="modal" data-target="#copy-modal"  (click) = "onMoveOrCopyFiles('Copy')"><i
+            <a  class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
                 class="fa fa-clone"></i>Copy</a>
             <div class="clear"></div>
           </div>
@@ -62,6 +59,16 @@
           </div>
           <div class="clear"></div>
         </div>
+        <div class="changing-btn desktop-div">
+          <a class="grey-btn" (click) = "onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
+          <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+              aria-hidden="true"></i>Move</a>
+          <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
+              class="fa fa-clone"></i>Copy</a>
+              <a class="grey-btn" (click) = "onDeleteFiles()"><i
+                class="fa fa-trash"></i>Delete</a>
+          <div class="clear"></div>
+        </div>
         <div class="tab-content">
           <div id="fm-grid-view"
             [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}"
@@ -72,18 +79,11 @@
                 <div class="sort-by">Sort by <span>Date</span><img src="assets/img/sort.png" alt="" /></div>
                 <div class="clear"></div>
               </div>
-              <div class="changing-btn desktop-div">
-                <a class="grey-btn" (click) = "onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
-                    aria-hidden="true"></i>Move</a>
-                <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
-                    class="fa fa-clone"></i>Copy</a>
-                <div class="clear"></div>
-              </div>
+              
 
               <mat-grid-list cols="5">
                 <mat-grid-tile *ngFor="let item of cardItems; let i = index;">
-                  <app-card [SetItem]="item" [selection_list]="selection_list">
+                  <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
 
                   </app-card>
                 </mat-grid-tile>
@@ -144,12 +144,12 @@
                       <i class="fa fa-ellipsis-h"></i>
                       <div class="media-edit-inner">
                         <div class="media-edit-box">
-                          <a mat-button (click)="openDialog('privacy');$event.stopPropagation();"><img src="assets/img/edit.png" alt="" />Edit
+                          <a mat-button (click)="openDialog('privacy', element);$event.stopPropagation();"><img src="assets/img/edit.png" alt="" />Edit
                             Privacy</a>
-                          <a mat-button (click)="openDialog('share');$event.stopPropagation();"><img src="assets/img/share.png" alt="" />Share</a>
-                          <a mat-button (click)="openDialog('rename');$event.stopPropagation();"><img src="assets/img/rename.png"
+                          <a mat-button (click)="openDialog('share', element);$event.stopPropagation();"><img src="assets/img/share.png" alt="" />Share</a>
+                          <a mat-button (click)="openDialog('rename', element);$event.stopPropagation();"><img src="assets/img/rename.png"
                               alt="" />Rename</a>
-                          <a mat-button (click)="openDialog('delete');$event.stopPropagation();"><img src="assets/img/delete.png"
+                          <a mat-button (click)="openDialog('delete', element);$event.stopPropagation();"><img src="assets/img/delete.png"
                               alt="" />Delete</a>
                         </div>
                       </div>

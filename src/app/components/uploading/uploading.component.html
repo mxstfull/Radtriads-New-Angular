@@ -23,14 +23,14 @@
         <ng-container #flowAdvanced="flow" [flowConfig]="{target: 'http://127.0.0.1:8000/api/fileupload/upload', testChunks:false, chunkSize:150*1024*1024, forceChunkSize:true }">
         </ng-container>
         <div class="dash-bot-top">
-          <h2><i class="fa fa-arrow-left" aria-hidden="true"></i> Upload files</h2>
+          <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.back();"></i> Upload files</h2>
           <div class="clear"></div>
         </div>
         <div class="upload-file-box">
           <div class="upload-btn-wrapper" flowDrop [flow]="flowAdvanced.flowJs">
             <button class="upload-btn"><i class="fa fa-upload" aria-hidden="true"></i> Drag files here or
               browse</button>
-            <input type="file" name="myfile" flowButton [flow]="flowAdvanced.flowJs"/>
+            <input type="file" name="myfile" flowButton [flow]="flowAdvanced.flowJs" [flowAttributes]="{accept: allowedExtensions[currentCategory]}"/>
           </div>
           <h4>Recent Uploads</h4>
           <div class="file-upload-list scroll-support" id="fu-list">

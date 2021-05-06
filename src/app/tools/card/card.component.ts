@@ -8,7 +8,6 @@ import { RenameModalComponent } from '../modals/rename-modal/rename-modal.compon
 import { DeleteModalComponent } from '../modals/delete-modal/delete-modal.component';
 import { CardItem } from '../../components/interfaces/CardItem';
 
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -20,19 +19,23 @@ export class CardComponent implements OnInit {
     this.item = value;
   }
   @Input() selection_list;
-  // @Input() item_checked: boolean;
-  // @Output() itemSelected = new EventEmitter<CardItem>();
-  
-  // @Input() item: CardItem;
-  constructor(public dialog: MatDialog) {
+  @Output() deleteItems: EventEmitter<any> = new EventEmitter();
+  private dialogRef: any;
+  constructor(public dialog: MatDialog, 
+    
+    ) {
   }
 
   openDialog(type: string) {
     if (type === "privacy") {
-      this.dialog.open(PrivacyModalComponent, {
+      this.dialogRef = this.dialog.open(PrivacyModalComponent, {
         data: this.item,
         width: '600px',
       });
+      this.dialogRef.afterClosed().subscribe(
+        result => {
+          this.item.is_protected = Number(result);
+        });
     }
     else if (type === "share") {
       this.dialog.open(ShareModalComponent, {
@@ -43,34 +46,42 @@ export class CardComponent implements OnInit {
       });
     }
     else if (type === "rename") {
-      this.dialog.open(RenameModalComponent, {
-        data: {
-          animal: 'panda'
-        },
+      this.dialogRef = this.dialog.open(RenameModalComponent, {
+        data: this.item,
         width: '600px',
       });
     }
     else if (type === "delete") {
-      this.dialog.open(DeleteModalComponent, {
-        data: {
-          animal: 'panda'
-        },
+      this.dialogRef = this.dialog.open(DeleteModalComponent, {
+        data: [this.item],
         width: '600px',
       });
+      this.dialogRef.afterClosed().subscribe(
+        result => {
+          if(result != true) {
+            this.deleteItems.emit(result);
+          }
+      }, error => {
+      }, () => {
+        
+      })
     }
-
   }
-
   ngOnInit(): void {
   }
   jsEncode(param: string){
+    if(param == null || param == "" ) return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
-    //return encodeURIComponent(param);
   }
   dispDate(m_date: string): string {
     let date = new Date(m_date);
     return date.toLocaleString('default', {day: 'numeric', month: 'short', year: 'numeric'});
+  }
+  viewImageThumbnail(item: CardItem) {
+    if(item.is_picture == 1)
+      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+    else return "assets/img/thumb-"+item.ext+".png";
   }
 }
