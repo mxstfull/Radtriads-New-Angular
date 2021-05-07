@@ -1,0 +1,12 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  
+  <h1 mat-dialog-title><img src="assets/img/m-icon.png" alt="">Music Player</h1>
+  <div mat-dialog-content>
+    
+    <div class="modal-body">
+      <ang-music-player [audioList] = audioList width="100%" ></ang-music-player>
+    </div>
+  </div>
+  

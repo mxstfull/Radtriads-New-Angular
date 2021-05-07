@@ -1,0 +1,20 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+  </button>
+  
+  <h1 mat-dialog-title><img src="assets/img/m-icon.png" alt="">Video Preview</h1>
+  <div mat-dialog-content>
+    
+    <div class="modal-body">
+        
+        <div class="popup">
+          <video  controls (canplay)="pauseVideo(videoplayer)" height="100%" width="100%"
+            #videoPlayer>
+          <source src="{{videoSource}}" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
+        </div>
+        
+    </div>
+  </div>
+  

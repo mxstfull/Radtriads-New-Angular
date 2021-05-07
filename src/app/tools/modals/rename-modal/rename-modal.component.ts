@@ -12,11 +12,19 @@ import { CardItem } from '../../../components/interfaces/CardItem';
 })
 export class RenameModalComponent  {
 
+  public titleText = "Rename selected file?";
   private dialogRef: any;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: CardItem, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,
     private selfDialogRef: MatDialogRef<RenameModalComponent>
-  ) {}
+  ) {
+    if(this.data.type === "album") {
+      this.titleText = "Rename Album?";
+    }
+    else {
+      this.titleText = "Rename selected file?";
+    }
+  }
   openDialog(type: string) {
     if (type === "rename-confirm") {
       this.dialogRef = this.dialog.open(RenameConfirmModalComponent, {

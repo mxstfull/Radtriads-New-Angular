@@ -5,7 +5,7 @@
   <div class="media-file">
     <img src="{{viewImageThumbnail(item)}}" alt="null" />
 
-    <div class="video-icon" data-toggle="modal" data-target="#video-modal"><img src="assets/img/video-icon.png" alt="">
+    <div class="video-icon" (click)="viewMedia(item)"><img src="{{viewPreviewButton()}}" alt="">
     </div>
   </div>
   <div class="media-content">
