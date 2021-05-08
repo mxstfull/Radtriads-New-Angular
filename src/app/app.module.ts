@@ -55,6 +55,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AngMusicPlayerModule } from  'ang-music-player';
 
 import { CardComponent } from './tools/card/card.component';
 import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
@@ -66,6 +67,9 @@ import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/
 import { Globals } from './global';
 import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie-image-editor.component';
 import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
+import { AudioModalComponent } from './tools/modals/audio-modal/audio-modal.component';
+import { VideoModalComponent } from './tools/modals/video-modal/video-modal.component';
+import { TrashComponent } from './components/trash/trash.component';
 
 @NgModule({
   exports: [
@@ -121,7 +125,10 @@ export class MaterialModule { }
     ImageEditorNewComponent,
     ToastUiImageEditorComponent,
     PixieImageEditorComponent,
-    MoveModalComponent
+    MoveModalComponent,
+    AudioModalComponent,
+    VideoModalComponent,
+    TrashComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -133,7 +140,8 @@ export class MaterialModule { }
     MaterialModule,
     FlexLayoutModule,
     NgxFlowModule,
-    MatTreeModule
+    MatTreeModule,
+    AngMusicPlayerModule
   ],
   exports: [
     SidebarComponent,

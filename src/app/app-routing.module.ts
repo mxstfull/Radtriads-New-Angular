@@ -17,6 +17,7 @@ import { PhotosComponent } from './components/photos/photos.component';
 import { TotalComponent } from './components/total/total.component';
 import { UploadingComponent } from './components/uploading/uploading.component';
 import { VideoComponent } from './components/video/video.component';
+import { TrashComponent } from './components/trash/trash.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'total', component: TotalComponent },
   { path: 'uploading', component: UploadingComponent },
   { path: 'video/:path', component: VideoComponent },
+  { path: 'trash', component: TrashComponent },
 ];
 
 @NgModule({

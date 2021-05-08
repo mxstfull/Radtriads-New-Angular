@@ -30,4 +30,7 @@ export class FileviewService {
   deleteFile(requestPayload: object): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/fileview/deleteFile', requestPayload);
   }
+  renameAlbum(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/renameAlbum', requestPayload);
+  }
 }

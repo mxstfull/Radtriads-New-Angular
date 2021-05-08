@@ -24,6 +24,7 @@
     "@angular/router": "~11.2.9",
     "@flowjs/flow.js": "^2.14.1",
     "@flowjs/ngx-flow": "^0.4.6",
+    "ang-music-player": "0.0.4",
     "bootstrap": "^4.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

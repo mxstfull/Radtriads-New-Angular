@@ -10,6 +10,7 @@ import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.
 import { RenameModalComponent } from '../../tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from '../../tools/modals/delete-modal/delete-modal.component';
 import { MoveModalComponent } from '../../tools/modals/move-modal/move-modal.component';
+
 import { NavItem } from '../interfaces/nav-item';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Globals } from '../../global';
@@ -96,6 +97,34 @@ export class PhotosComponent implements OnInit {
       }
     );
   }
+  onDownloadAlbum() {
+    let urlArray = this.cardItems;
+    if(urlArray.length == 0) return;
+    this.fileviewService.downloadFiles({ fileList: urlArray }).subscribe(
+      result => {
+        const a = document.createElement('a')
+        const objectUrl = URL.createObjectURL(result)
+        a.href = objectUrl
+        a.download = 'archive.zip';
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      },error => {
+        // this.errors = error.error;
+      }, () => {
+        this.selection_list.clear();
+      }
+    );
+  }
+  onRenameAlbum() {
+    if(localStorage.getItem("current_path") == "home") return;
+    this.dialogRef = this.dialog.open(RenameModalComponent, {
+      data: {
+        data: null,
+        type: 'album'
+      },
+      width: '600px',
+    });
+  }
   onMoveOrCopyFiles(m_action: any) {
     let requestPayload = this.selection_list.selected;
     if (requestPayload.length == 0) return;
@@ -158,11 +187,16 @@ export class PhotosComponent implements OnInit {
   convertoToString(param: any) {
     return new Date(param).toLocaleDateString('en-us');
   }
-  jsEncode(param: string) {
+  jsEncode(param: string){
+    if(param == null || param == "" ) return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
-    //return encodeURIComponent(param);
+  }
+  viewImageThumbnail(item: CardItem) {
+    if(item.is_picture == 1)
+      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+    else return "assets/img/thumb-"+item.ext+".png";
   }
   openDialog(type: string, item: CardItem) {
     
@@ -186,7 +220,10 @@ export class PhotosComponent implements OnInit {
     }
     else if (type === "rename") {
       this.dialogRef = this.dialog.open(RenameModalComponent, {
-        data: item,
+        data: {
+          data: item,
+          type: 'file'
+        },
         width: '600px',
       });
     }
@@ -220,5 +257,9 @@ export class PhotosComponent implements OnInit {
         this.deleteItems(result);
         this.selection_list.clear();
     })
+  }
+  onSortClicked() {
+    this.cardItems = this.cardItems.reverse();
+    this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
 }

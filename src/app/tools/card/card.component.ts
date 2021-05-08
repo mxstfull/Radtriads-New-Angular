@@ -7,6 +7,8 @@ import { ShareModalComponent } from '../modals/share-modal/share-modal.component
 import { RenameModalComponent } from '../modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from '../modals/delete-modal/delete-modal.component';
 import { CardItem } from '../../components/interfaces/CardItem';
+import { AudioModalComponent } from '../modals/audio-modal/audio-modal.component';
+import { VideoModalComponent } from '../modals/video-modal/video-modal.component';
 
 @Component({
   selector: 'app-card',
@@ -47,7 +49,10 @@ export class CardComponent implements OnInit {
     }
     else if (type === "rename") {
       this.dialogRef = this.dialog.open(RenameModalComponent, {
-        data: this.item,
+        data: {
+          data: this.item,
+          type: 'file'
+        },
         width: '600px',
       });
     }
@@ -75,13 +80,46 @@ export class CardComponent implements OnInit {
     param = param.replace(re, '>');
     return param;
   }
-  dispDate(m_date: string): string {
-    let date = new Date(m_date);
-    return date.toLocaleString('default', {day: 'numeric', month: 'short', year: 'numeric'});
-  }
   viewImageThumbnail(item: CardItem) {
     if(item.is_picture == 1)
       return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
     else return "assets/img/thumb-"+item.ext+".png";
+  }
+  dispDate(m_date: string): string {
+    let date = new Date(m_date);
+    return date.toLocaleString('default', {day: 'numeric', month: 'short', year: 'numeric'});
+  }
+  viewMedia(item: CardItem) {
+    let category = item.category;
+    // localStorage.getItem('current_category');
+    if(category == 0) {
+
+    } else if(category == 1) {
+      this.dialogRef = this.dialog.open(AudioModalComponent, {
+        data: this.item,
+        width: '930px',
+      });
+    } else if(category == 2) {
+      this.dialogRef = this.dialog.open(VideoModalComponent, {
+        data: this.item,
+        width: '930px',
+      });
+    } else if(category == 3) {
+
+    }
+  }
+  
+  viewPreviewButton() {
+    if(this.item.category == 0){
+     return "";
+    }
+    else if(this.item.category == 1) {
+      if(this.item.ext == "mp3")
+        return "assets/img/music-icon.png";
+      return "assets/img/music-icon1.png";
+    }
+    else if(this.item.category == 2) {
+      return "assets/img/video-icon.png";
+    }
   }
 }

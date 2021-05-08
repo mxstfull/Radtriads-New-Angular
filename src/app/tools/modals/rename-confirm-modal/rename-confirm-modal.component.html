@@ -2,11 +2,11 @@
     <mat-icon class="close-icon" color="warn">close</mat-icon>
   </button>
   
-  <h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Rename folder?</h1>
+  <h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Rename {{this.data.type}}?</h1>
   <div mat-dialog-content>
     <div class="rename-folder">
       <div class="rename-imgs">
-        <img src="http://127.0.0.1:8000/files/{{jsEncode(data.url)}} " alt="">
+        <img src="{{viewImageThumbnail(data)}} " alt="">
         <span class="rename-check"><img src="assets/img/rename-check.png" alt=""></span>
       </div>
       <input type="text" [(ngModel)]="newFileName">

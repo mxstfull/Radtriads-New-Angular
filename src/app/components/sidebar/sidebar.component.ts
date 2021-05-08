@@ -14,7 +14,7 @@ import { SidebarService } from '../../shared/sidebar.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
-  
+
   private ngUnsubscribe = new Subject();
   public currentActiveNav: string = "";
   @ViewChild('appDrawer') appDrawer: ElementRef;
@@ -22,12 +22,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   folderTree: NavItem;
 
   constructor(
-    private router: Router, 
-    private cdr: ChangeDetectorRef, 
-    private navService: NavService, 
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private navService: NavService,
     private broadcastService: SidebarBroadcastService,
     private sidebarService: SidebarService
-    ) {
+  ) {
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getActiveRoutes();
@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.getSidebarNavItems();
   }
   ngOnInit(): void {
-    
+
   }
   getSidebarNavItems() {
     let requestPayload = {
@@ -59,15 +59,22 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   setSidebarNavItems(result: any) {
     this.navItems = result;
     let label = ['Photo', 'Music', 'Video', 'Code'];
-    for(let i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) {
       // this.navItems[i] = Object.assign({}, result) ;
       this.navItems[i]['displayName'] = label[i];
       this.navItems[i]['path'] = 'home';
-      if(i == 0) {
+      if (i == 0) {
         this.folderTree = Object.assign({}, this.navItems[i]);
         this.folderTree['displayName'] = 'Home';
       }
     }
+    this.navItems[4] = {
+      displayName: "Trash",
+      iconName: "person",
+      path: "",
+      category: "trash",
+      children: null
+    };
   }
   ngAfterViewInit() {
     this.navService.appDrawer = this.appDrawer;
