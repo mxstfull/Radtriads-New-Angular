@@ -240,7 +240,7 @@ export class PhotosComponent implements OnInit {
       })
     }
   }
-  deleteItems(deletedItems: [CardItem]) {
+  deleteItems(deletedItems: CardItem[]) {
     this.cardItems = this.cardItems.filter(function(item) {
       return !deletedItems.includes(item);
     });

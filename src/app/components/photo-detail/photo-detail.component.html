@@ -1,23 +1,23 @@
 <div id="dashobard">
   <div class="photo-heading">
-    <a routerLink="/"><i class="fa fa-angle-left"></i> Home</a>
+    <a onclick="javascript:history.back();" style="cursor: pointer;"><i class="fa fa-angle-left"></i> Back</a>
   </div>
   <div class="photo-details-box">
     <div class="photo-details-box-left">
       <div class="photo-box">
-        <img src="../../../assets/img/photo-image.png" alt="" />
+        <img src="{{viewImageDetail(currentItem)}}" alt="" />
         <div class="photo-box-icons">
-          <a routerLink="/"><i class="fa fa-trash" aria-hidden="true"></i></a>
-          <a routerLink="/"><i class="fa fa-download" aria-hidden="true"></i></a>
-          <a routerLink="/"><i class="fa fa-sliders" aria-hidden="true"></i></a>
-          <a routerLink="/"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+          <a (click)="onDeleteItem()"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          <a (click)="onDownloadItem()"><i class="fa fa-download" aria-hidden="true"></i></a>
+          <a ><i class="fa fa-sliders" aria-hidden="true"></i></a>
+          <a ><i class="fa fa-share-alt" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
     <div class="photo-details-box-right">
-      <div class="photo-details-top">
-        <h2>hero.jpg</h2>
-        <p>11/20/2020, 6:04 PM</p>
+      <div class="photo-details-top" *ngIf="currentItem != null">
+        <h2>{{currentItem.title}}</h2>
+        <p>{{getCreatedDateAsString()}}</p>
       </div>
       <div class="photo-details-bottom">
         <table>
@@ -42,11 +42,11 @@
             </tr>
             <tr>
               <td>Privacy</td>
-              <td>Public</td>
+              <td>{{(currentItem.is_protected == 0)? "public" : "private"}}</td>
             </tr>
             <tr>
               <td>Size</td>
-              <td>578.38 KB</td>
+              <td>{{currentItem.diskspace/1000.0}}KB</td>
             </tr>
           </tbody>
         </table>

@@ -64,6 +64,10 @@ export class MoveModalComponent implements OnInit {
     this.activeNode = node;
   }
   onMoveConfirm() {
+    if(this.activeNode['path'] == localStorage.getItem('current_path')){
+      alert('Please select another album.');
+      return;
+    } 
     if (this.activeNode === undefined) return;
     let requestPayload = {
       user_id: localStorage.getItem('user_id'),
