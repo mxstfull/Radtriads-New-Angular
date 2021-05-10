@@ -85,10 +85,14 @@ export class MusicComponent implements OnInit {
     }
     this.fileviewService.downloadFiles({ fileList: urlArray }).subscribe(
       result => {
-        const a = document.createElement('a')
-        const objectUrl = URL.createObjectURL(result)
-        a.href = objectUrl
-        a.download = 'archive.zip';
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(result);
+        a.href = objectUrl;
+        if(urlArray.length == 1) {
+          a.download = urlArray[0]['title'];
+        } else {
+          a.download = 'archive.zip';
+        }
         a.click();
         URL.revokeObjectURL(objectUrl);
       },error => {
@@ -103,10 +107,14 @@ export class MusicComponent implements OnInit {
     if(urlArray.length == 0) return;
     this.fileviewService.downloadFiles({ fileList: urlArray }).subscribe(
       result => {
-        const a = document.createElement('a')
-        const objectUrl = URL.createObjectURL(result)
-        a.href = objectUrl
-        a.download = 'archive.zip';
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(result);
+        a.href = objectUrl;
+        if(urlArray.length == 1) {
+          a.download = urlArray[0]['title'];
+        } else {
+          a.download = 'archive.zip';
+        }
         a.click();
         URL.revokeObjectURL(objectUrl);
       },error => {
