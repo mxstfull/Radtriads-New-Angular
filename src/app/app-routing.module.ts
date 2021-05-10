@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'login', component: SigninComponent },
   { path: 'register', component: SignupComponent },
-  { path: 'profile', component: UserProfileComponent },
+  // { path: 'profile', component: UserProfileComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'public-media-board', component: PublicMediaBoardComponent },
   { path: 'photo-detail', component: PhotoDetailComponent },

@@ -3,7 +3,7 @@
   [checked]="selection_list.isSelected(item)"></mat-checkbox>
   <div class="lock-media" *ngIf = "item.is_protected!=0"><img src="assets/img/lock-icon.png" alt=""></div>
   <div class="media-file" (click)="imageView(item)" [ngStyle]="{'cursor': (item.category == 0)? 'pointer': ''}">
-    <img src="{{viewImageThumbnail(item)}}" alt="null" />
+    <img src="{{viewImageThumbnail(item)}}"/>
 
     <div class="video-icon" (click)="viewMedia(item)"><img src="{{viewPreviewButton()}}" alt="">
     </div>
