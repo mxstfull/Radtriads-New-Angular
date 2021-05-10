@@ -44,7 +44,7 @@ h2 {
 ::ng-deep .mat-tab-label{
     font-family: 'Archivo', sans-serif;
 }
-::ng-deep .mat-tab-label {
+:host ::ng-deep .mat-tab-label {
   font-size: 30px;
 }
 :host ::ng-deep .mat-tab-label {
