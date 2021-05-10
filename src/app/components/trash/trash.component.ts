@@ -9,7 +9,6 @@ import { PrivacyModalComponent } from '../../tools/modals/privacy-modal/privacy-
 import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
 import { RenameModalComponent } from '../../tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from '../../tools/modals/delete-modal/delete-modal.component';
-import { MoveModalComponent } from '../../tools/modals/move-modal/move-modal.component';
 
 import { NavItem } from '../interfaces/nav-item';
 import { SidebarComponent } from '../sidebar/sidebar.component';
@@ -36,7 +35,7 @@ export class TrashComponent implements OnInit {
     private router: ActivatedRoute,
     private fileviewService: FileviewService,
     private router_1: Router,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private globals: Globals,
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
@@ -102,26 +101,106 @@ export class TrashComponent implements OnInit {
   convertoToString(param: any) {
     return new Date(param).toLocaleDateString('en-us');
   }
-  jsEncode(param: string){
-    if(param == null || param == "" ) return "";
+  jsEncode(param: string) {
+    if (param == null || param == "") return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
   }
   viewImageThumbnail(item: CardItem) {
-    if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+    if (item.is_picture == 1)
+      return "http://127.0.0.1:8000/files/" + this.jsEncode(item.thumb_url);
+    else return "assets/img/thumb-" + item.ext + ".png";
   }
-  
+  openDialog(type: string, item: CardItem) {
+
+    if (type === "privacy") {
+      this.dialogRef = this.dialog.open(PrivacyModalComponent, {
+        data: item,
+        width: '600px',
+      });
+      this.dialogRef.afterClosed().subscribe(
+        (result: any) => {
+          item.is_protected = Number(result);
+        });
+    }
+    else if (type === "share") {
+      this.dialog.open(ShareModalComponent, {
+        data: {
+          animal: 'panda'
+        },
+        width: '740px',
+      });
+    }
+    else if (type === "rename") {
+      this.dialogRef = this.dialog.open(RenameModalComponent, {
+        data: {
+          data: item,
+          type: 'file'
+        },
+        width: '600px',
+      });
+    }
+    else if (type === "delete") {
+      this.dialogRef = this.dialog.open(DeleteModalComponent, {
+        data: [item],
+        width: '600px',
+      });
+      this.dialogRef.afterClosed().subscribe(
+        (result: any) => {
+          if (result != true) {
+            this.deleteItems(result);
+          }
+        })
+    }
+  }
+  deleteItems(deletedItems: CardItem[]) {
+    this.cardItems = this.cardItems.filter(function (item) {
+      return !deletedItems.includes(item);
+    });
+    this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+  }
+
   onSortClicked() {
     this.cardItems = this.cardItems.reverse();
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
   onRecoverFiles() {
-
+    if(this.selection_list.selected.length == 0) return;
+    if (!window.confirm("Are you sure you want to recover these files?")) return;
+    let requestPayload = {
+      item: this.selection_list.selected,
+    };
+    this.fileviewService.recoverFiles(requestPayload).subscribe(
+      result => {
+        this.deleteItems(this.selection_list.selected);
+        this.selection_list.clear();
+      },
+      error => {
+        console.log(error);
+      }, () => {
+        //
+      }
+    );
+    
   }
   onDeleteFiles() {
-    
+    if(this.selection_list.selected.length == 0) return;
+    if (!window.confirm("Are you sure you want to delete these files forever?")) return;
+    let requestPayload = {
+      item: this.selection_list.selected,
+    };
+
+    this.fileviewService.permanentlyDeleteFiles(requestPayload).subscribe(
+      result => {
+        this.deleteItems(this.selection_list.selected);
+        this.selection_list.clear();
+      },
+      error => {
+        console.log(error);
+      }, () => {
+        //
+      }
+    );
   }
 }

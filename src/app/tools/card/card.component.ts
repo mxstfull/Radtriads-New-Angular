@@ -9,6 +9,7 @@ import { DeleteModalComponent } from '../modals/delete-modal/delete-modal.compon
 import { CardItem } from '../../components/interfaces/CardItem';
 import { AudioModalComponent } from '../modals/audio-modal/audio-modal.component';
 import { VideoModalComponent } from '../modals/video-modal/video-modal.component';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -23,11 +24,12 @@ export class CardComponent implements OnInit {
   @Input() selection_list;
   @Output() deleteItems: EventEmitter<any> = new EventEmitter();
   private dialogRef: any;
+  public category;
   constructor(public dialog: MatDialog, 
-    
-    ) {
+    private router: Router,
+  ) {
+    this.category = localStorage.getItem("current_category");
   }
-
   openDialog(type: string) {
     if (type === "privacy") {
       this.dialogRef = this.dialog.open(PrivacyModalComponent, {
@@ -121,5 +123,9 @@ export class CardComponent implements OnInit {
     else if(this.item.category == 2) {
       return "assets/img/video-icon.png";
     }
+  }
+  imageView(item: CardItem) {
+    if(item.category != 0) return;
+    this.router.navigate(['/photo-details'], {queryParams:{id:item.unique_id}});
   }
 }

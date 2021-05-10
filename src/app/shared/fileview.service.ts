@@ -33,4 +33,13 @@ export class FileviewService {
   renameAlbum(requestPayload: object): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/fileview/renameAlbum', requestPayload);
   }
+  recoverFiles(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/recoverFiles', requestPayload);
+  }
+  permanentlyDeleteFiles(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/permanentlyDeleteFiles', requestPayload);
+  }
+  getItemByUniqueId(requestPayload: object): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/fileview/getItemByUniqueId', requestPayload);
+  }
 }

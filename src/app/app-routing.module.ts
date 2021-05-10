@@ -38,6 +38,8 @@ const routes: Routes = [
   { path: 'uploading', component: UploadingComponent },
   { path: 'video/:path', component: VideoComponent },
   { path: 'trash', component: TrashComponent },
+  { path: 'total', component: TotalComponent },
+  { path: 'photo-details', component: PhotoDetailComponent },
 ];
 
 @NgModule({
