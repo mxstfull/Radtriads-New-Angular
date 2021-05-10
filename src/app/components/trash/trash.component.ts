@@ -22,7 +22,7 @@ import { Globals } from '../../global';
 export class TrashComponent implements OnInit {
   @ViewChild(SidebarComponent) child: SidebarComponent;
 
-  displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
+  displayedColumns: string[] = ['select', 'title', 'date', 'privacy'];
   cardItems: CardItem[];
   dataSource: MatTableDataSource<CardItem>;
   selection_list = new SelectionModel<CardItem>(true, []);

@@ -96,10 +96,14 @@ export class PhotoDetailComponent implements OnInit {
     }
     this.fileviewService.downloadFiles({ fileList: urlArray }).subscribe(
       result => {
-        const a = document.createElement('a')
-        const objectUrl = URL.createObjectURL(result)
-        a.href = objectUrl
-        a.download = urlArray[0]['title'];
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(result);
+        a.href = objectUrl;
+        if(urlArray.length == 1) {
+          a.download = urlArray[0]['title'];
+        } else {
+          a.download = 'archive.zip';
+        }
         a.click();
         URL.revokeObjectURL(objectUrl);
       },error => {

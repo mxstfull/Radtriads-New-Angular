@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="photo-details-box-right">
-      <div class="photo-details-top" *ngIf="currentItem != null">
+      <div class="photo-details-top" *ngIf="currentItem">
         <h2>{{currentItem.title}}</h2>
         <p>{{getCreatedDateAsString()}}</p>
       </div>
@@ -42,11 +42,11 @@
             </tr>
             <tr>
               <td>Privacy</td>
-              <td>{{(currentItem.is_protected == 0)? "public" : "private"}}</td>
+              <td>{{(currentItem && currentItem.is_protected == 0)? "public" : "private"}}</td>
             </tr>
             <tr>
               <td>Size</td>
-              <td>{{currentItem.diskspace/1000.0}}KB</td>
+              <td>{{currentItem && currentItem.diskspace/1000.0}}KB</td>
             </tr>
           </tbody>
         </table>
