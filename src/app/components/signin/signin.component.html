@@ -1,58 +1,59 @@
-<div id="wrapper" class="auth-wrapper">        
+<div id="wrapper" class="auth-wrapper">
     <div class="sign-up-section">
         <div class="container">
-        <div class="row">
-            <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="sign-logo">
-                <a routerLink="/"><img src="../../../assets/img/main-logo.png" width="100px" alt="logo" /></a>
+            <div class="row">
+                <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="sign-logo">
+                        <a routerLink="/"><img src="../../../assets/img/main-logo.png" width="100px" alt="logo" /></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="sign-box-outer">
-                <div class="sign-box sign-in-box">
-                    <h3>Sign In</h3>
-                    <a routerLink="/register" class="sign-in">Sign Up</a>
-                    <div class="clear"></div>
-                                        <form   class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                                        <div *ngIf="submitted && this.errors.error" style="color: brown;">
-                                            <div *ngIf="this.errors.error">{{this.errors.error}}</div>
-                                        </div>
-                                        <div class="input-box">
-                                                <i class="fa fa-envelope"></i>
-                                                <input type="text" formControlName="email" placeholder="Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.email }" />
-                                                <div *ngIf="submitted && this.errors.email" class="invalid-feedback">
-                                                    <div *ngIf="this.errors.required">Email is required</div>
-                                                    <div *ngIf="this.errors.email">{{this.errors.email}}</div>
-                                                </div>
-                                            </div>
-                                            <div class="input-box">
-                                                <i class="fa fa-lock"></i><input type="password"   placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.password }" />
-                                                <div *ngIf="submitted && this.errors.password" class="invalid-feedback">
-                                                    <div *ngIf="this.errors.password">{{this.errors.password}}</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col">
-                                                    <button type="submit" [disabled]="loading" class="btn btn-primary">
+                <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="sign-box-outer">
+                        <div class="sign-box sign-in-box">
+                            <h3>Sign In</h3>
+                            <a routerLink="/register" class="sign-in">Sign Up</a>
+                            <div class="clear"></div>
+                            <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                <div *ngIf="submitted && this.errors?.error" style="color: brown;">
+                                    <div *ngIf="this.errors?.error">{{this.errors?.error}}</div>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fa fa-envelope"></i>
+                                    <input type="text" formControlName="email" placeholder="Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.email }" />
+                                    <div *ngIf="submitted && this.errors?.email" class="invalid-feedback">
+                                        <div *ngIf="this.errors?.required">Email is required</div>
+                                        <div *ngIf="this.errors?.email">{{this.errors?.email}}</div>
+                                    </div>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fa fa-lock"></i><input type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.password }" />
+                                    <div *ngIf="submitted && this.errors?.password" class="invalid-feedback">
+                                        <div *ngIf="this.errors?.password">{{this.errors?.password}}</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <button type="submit" [disabled]="loading" class="btn btn-primary">
                                                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                                         Login
                                                     </button>
-                                                </div>
-                                                <div class="form-group col text-right">
-                                                    <a class="" class="btn btn-link pr-0">Forgot Password?</a>
-                                                </div>
-                                            </div>
-                                        </form>
-                        <div class="or-sign-up">
-                        <p>Or sign in with</p>
-                        <a routerLink="/" target="_blank"><i class="fa fa-google"></i></a>
-                        <a routerLink="/" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a routerLink="/" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    </div>
+                                    <div class="form-group col text-right">
+                                        <a class="" class="btn btn-link pr-0">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="or-sign-up">
+                                <p>Or sign in with</p>
+                                <a routerLink="/" target="_blank"><i class="fa fa-google"></i></a>
+                                <a routerLink="/" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a routerLink="/" target="_blank"><i class="fa fa-facebook"></i></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
-        </div>
-    </div><!-- sign-up-section-->
+    </div>
+    <!-- sign-up-section-->
 </div>
