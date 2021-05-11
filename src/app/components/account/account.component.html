@@ -23,23 +23,26 @@
         <mat-tab-group dynamicHeight>
           <mat-tab label="MY INFO">
             <h2>My Info</h2>
-              <form>
+              <form [formGroup]="MyInfoForm" (ngSubmit)="onSubmit_myinfo()">
                 <div class="row">
                   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2 order-lg-1">
                     <div class="acc-input-box">
                       <label>Username</label>
-                      <input type="text" placeholder="Angel" />
+                      <input type="text" formControlName="Username" placeholder="Angel" readonly = 'true'  class="form-control"/>
                     </div>
                     <div class="acc-input-box">
                       <label>Email</label>
-                      <input type="email" placeholder="sp6166400@gmail.com" />
+                      <input type="email" formControlName="email" placeholder="sp6166400@gmail.com"  readonly = 'true' class="form-control"/>
                     </div>
                     <h6>Personal Info</h6>
                     <div class="row">
                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="acc-input-box">
                           <label>Old Password</label>
-                          <input type="password" placeholder="********" />
+                          <input type="password" formControlName="old_password" placeholder="********"  class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.old_password }"/>
+                          <div *ngIf="submitted && this.errors.old_password" class="invalid-feedback">
+                            <div *ngIf="this.errors.old_password">{{this.errors.old_password}}</div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -48,14 +51,19 @@
                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="acc-input-box">
                           <label>New Password</label>
-                          <input type="password" placeholder="********" />
+                          <input type="password" formControlName="new_password" placeholder="********"  class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password }"/>
+                          <div *ngIf="submitted && this.errors.new_password" class="invalid-feedback">
+                            <div *ngIf="this.errors.new_password">{{this.errors.new_password}}</div>
+                          </div>
                         </div>
                       </div>
                       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div class="acc-input-box">
                           <label>Repeat Password</label>
-                          <input type="password" placeholder="********" />
-                          <div class="error-msg">*Error Text</div>
+                          <input type="password" formControlName="new_password_confirmation" placeholder="********"  class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password_confirmation }"/>
+                          <div *ngIf="submitted && this.errors.new_password_confirmation" class="invalid-feedback">
+                            <div *ngIf="this.errors.new_password_confirmation">{{this.errors.new_password_confirmation}}</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -64,12 +72,12 @@
                     <div class="upload-img-wrapper">
                       <button class="upload-img"><span>+</span>You can upload your image up to 300x300px. PNG, JPG
                         only</button>
-                      <input type="file" name="myImg">
+                      <input type="file" name="myImg" (change)="onFileSelected($event)" required accept=".png">
                     </div>
                   </div>
                 </div>
                 <button type="submit" class="sky-blue-btn">Save Settings</button>
-                <div class="delete-acc"><a routerLink="/"><i class="fa fa-trash" aria-hidden="true"></i> Delete
+                <div class="delete-acc"><a (click)="signOut()"><i class="fa fa-trash" aria-hidden="true" ></i> Delete
                     Account</a>
                 </div>
               </form>
@@ -115,32 +123,32 @@
           </mat-tab>
           <mat-tab label="SETTING">
             <h2>Settings</h2>
-            <form action="">
+            <form action="" [formGroup]="SettingForm" (ngSubmit)="onSubmit_Settings()">
               <h4>Quick Link Share Show / Hide links below your files</h4>
               <div class="switch-box">
                 <label class="switch">
-                  <input type="checkbox">
+                  <input type="checkbox" formControlName="check_direct">
                   <span class="slider"></span>
                 </label>
                 Show Direct Link
               </div>
               <div class="switch-box">
                 <label class="switch">
-                  <input type="checkbox" checked>
+                  <input type="checkbox" formControlName="check_html">
                   <span class="slider"></span>
                 </label>
                 Show HTML Code
               </div>
               <div class="switch-box">
                 <label class="switch">
-                  <input type="checkbox">
+                  <input type="checkbox" formControlName="check_bulletin">
                   <span class="slider"></span>
                 </label>
                 Show Bulletin Boards & Forums Code
               </div>
               <div class="switch-box">
                 <label class="switch">
-                  <input type="checkbox" checked>
+                  <input type="checkbox" formControlName="check_button">
                   <span class="slider"></span>
                 </label>
                 Show Social Share Buttons
@@ -150,18 +158,16 @@
           </mat-tab>
           <mat-tab label="PRIVACY & SECURITY">
             <h2>Privacy & Security</h2>
-            <form action="">
+            <form action="" [formGroup]="PrivacyForm" (ngSubmit)="onSubmit_Privacy()">
               <h4>Set your account privacy to private if you don't want anyone to be able to access your files or
                 public if you want to allow anyone who has the links to your files to access them.</h4>
-              <div class="privacy-select">
-                <div class="ps-selectd"><img src="../../../assets/img/public.png" alt="" />Account is Public <i
-                    class="fa fa-angle-down"></i></div>
-                <div class="ps-dropdown">
-                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Public</div>
-                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />Account is Private</div>
-                  <div class="ps-option"><img src="../../../assets/img/public.png" alt="" />No Prefences</div>
-                </div>
-              </div>
+              <mat-form-field appearance="fill">
+                <mat-label><img src="../../../assets/img/public.png" alt="" />Select an option</mat-label>
+                <mat-select [(value)]="selected" formControlName="Privacy_seleted">
+                  <mat-option value="option1"><img src="../../../assets/img/public.png" alt="" />Account is Public</mat-option>
+                  <mat-option value="option2"><img src="../../../assets/img/public.png" alt="" />Account is Private</mat-option>
+                </mat-select>
+              </mat-form-field>
               <button type="submit" class="sky-blue-btn">Save Settings</button>
             </form>
           </mat-tab>
