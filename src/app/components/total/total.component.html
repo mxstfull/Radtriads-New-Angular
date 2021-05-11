@@ -18,7 +18,7 @@
     <!--dashobard-sidebar-->
     <app-sidebar></app-sidebar>
     <div class="dashboard-content">
-      <app-topbar></app-topbar>
+      <app-topbar [hideButtons] = "hideButtons"></app-topbar>
       <div class="dashboard-bottom">
         <mat-tab-group dynamicHeight (selectedTabChange)="onTabClick($event)">
           <mat-tab label="Home" style="overflow: visible;">

@@ -21,7 +21,7 @@ import { Globals } from '../../global';
 })
 export class TotalComponent implements OnInit {
   @ViewChild(SidebarComponent) child: SidebarComponent;
-
+  hideButtons = true;
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
   cardItems_recent: CardItem[];
@@ -59,6 +59,7 @@ export class TotalComponent implements OnInit {
             this.cardItems = result['total'];
             this.cardItems_recent = result['recent'];
             this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+            
           },
           error => {
 

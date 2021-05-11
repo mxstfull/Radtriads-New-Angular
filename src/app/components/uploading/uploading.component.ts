@@ -31,7 +31,7 @@ export class UploadingComponent implements OnInit {
   flow: FlowDirective;
 
   autoUploadSubscription: Subscription;
-
+  public uploadFinished: boolean;
   autoupload = true;
 
   ngAfterViewInit() {
@@ -43,16 +43,20 @@ export class UploadingComponent implements OnInit {
     }
     
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
+
       this.flow.flowJs.files.forEach(item => {
         if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension()))
          item.cancel();
-      })
-      
-      // to get rid of incorrect `event.type` type you need Typescript 2.8+
+      });
       if (this.autoupload && event.type === 'filesSubmitted') {
+        this.uploadFinished = false;
         this.flow.upload();
       }
+      if(event.type == "complete") {
+        this.uploadFinished = true;
+      }
     });
+    
   }
 
   ngOnDestroy() {
