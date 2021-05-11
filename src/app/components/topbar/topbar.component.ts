@@ -1,4 +1,7 @@
 import { Component, OnInit, Output,Input, EventEmitter } from '@angular/core';
+import { AccountService } from 'src/app/shared/account.service';
+import { TokenService } from 'src/app/shared/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -12,17 +15,34 @@ export class TopbarComponent implements OnInit {
   onRenameAlbum = new EventEmitter<string>();
   @Input()
   hideButtons: boolean = false;
-  constructor() { 
+  constructor(    
+    public AccountService: AccountService,
+    private token: TokenService,
+    public router: Router,
+
+    ) { 
     
   }
-
+  allRate: number;
+  usedRate: number;
   ngOnInit(): void {
+    this.allRate = Number(localStorage.getItem('allRate'));
+    this.usedRate = Number(localStorage.getItem('usedRate'));
+    if(this.allRate == 0 && this.usedRate == 0) 
+      this.allRate = 1;
+    else if(this.allRate < this.usedRate)
+      this.usedRate = this.allRate;
   }
   downloadAlbum() {
     this.onDownloadAlbum.emit();
   }
   renameAlbum() {
     this.onRenameAlbum.emit();
+  }
+  logout() {
+    this.token.removeToken();
+    localStorage.clear();
+    this.router.navigate(['landing']);
   }
 
 }

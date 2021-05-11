@@ -26,6 +26,8 @@
     "@flowjs/ngx-flow": "^0.4.6",
     "ang-music-player": "0.0.4",
     "bootstrap": "^4.6.0",
+    "ngx-page-scroll": "^7.0.4",
+    "ngx-page-scroll-core": "^7.0.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "tui-image-editor": "^3.14.3",

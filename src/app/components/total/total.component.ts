@@ -13,6 +13,7 @@ import { MoveModalComponent } from '../../tools/modals/move-modal/move-modal.com
 import { NavItem } from '../interfaces/nav-item';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Globals } from '../../global';
+import { AccountService } from 'src/app/shared/account.service';
 
 @Component({
   selector: 'app-total',
@@ -31,14 +32,24 @@ export class TotalComponent implements OnInit {
   category = -1; // this means we need photos.
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
   rangeMode: number = 0; //this means now is for all medias(when it's 1 it means to be for recent uploaded medias).
-  // folderTree: NavItem;
+  //These are for media percentage.
+  allRate: number;
+  photoRate: number;
+  musicRate: number;
+  videoRate: number;
+  codeRate: number;
+  trashRate: number;
+
   private dialogRef: any;
+
   constructor(
     private router: ActivatedRoute,
     private fileviewService: FileviewService,
     private router_1: Router,
     public dialog: MatDialog, 
     private globals: Globals,
+    public AccountService: AccountService,
+
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -48,32 +59,74 @@ export class TotalComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "photo");
-        let requestPayload = {
-          user_id: localStorage.getItem('user_id'),
-          unique_id: localStorage.getItem('unique_id'),
-          currentPath: this.currentPath,
-          category: this.category
-        };
-        this.fileviewService.getFileByCategory(requestPayload).subscribe(
-          result => {
-            this.cardItems = result['total'];
-            this.cardItems_recent = result['recent'];
-            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-            
-          },
-          error => {
-
-          }, () => {
-            //
-            
-          }
-        );
+        
       }
     });
   }
+  getDiskUsage() {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+    }
+    this.AccountService.getDiskUsage(requestPayload).subscribe(
+      result => {
+        this.drawPercentBar(result);
+      },
+    );
+    this.getMedias();
+  }
+  drawPercentBar(result: any) {
+    if(result) {
+      
+      this.allRate = result['all'];
+      this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
+      this.trashRate = result['deleted'];
+      result['category'].forEach (
+        element => {
+          switch(element['category']) {
+            case 0: this.photoRate = element['diskspace']; break;
+            case 1: this.musicRate = element['diskspace']; break;
+            case 2: this.videoRate = element['diskspace']; break;
+            case 3: this.codeRate = element['diskspace']; break;
+          }
+        }
+      );
+    }
+  }
+  convertToBigUnit(byteSize) {
+    if(byteSize < 1000) {
+      return byteSize + "byte";
+    } else if(byteSize < 1000 * 1000) {
+      return Math.round(byteSize / 1000) + "KB";
+    } else if(byteSize < 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000) + "MB";
+    } else if(byteSize < 1000 * 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
+    }
+  }
+  getMedias() {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+      unique_id: localStorage.getItem('unique_id'),
+      currentPath: this.currentPath,
+      category: this.category
+    };
+    this.fileviewService.getFileByCategory(requestPayload).subscribe(
+      result => {
+        this.cardItems = result['total'];
+        this.cardItems_recent = result['recent'];
+        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+        
+      },
+      error => {
 
+      }, () => {
+        //
+        
+      }
+    );
+  }
   ngOnInit(): void {
-
+    this.getDiskUsage();
   }
   onTabClick(event) {
     this.selection_list.clear();

@@ -14,11 +14,11 @@
                 <div class="ua-dropdown-outer">
                     <div class="ua-links">
                         <a href="/account"><i class="fa fa-user"></i>Account</a>
-                        <a href="#"><i class="fa fa-sign-out"></i>Log out</a>
+                        <a (click)="logout()"><i class="fa fa-sign-out"></i>Log out</a>
                     </div>
                     <div class="ua-storage">
-                        <h5>Storage <span>18%</span></h5>
-                        <div class="ua-st-line"><span class="ua-fill"></span></div>
+                        <h5>Storage <span>{{usedRate * 100 / allRate}}%</span></h5>
+                        <div class="ua-st-line"><span class="ua-fill" [ngStyle]="{'width': usedRate * 100 / allRate + '%'}" ></span></div>
                     </div>
                 </div>
             </div>

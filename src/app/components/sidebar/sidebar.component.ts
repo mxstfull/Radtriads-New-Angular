@@ -7,6 +7,7 @@ import { NavItem } from '../interfaces/nav-item';
 
 import { SidebarBroadcastService } from '../../shared/sidebar-broadcast.service';
 import { SidebarService } from '../../shared/sidebar.service';
+import { AccountService } from 'src/app/shared/account.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,12 +23,16 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   folderTree: NavItem;
   imgNavItems: string[] = [];
 
+  allRate: number;
+  usedRate: number;
+
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
     private navService: NavService,
     private broadcastService: SidebarBroadcastService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    public AccountService: AccountService,
   ) {
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -39,12 +44,35 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.getSidebarNavItems();
   }
   ngOnInit(): void {
-    this.imgNavItems = ["../../../assets/img/Folder.png", 
-    "../../../assets/img/photo.png", 
-    "../../../assets/img/music.png", 
-    "../../../assets/img/video.png", 
-    "../../../assets/img/code.png",
-    "../../../assets/img/trash.png"];
+    this.imgNavItems = ["../../../assets/img/Folder.png",
+      "../../../assets/img/photo.png",
+      "../../../assets/img/music.png",
+      "../../../assets/img/video.png",
+      "../../../assets/img/code.png",
+      "../../../assets/img/trash.png"];
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+    }
+    this.AccountService.getDiskUsage(requestPayload).subscribe(
+      result => {
+        this.allRate = this.usedRate = 0;
+        this.allRate = result['all'] ? result['all'] : 0;
+        this.usedRate = parseInt(result['used_all']) ? parseInt(result['used_all']) : 0;
+        localStorage.setItem('allRate', this.allRate + "");
+        localStorage.setItem('usedRate', this.usedRate + "");
+      },
+    );
+  }
+  convertToBigUnit(byteSize) {
+    if (byteSize < 1000) {
+      return byteSize + "byte";
+    } else if (byteSize < 1000 * 1000) {
+      return Math.round(byteSize / 1000) + "KB";
+    } else if (byteSize < 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000) + "MB";
+    } else if (byteSize < 1000 * 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
+    }
   }
   getSidebarNavItems() {
     let requestPayload = {
