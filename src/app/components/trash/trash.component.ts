@@ -21,7 +21,7 @@ import { Globals } from '../../global';
 })
 export class TrashComponent implements OnInit {
   @ViewChild(SidebarComponent) child: SidebarComponent;
-
+  hideButtons = true;
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy'];
   cardItems: CardItem[];
   dataSource: MatTableDataSource<CardItem>;

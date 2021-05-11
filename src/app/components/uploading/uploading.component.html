@@ -53,8 +53,9 @@
           </div>
           <!-- <div class="fu-time">Time Remaining: <span>23 minutes</span></div> -->
         </div>
-        <div class="fu-message" [hidden]="(flowAdvanced.transfers$ | async).totalProgress != 1" ><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success!
-          <div class="fu-msg-name"></div>
+        <div class="fu-message" [hidden]="(flowAdvanced.transfers$ | async).totalProgress != 1" >
+          <div [hidden] = "uploadFinished == true"><span><img style = "width:50%" src = "assets/img/loading.gif"></span>Processing on Server.</div>
+          <div [hidden] = "uploadFinished == false"><span><i class="fa fa-check" aria-hidden="true"></i></span>Upload Success!</div>
         </div>
       </div>
     </div>
