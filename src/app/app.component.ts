@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoginRegisterUrl: boolean = true;
   yesHeaderUrls: string[] = [
     '/landing',
-    '/image-editor',
+    //'/image-editor',
     '/public-mdeia-board',
     '/photo-detail',
     '/profile'

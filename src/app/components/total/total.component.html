@@ -20,748 +20,255 @@
     <div class="dashboard-content">
       <app-topbar></app-topbar>
       <div class="dashboard-bottom">
-        <div class="fm-tabs">
-          <ul class="nav nav-tabs">
-            <li><a class="active" data-toggle="tab" href="#fm-home">Home</a></li>
-            <li><a data-toggle="tab" href="#fm-recent-uploads">Recent uploads</a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="fm-home" class="tab-pane fade in active show">
-              <div class="storage-box-outer">
-                <div class="storage-box">
-                  <div class="storage-tab">
-                    <div class="storage-line photo-line" style="width:25%;"></div>
-                    <div class="storage-line video-line" style="width:10%;"></div>
-                    <div class="storage-line music-line" style="width:8%;"></div>
-                    <div class="storage-line doc-line" style="width:20%;"></div>
-                    <div class="storage-line trash-line" style="width:5%;"></div>
-                    <div class="clear"></div>
-                  </div>
-                  <div class="remain-space">24,5 GB / 500 GB is free</div>
-                  <ul>
-                    <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">720 kb</span></li>
-                    <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">720 kb</span></li>
-                    <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">720 kb</span></li>
-                    <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">720 kb</span>
-                    </li>
-                    <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">720 kb</span></li>
-                  </ul>
-
+        <mat-tab-group dynamicHeight (selectedTabChange)="onTabClick($event)">
+          <mat-tab label="Home" style="overflow: visible;">
+            <div class="storage-box-outer">
+              <div class="storage-box">
+                <div class="storage-tab">
+                  <div class="storage-line photo-line" style="width:25%;"></div>
+                  <div class="storage-line video-line" style="width:10%;"></div>
+                  <div class="storage-line music-line" style="width:8%;"></div>
+                  <div class="storage-line doc-line" style="width:20%;"></div>
+                  <div class="storage-line trash-line" style="width:5%;"></div>
                   <div class="clear"></div>
                 </div>
-                <div class="drag-drop-wrapper">
-                  <button class="drag-drop-btn"><span>+</span> Drad and Drop or Browse Files</button>
-                  <input type="file" name="drap-drop">
-                </div>
-                <div class="clear"></div>
-              </div>
-              <div class="changing-btn mobile-div">
-                <a href="#" class="grey-btn"><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                <a href="#" class="grey-btn" data-toggle="modal" data-target="#move-modal"><i class="fa fa-arrows"
-                    aria-hidden="true"></i>Move</a>
-                <a href="#" class="grey-btn" data-toggle="modal" data-target="#copy-modal"><i
-                    class="fa fa-clone"></i>Copy</a>
-                <div class="clear"></div>
-              </div>
-              <div class="list-grid">
-                <ul class="nav nav-tabs">
-                  <li><a data-toggle="tab" href="#fm-grid-view"><i class="fa fa-th" aria-hidden="true"></i></a></li>
-                  <li><a class="active" data-toggle="tab" href="#fm-list-view"><i class="fa fa-list"
-                        aria-hidden="true"></i></a></li>
+                <div class="remain-space">24,5 GB / 500 GB is free</div>
+                <ul>
+                  <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">720 kb</span></li>
+                  <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">720 kb</span></li>
+                  <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">720 kb</span></li>
+                  <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">720 kb</span></li>
+                  <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">720 kb</span></li>
                 </ul>
-              </div>
+
+                <div class="clear"></div>
+              </div>             
+            </div>
+            <div class="clear"></div>
+            <div class="changing-btn desktop-div">
+              <a class="grey-btn" (click) = "onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
+              <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+                  aria-hidden="true"></i>Move</a>
+              <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
+                  class="fa fa-clone"></i>Copy</a> -->
+                  <a class="grey-btn" (click) = "onDeleteFiles()"><i
+                    class="fa fa-trash"></i>Delete</a>
               <div class="clear"></div>
-              <div class="tab-content">
-                <div id="fm-list-view" class="tab-pane fade in active show">
-                  <div class="changing-btn desktop-div">
-                    <a href="#" class="grey-btn"><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                    <a href="#" class="grey-btn" data-toggle="modal" data-target="#move-modal"><i class="fa fa-arrows"
-                        aria-hidden="true"></i>Move</a>
-                    <a href="#" class="grey-btn" data-toggle="modal" data-target="#copy-modal"><i
-                        class="fa fa-clone"></i>Copy</a>
+            </div>
+            <div class="tab-content">
+              <div id="fm-grid-view"
+                [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}"
+                class="tab-pane fade in active show">
+                <div class="recent-file-outer">
+                  <div class="recent-file-head">
+                    <h5>Recently added files</h5>
+                    <div class="sort-by">Sort by <span>Date</span><img style = "cursor: pointer;" (click)="onSortClicked()" src="assets/img/sort.png" alt="" /></div>
                     <div class="clear"></div>
                   </div>
-                  <div class="list-table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>
-                            <label class="table-check">
-                              <input type="checkbox" checked="checked">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </th>
-                          <th>Name <i class="fa fa-angle-down"></i></th>
-                          <th>Date <i class="fa fa-angle-down"></i></th>
-                          <th>PRivacy</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox" checked="checked">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /></div> Music
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="dark-bg">
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /></div> Important
-                              Documents
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="dark-bg">
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-desk.png" alt="" /><span
-                                  class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                              Folder Mobile Itteractions
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                                  class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                              New_Version_Table_Design.sketch
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="dark-bg">
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                                  class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                              Presentation Kit Desktop.psd
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <label class="table-check">
-                              <input type="checkbox">
-                              <span class="table-checkmark"></span>
-                            </label>
-                          </td>
-                          <td>
-                            <div class="file-name-table">
-                              <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                                  class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                              Modeling 3d.c4d
-                            </div>
-                          </td>
-                          <td>13/10/17</td>
-                          <td>Public</td>
-                          <td>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-h"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div id="fm-grid-view" class="tab-pane fade">
-                  <div class="recent-file-outer">
-                    <div class="changing-btn desktop-div">
-                      <a href="#" class="grey-btn"><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                      <a href="#" class="grey-btn" data-toggle="modal" data-target="#move-modal"><i class="fa fa-arrows"
-                          aria-hidden="true"></i>Move</a>
-                      <a href="#" class="grey-btn" data-toggle="modal" data-target="#copy-modal"><i
-                          class="fa fa-clone"></i>Copy</a>
-                      <div class="sort-by">Sort by <span>Date</span><img src="assets/img/sort.png" alt="" /></div>
-                      <div class="clear"></div>
-                    </div>
-                    <div class="sort-by mobile-div">Sort by <span>Date</span><img src="assets/img/sort.png" alt="" />
-                    </div>
-                    <div class="media-boxes">
-                      <div class="media-box">
-                        <div class="code-media-box">
-                          <div class="media-file">
-                            <img src="assets/img/zip-icon.png" alt="" />
-                          </div>
-                          <div class="media-content">
-                            <div class="media-info">
-                              <div class="file-name">NY_bridge.jpg</div>
-                              <div class="file-date">Added 5 Aug 2016</div>
-                            </div>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-v"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="code-media-box">
-                          <div class="lock-media"><img src="assets/img/lock-icon.png" alt="" /></div>
-                          <div class="media-file">
-                            <img src="assets/img/doc-icon.png" alt="" />
-                          </div>
-                          <div class="media-content">
-                            <div class="media-info">
-                              <div class="file-name">NY_bridge.jpg</div>
-                              <div class="file-date">Added 5 Aug 2016</div>
-                            </div>
-                            <div class="media-edit">
-                              <i class="fa fa-ellipsis-v"></i>
-                              <div class="media-edit-inner">
-                                <div class="media-edit-box">
-                                  <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                      src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                  <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                      src="assets/img/share.png" alt="" />Share</a>
-                                  <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                      src="assets/img/rename.png" alt="" />Rename</a>
-                                  <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                      src="assets/img/delete.png" alt="" />Delete</a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="clear"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="lock-media"><img src="assets/img/lock-icon.png" alt="" /></div>
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap1.png" alt="" />
-                          <div class="video-icon" data-toggle="modal" data-target="#video-modal"><img
-                              src="assets/img/video-icon.png" alt="" /></div>
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="lock-media"><img src="assets/img/lock-icon.png" alt="" /></div>
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap2.png" alt="" />
-                          <div class="music-icon" data-toggle="modal" data-target="#music-modal"><img
-                              src="assets/img/music-icon.png" alt="" /> .mp3</div>
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="media-box">
-                        <div class="media-file">
-                          <img src="assets/img/Bitmap.png" alt="" />
-                        </div>
-                        <div class="media-content">
-                          <div class="media-info">
-                            <div class="file-name">NY_bridge.jpg</div>
-                            <div class="file-date">Added 5 Aug 2016</div>
-                          </div>
-                          <div class="media-edit">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <div class="media-edit-inner">
-                              <div class="media-edit-box">
-                                <a href="#" data-toggle="modal" data-target="#edit-privacy-modal"><img
-                                    src="assets/img/edit.png" alt="" />Edit Privacy</a>
-                                <a href="#" data-toggle="modal" data-target="#share-modal"><img
-                                    src="assets/img/share.png" alt="" />Share</a>
-                                <a href="#" data-toggle="modal" data-target="#rename-modal"><img
-                                    src="assets/img/rename.png" alt="" />Rename</a>
-                                <a href="#" data-toggle="modal" data-target="#delete-modal"><img
-                                    src="assets/img/delete.png" alt="" />Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="clear"></div>
-                        </div>
-                      </div>
-                      <div class="clear"></div>
-                    </div>
-                  </div>
+                  <mat-grid-list cols="5">
+                    <mat-grid-tile *ngFor="let item of cardItems; let i = index;">
+                      <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
+    
+                      </app-card>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+    
                 </div>
               </div>
-            </div>
-            <div id="fm-recent-uploads" class="tab-pane fade">
-              <div class="list-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>
-                        <label class="table-check">
-                          <input type="checkbox" checked="checked">
-                          <span class="table-checkmark"></span>
-                        </label>
+              <div id="fm-list-view"
+                [ngClass]="{'tab-pane fade in active show': viewMode == 1, 'tab-pane fade ': viewMode == 0}">
+                <div class="list-table">
+                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection_list.hasValue() && isAllSelected()"
+                          [indeterminate]="selection_list.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
                       </th>
-                      <th>Name <i class="fa fa-angle-down"></i></th>
-                      <th>Date <i class="fa fa-angle-down"></i></th>
-                      <th>PRivacy</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox" checked="checked">
-                          <span class="table-checkmark"></span>
-                        </label>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_list.toggle(row) : null"
+                          [checked]="selection_list.isSelected(row)">
+                        </mat-checkbox>
                       </td>
-                      <td>
+                    </ng-container>
+    
+                    <!-- Title Column -->
+                    <ng-container matColumnDef="title">
+                      <th mat-header-cell *matHeaderCellDef> Title </th>
+                      <td mat-cell *matCellDef="let element">
                         <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /></div> Music
+                          <div class="file-name-img"><img src="{{viewImageThumbnail(element)}}" alt="">
+                              <span class="lock-box" *ngIf="element.is_protected!=0">
+                                <img src="assets/img/lock-icon.png" class="" alt="">
+                              </span>
+                          </div> {{element.title}}
                         </div>
                       </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
-                    </tr>
-                    <tr class="dark-bg">
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox">
-                          <span class="table-checkmark"></span>
-                        </label>
-                      </td>
-                      <td>
-                        <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /></div> Important
-                          Documents
+                    </ng-container>
+    
+                    <!-- Date Column -->
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef> Date </th>
+                      <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}} </td>
+                    </ng-container>
+    
+                    <!-- Privacy Column -->
+                    <ng-container matColumnDef="privacy">
+                      <th mat-header-cell *matHeaderCellDef> Privacy </th>
+                      <td mat-cell *matCellDef="let element"> {{convertToPrivacyString(element.is_protected)}} </td>
+                    </ng-container>
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td mat-cell *matCellDef="let element">
+                        <div class="media-edit">
+                          <i class="fa fa-ellipsis-h"></i>
+                          <div class="media-edit-inner">
+                            <div class="media-edit-box">
+                              <a mat-button (click)="openDialog('privacy', element);$event.stopPropagation();"><img src="assets/img/edit.png" alt="" />Edit
+                                Privacy</a>
+                              <a mat-button (click)="openDialog('share', element);$event.stopPropagation();"><img src="assets/img/share.png" alt="" />Share</a>
+                              <a mat-button (click)="openDialog('rename', element);$event.stopPropagation();"><img src="assets/img/rename.png"
+                                  alt="" />Rename</a>
+                              <a mat-button (click)="openDialog('delete', element);$event.stopPropagation();"><img src="assets/img/delete.png"
+                                  alt="" />Delete</a>
+                            </div>
+                          </div>
                         </div>
                       </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection_list.toggle(row)">
                     </tr>
-                    <tr class="dark-bg">
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox">
-                          <span class="table-checkmark"></span>
-                        </label>
-                      </td>
-                      <td>
-                        <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-desk.png" alt="" /><span
-                              class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                          Folder Mobile Itteractions
-                        </div>
-                      </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox">
-                          <span class="table-checkmark"></span>
-                        </label>
-                      </td>
-                      <td>
-                        <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                              class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                          New_Version_Table_Design.sketch
-                        </div>
-                      </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
-                    </tr>
-                    <tr class="dark-bg">
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox">
-                          <span class="table-checkmark"></span>
-                        </label>
-                      </td>
-                      <td>
-                        <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                              class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                          Presentation Kit Desktop.psd
-                        </div>
-                      </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <label class="table-check">
-                          <input type="checkbox">
-                          <span class="table-checkmark"></span>
-                        </label>
-                      </td>
-                      <td>
-                        <div class="file-name-table">
-                          <div class="file-name-img"><img src="assets/img/file-icon.png" alt="" /><span
-                              class="lock-box"><img src="assets/img/lock-icon.png" class="" alt="" /></span></div>
-                          Modeling 3d.c4d
-                        </div>
-                      </td>
-                      <td>13/10/17</td>
-                      <td>Public</td>
-                      <td><i class="fa fa-ellipsis-h"></i></td>
-                    </tr>
-
-                  </tbody>
-                </table>
+                  </table>
+                </div>
               </div>
+            </div>             
+          </mat-tab>
+          <mat-tab label="Recent uploads">
+            <div class="changing-btn desktop-div">
+              <a class="grey-btn" (click) = "onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
+              <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+                  aria-hidden="true"></i>Move</a>
+              <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
+                  class="fa fa-clone"></i>Copy</a> -->
+                  <a class="grey-btn" (click) = "onDeleteFiles()"><i
+                    class="fa fa-trash"></i>Delete</a>
+              <div class="clear"></div>
             </div>
-          </div>
-        </div>
+            <div class="tab-content">
+              <div id="fm-grid-view"
+                [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}"
+                class="tab-pane fade in active show">
+                <div class="recent-file-outer">
+                  <div class="recent-file-head">
+                    <h5>Recently added files</h5>
+                    <div class="sort-by">Sort by <span>Date</span><img style = "cursor: pointer;" (click)="onSortClicked()" src="assets/img/sort.png" alt="" /></div>
+                    <div class="clear"></div>
+                  </div>
+                  <mat-grid-list cols="5">
+                    <mat-grid-tile *ngFor="let item of cardItems_recent; let i = index;">
+                      <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
+    
+                      </app-card>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+    
+                </div>
+              </div>
+              <div id="fm-list-view"
+                [ngClass]="{'tab-pane fade in active show': viewMode == 1, 'tab-pane fade ': viewMode == 0}">
+                <div class="list-table">
+                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection_list.hasValue() && isAllSelected()"
+                          [indeterminate]="selection_list.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_list.toggle(row) : null"
+                          [checked]="selection_list.isSelected(row)">
+                        </mat-checkbox>
+                      </td>
+                    </ng-container>
+    
+                    <!-- Title Column -->
+                    <ng-container matColumnDef="title">
+                      <th mat-header-cell *matHeaderCellDef> Title </th>
+                      <td mat-cell *matCellDef="let element">
+                        <div class="file-name-table">
+                          <div class="file-name-img"><img src="{{viewImageThumbnail(element)}}" alt="">
+                              <span class="lock-box" *ngIf="element.is_protected!=0">
+                                <img src="assets/img/lock-icon.png" class="" alt="">
+                              </span>
+                          </div> {{element.title}}
+                        </div>
+                      </td>
+                    </ng-container>
+    
+                    <!-- Date Column -->
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef> Date </th>
+                      <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}} </td>
+                    </ng-container>
+    
+                    <!-- Privacy Column -->
+                    <ng-container matColumnDef="privacy">
+                      <th mat-header-cell *matHeaderCellDef> Privacy </th>
+                      <td mat-cell *matCellDef="let element"> {{convertToPrivacyString(element.is_protected)}} </td>
+                    </ng-container>
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef> Action </th>
+                      <td mat-cell *matCellDef="let element">
+                        <div class="media-edit">
+                          <i class="fa fa-ellipsis-h"></i>
+                          <div class="media-edit-inner">
+                            <div class="media-edit-box">
+                              <a mat-button (click)="openDialog('privacy', element);$event.stopPropagation();"><img src="assets/img/edit.png" alt="" />Edit
+                                Privacy</a>
+                              <a mat-button (click)="openDialog('share', element);$event.stopPropagation();"><img src="assets/img/share.png" alt="" />Share</a>
+                              <a mat-button (click)="openDialog('rename', element);$event.stopPropagation();"><img src="assets/img/rename.png"
+                                  alt="" />Rename</a>
+                              <a mat-button (click)="openDialog('delete', element);$event.stopPropagation();"><img src="assets/img/delete.png"
+                                  alt="" />Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection_list.toggle(row)">
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>              
+          </mat-tab>
+          <mat-tab disabled >
+            <ng-template mat-tab-label >
+                <ul class="nav nav-tabs list-grid" style = "font-size: 16px !important;">
+                  <li><a  data-toggle="tab" (click)="setGridViewMode()"><i class="fa fa-th" aria-hidden="true"></i></a></li>
+                  <li><a data-toggle="tab" (click)="setListViewMode()"><i class="fa fa-list" aria-hidden="true"></i></a></li>
+                </ul>
+                <div class="select-all desktop-div" style = "font-size: 16px !important;">
+                  <mat-checkbox  (change)="$event ? masterToggle() : null"
+                  [checked]="selection_list.hasValue() && isAllSelected()"
+                  [indeterminate]="selection_list.hasValue() && !isAllSelected()">Select All</mat-checkbox>
+                </div>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+
       </div>
     </div>
     <!--dashobard-content-->
@@ -770,4 +277,3 @@
   </div>
 
 </div>
-<app-modals></app-modals>

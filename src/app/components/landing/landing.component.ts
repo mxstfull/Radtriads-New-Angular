@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthStateService } from '../../shared/auth-state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authState: AuthStateService,
+    public router: Router,
+  ) {
+    if(this.authState.getAuthState()) {
+      this.router.navigate(['total']);
+    }
+  }
 
   ngOnInit(): void {
   }

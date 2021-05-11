@@ -1,0 +1,9 @@
+.photo-box-icons a {
+    color: white;
+}
+.photo-box img {
+    /* min-width: 60%; */
+}
+.photo-details-top {
+    word-wrap: break-word;
+}

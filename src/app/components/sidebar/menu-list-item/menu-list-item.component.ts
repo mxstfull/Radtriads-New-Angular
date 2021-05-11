@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NavService } from '../nav-service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Globals } from '../../../global';
+import { tick } from '@angular/core/testing';
 @Component({
   selector: 'app-menu-list-item',
   templateUrl: './menu-list-item.component.html',
@@ -44,7 +45,16 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: NavItem) {
+    if(item.category == "all") {
+      this.router.navigateByUrl('/total');
+      return;
+    }
+    if(item.category == "deleted") {
+      this.router.navigateByUrl('/trash');
+      return;
+    }
     this.globals.gl_currentPath = item.path;
+    localStorage.setItem('current_album_title', item.displayName);
     this.router.navigate([item.category, item.path]);
     // if (!item.children || !item.children.length) {
     //   this.router.navigate([item.route]);

@@ -36,3 +36,9 @@ mat-select{
   padding: 0 1em 0 1.5em;
   cursor: pointer;
 }
+input {
+  border: 2px solid #DFE4EA;
+  border-radius: 8px;
+  padding: 0 1em 0 1.5em;
+  width: 100%;
+}

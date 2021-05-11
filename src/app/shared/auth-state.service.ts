@@ -18,5 +18,8 @@ export class AuthStateService {
   setAuthState(value: boolean) {
     this.userState.next(value);
   }
+  getAuthState(): boolean {
+    return this.token.isLoggedIn();
+  }
   
 }

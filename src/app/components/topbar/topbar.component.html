@@ -4,10 +4,12 @@
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
     <div class="topbar-btns">
-        <a routerLink = "/folder-creation" class="blue-btns">Create Folder</a>
+        <a (click) = "renameAlbum()" class="blue-btns" style="cursor: pointer;">Rename Album</a>
+        <a (click) = "downloadAlbum()" class="blue-btns" style="cursor: pointer;">Download Album</a>
+        <a routerLink = "/folder-creation" class="blue-btns">Create Album</a>
         <a routerLink = "/uploading" class="blue-btns">Upload files</a>
         <div class="user-account-outer">
-            <a href="/account" class="user-account"><i class="fa fa-user" aria-hidden="true"></i></a>
+            <a class="user-account"><i class="fa fa-user" aria-hidden="true"></i></a>
             <div class="ua-dropdown">
                 <div class="ua-dropdown-outer">
                     <div class="ua-links">

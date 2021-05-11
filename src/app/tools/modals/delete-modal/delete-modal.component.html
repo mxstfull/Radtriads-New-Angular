@@ -7,7 +7,7 @@
     <p>If you delete the file all link will break. Are you sure you want to proceed?</p>
     <div class="modal-btn">
       <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
-      <button mat-button class="btn-ok">Confirm</button>
+      <button mat-button class="btn-ok" (click)="onDeleteConfirm()">Confirm</button>
     </div>
   </div>
   

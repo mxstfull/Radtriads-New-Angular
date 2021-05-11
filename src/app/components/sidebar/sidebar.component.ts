@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, Output, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -19,14 +19,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   public currentActiveNav: string = "";
   @ViewChild('appDrawer') appDrawer: ElementRef;
   navItems: NavItem[] = [];
+  folderTree: NavItem;
 
   constructor(
-    private router: Router, 
-    private cdr: ChangeDetectorRef, 
-    private navService: NavService, 
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private navService: NavService,
     private broadcastService: SidebarBroadcastService,
     private sidebarService: SidebarService
-    ) {
+  ) {
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getActiveRoutes();
@@ -37,7 +38,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.getSidebarNavItems();
   }
   ngOnInit(): void {
-    
+
   }
   getSidebarNavItems() {
     let requestPayload = {
@@ -58,11 +59,22 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   setSidebarNavItems(result: any) {
     this.navItems = result;
     let label = ['Photo', 'Music', 'Video', 'Code'];
-    for(let i = 0; i < 4; i++) {
+    for (let i = 1; i <= 4; i++) {
       // this.navItems[i] = Object.assign({}, result) ;
-      this.navItems[i]['displayName'] = label[i];
+      this.navItems[i]['displayName'] = label[i-1];
       this.navItems[i]['path'] = 'home';
+      if (i == 1) {
+        this.folderTree = Object.assign({}, this.navItems[i]);
+        this.folderTree['displayName'] = 'Home';
+      }
     }
+    this.navItems[5] = {
+      displayName: "Trash",
+      iconName: "person",
+      path: "",
+      category: "deleted",
+      children: null
+    };
   }
   ngAfterViewInit() {
     this.navService.appDrawer = this.appDrawer;

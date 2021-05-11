@@ -5,21 +5,22 @@
 <h1 mat-dialog-title><img src="assets/img/edit-icon.png" alt="">Edit Privacy?</h1>
 <div mat-dialog-content>
   <div class="privacy-select">
-    <mat-select>
-      <mat-option value="option1" selected>🐼Public
-        <img src="assets/img/edit-icon.png"/>
+    <mat-select [(value)]="privacy_select">
+      <mat-option value="0" >Public
+        
 
       </mat-option>
-      <mat-option value="option2">Private
-        <img with="10" height="10" src="assets/img/edit-icon.png">
+      <mat-option value="1">Private
+        
 
       </mat-option>
 
-      <mat-option value="option3">No Prefences</mat-option>
+      <mat-option value="2">Private with password</mat-option>
     </mat-select>
+    <input matInput type="password" style="margin-top:20px;" [hidden]="privacy_select!='2'" [(ngModel)]="password">
   </div>
   <div class="modal-btn">
-    <button mat-button class="btn-cancel" [mat-dialog-close]="true">Cancel</button>
-    <button mat-button class="btn-ok">Confirm</button>
+    <button mat-button class="btn-cancel" [mat-dialog-close]="'cancel'">Cancel</button>
+    <button mat-button class="btn-ok" (click)="onPrivacyConfirm()">Confirm</button>
   </div>
 </div>

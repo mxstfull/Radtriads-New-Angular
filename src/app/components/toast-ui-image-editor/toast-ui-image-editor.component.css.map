@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,2BAA2B,CAAC;EACxB,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,KAAK;CACpB",
+    "sources": [
+        "toast-ui-image-editor.component.scss"
+    ],
+    "names": [],
+    "file": "toast-ui-image-editor.component.css"
+}

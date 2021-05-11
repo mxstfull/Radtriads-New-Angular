@@ -1,0 +1,54 @@
+.close-button{
+    float: right;
+    top:-15px;
+    right:-15px;
+  }
+  
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+  
+  .close-icon:hover {
+    transform: rotate(180deg);
+  }
+  
+  ::ng-deep .icon-outside .close-button{
+    float: right;
+    top:-52px;
+    right:-52px;
+  }
+  
+  ::ng-deep .icon-outside .mat-dialog-container {
+   overflow: unset
+  }
+  h1{
+    color: black;
+  }
+  .mat-dialog-title img {
+    margin-right: 8px;
+}
+::ng-deep .mat-dialog-container{
+  padding: 2.5em 2.5em 1.875em;
+}
+mat-select{
+  border: 2px solid #DFE4EA;
+  border-radius: 8px;
+  padding: 0 1em 0 1.5em;
+  cursor: pointer;
+}
+.audio-box {
+  background: #fff;
+  box-shadow: -4px 5px 8px rgb(67 86 100 / 13%);
+  border-radius: 0.5em;
+  padding: 1em;
+  font-family: 'Inter', sans-serif;
+}
+.modal-body {
+  padding-bottom: 10px;
+}
+ 
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
