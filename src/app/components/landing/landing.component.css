@@ -1,0 +1,9 @@
+#header {
+    background-color: transparent ;
+    position: fixed;
+}
+.sticky {
+    background-color: #e74a3b !important;
+    opacity: 1;
+    transition: opacity .25s ease-out, height .15s ease;
+}

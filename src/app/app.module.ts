@@ -70,7 +70,8 @@ import { MoveModalComponent } from './tools/modals/move-modal/move-modal.compone
 import { AudioModalComponent } from './tools/modals/audio-modal/audio-modal.component';
 import { VideoModalComponent } from './tools/modals/video-modal/video-modal.component';
 import { TrashComponent } from './components/trash/trash.component';
-
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 @NgModule({
   exports: [
     MatIconModule,
@@ -141,7 +142,9 @@ export class MaterialModule { }
     FlexLayoutModule,
     NgxFlowModule,
     MatTreeModule,
-    AngMusicPlayerModule
+    AngMusicPlayerModule,
+    NgxPageScrollModule,
+    NgxPageScrollCoreModule.forRoot({duration: 1})
   ],
   exports: [
     SidebarComponent,

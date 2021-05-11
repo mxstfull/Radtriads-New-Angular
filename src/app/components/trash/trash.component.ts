@@ -46,30 +46,30 @@ export class TrashComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "deleted");
-        let requestPayload = {
-          user_id: localStorage.getItem('user_id'),
-          unique_id: localStorage.getItem('unique_id'),
-          currentPath: this.currentPath,
-          category: this.category
-        };
-        this.fileviewService.getFileByCategory(requestPayload).subscribe(
-          result => {
-            this.cardItems = result;
-            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-          },
-          error => {
-
-          }, () => {
-            //
-
-          }
-        );
+        
       }
     });
   }
 
   ngOnInit(): void {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+      unique_id: localStorage.getItem('unique_id'),
+      currentPath: this.currentPath,
+      category: this.category
+    };
+    this.fileviewService.getFileByCategory(requestPayload).subscribe(
+      result => {
+        this.cardItems = result;
+        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+      },
+      error => {
 
+      }, () => {
+        //
+
+      }
+    );
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {

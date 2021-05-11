@@ -45,7 +45,7 @@ const Ru = (function (t: any) {
 
 @Component({
   selector: 'pixie-image-editor',
-  templateUrl: `./pixie-image-editor.component.html`,
+  templateUrl: './pixie-image-editor.component.html',
   styleUrls: ['./pixie-image-editor.component.css'],
   encapsulation: ViewEncapsulation.None
 })

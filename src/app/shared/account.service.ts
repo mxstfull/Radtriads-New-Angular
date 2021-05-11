@@ -52,4 +52,8 @@ export class AccountService {
   delete(val :object): Observable<any> {
     return this.http.post<any>('http://127.0.0.1:8000/api/account/delete', val);
   }
+  //get disk usage.
+  getDiskUsage(requestPayload: object): Observable<any> {
+    return this.http.post<any>('http://127.0.0.1:8000/api/account/getDiskUsage', requestPayload);
+  }
 }

@@ -17,25 +17,11 @@ export class AppComponent implements OnInit, OnDestroy {
   isSignedIn: boolean;
   event$;
   isLoginRegisterUrl: boolean = true;
-  yesHeaderUrls: string[] = [
-    '/landing',
-    //'/image-editor',
-    '/public-mdeia-board',
-    '/photo-detail',
-    '/profile'
-    // '/login',
-    // '/register',
-    // '/photo-detail',
-    // '/image-editor',
-    // '/account',
-    // '/code',
-    // '/folder-creation',
-    // '/music',
-    // '/photos',
-    // '/total',
-    // '/uploading',
-    // '/video'
-  ];
+  // yesHeaderUrls: string[] = [
+  //   '/landing',
+  //   '/public-mdeia-board',
+  //   '/photo-detail'
+  // ];
 
   constructor(
     private auth: AuthStateService,
@@ -43,11 +29,11 @@ export class AppComponent implements OnInit, OnDestroy {
     public token: TokenService,
     private broadcastService: SidebarBroadcastService
   ) {
-    this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
-      if (event instanceof NavigationStart) {
-        this.isLoginRegisterUrl = !this.yesHeaderUrls.includes(event.url);
-      }
-    });
+    // this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
+    //   if (event instanceof NavigationStart) {
+    //     this.isLoginRegisterUrl = !this.yesHeaderUrls.includes(event.url);
+    //   }
+    // });
   }
 
   ngOnInit() {    

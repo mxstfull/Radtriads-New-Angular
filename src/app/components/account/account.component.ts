@@ -59,7 +59,6 @@ export class AccountComponent {
 
   responseGetDataHandler(result: any) {
     this.user_inf = result['message'];
-    console.log(this.user_inf['name']);
 
     this.MyInfoForm.patchValue({ Username: this.user_inf['name'], email: this.user_inf['email'], old_password: "", new_password: "", new_password_confirmation: "" });
     this.SettingForm.patchValue({ check_direct: this.user_inf['show_direct_link'], check_html: this.user_inf['show_html_code'], check_bulletin: this.user_inf['show_forum_code'], check_button: this.user_inf['show_social_share'] });

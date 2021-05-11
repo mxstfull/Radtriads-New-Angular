@@ -19,6 +19,10 @@ export class PhotoDetailComponent implements OnInit {
     private router: ActivatedRoute,
     public dialog: MatDialog, 
   ) { 
+    
+  }
+
+  ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
       let m_unique_id = params['id'];
       let requestPayload = {
@@ -38,11 +42,7 @@ export class PhotoDetailComponent implements OnInit {
         }, () => {
         }
       );  
-    });
-  }
-
-  ngOnInit(): void {
-    
+    });    
   }
   viewImageDetail(item: CardItem) {
     if(item == null) return;

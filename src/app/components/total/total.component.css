@@ -82,3 +82,6 @@ a {
  ::ng-deep .tab-content {
   margin-bottom: 400px !important;
 }
+.storage-box {
+  width: 100%;
+}

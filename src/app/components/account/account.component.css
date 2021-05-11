@@ -50,3 +50,6 @@ h2 {
 ::ng-deep .mat-tab-label{
     font-family: 'Archivo', sans-serif;
 }
+:host ::ng-deep .account-tab .tab-content h2 {
+  margin-bottom: 1.25em;
+}

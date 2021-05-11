@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthStateService } from '../../shared/auth-state.service';
 import { Router } from '@angular/router';
 
@@ -9,12 +9,18 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
+  isSticky: boolean = false;
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    this.isSticky = window.pageYOffset >= 250;
+  }
   constructor(
     private authState: AuthStateService,
     public router: Router,
+
   ) {
     if(this.authState.getAuthState()) {
-      this.router.navigate(['total']);
+      this.router.navigate(['total']);      
     }
   }
 
