@@ -59,20 +59,20 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   setSidebarNavItems(result: any) {
     this.navItems = result;
     let label = ['Photo', 'Music', 'Video', 'Code'];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 1; i <= 4; i++) {
       // this.navItems[i] = Object.assign({}, result) ;
-      this.navItems[i]['displayName'] = label[i];
+      this.navItems[i]['displayName'] = label[i-1];
       this.navItems[i]['path'] = 'home';
-      if (i == 0) {
+      if (i == 1) {
         this.folderTree = Object.assign({}, this.navItems[i]);
         this.folderTree['displayName'] = 'Home';
       }
     }
-    this.navItems[4] = {
+    this.navItems[5] = {
       displayName: "Trash",
       iconName: "person",
       path: "",
-      category: "trash",
+      category: "deleted",
       children: null
     };
   }

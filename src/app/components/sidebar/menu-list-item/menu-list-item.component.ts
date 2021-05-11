@@ -45,7 +45,11 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: NavItem) {
-    if(item.category == "trash") {
+    if(item.category == "all") {
+      this.router.navigateByUrl('/total');
+      return;
+    }
+    if(item.category == "deleted") {
       this.router.navigateByUrl('/trash');
       return;
     }
