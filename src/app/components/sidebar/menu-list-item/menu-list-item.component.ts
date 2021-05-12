@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { NavItem } from '../../interfaces/nav-item';
 import { Router } from '@angular/router';
 import { NavService } from '../nav-service';
@@ -25,6 +25,7 @@ export class MenuListItemComponent implements OnInit {
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem;
   @Input() depth: number;
+  @Output() itemChanged: EventEmitter<NavItem> =   new EventEmitter();
 
   constructor(public navService: NavService,
     public router: Router, private globals: Globals) {
@@ -36,8 +37,10 @@ export class MenuListItemComponent implements OnInit {
   ngOnInit() {
     this.navService.currentUrl.subscribe((url: string) => {
       if (this.item.path && url) {
-        // console.log(`Checking '/${this.item.route}' against '${url}'`);
-        this.expanded = url.indexOf(`${this.item.path}`) === 0;
+        console.log(`Checking '/${this.item.path}' against '${url}'`);
+        console.log(url.indexOf(`${this.item.path}`));
+        this.expanded = url.indexOf(`${this.item.category}/${this.item.path}`) >= 0;
+        debugger;
         this.ariaExpanded = this.expanded;
         // console.log(`${this.item.route} is expanded: ${this.expanded}`);
       }
@@ -45,6 +48,8 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: NavItem) {
+    item.selected = true;
+    this.itemChanged.emit(item);
     if(item.category == "all") {
       this.router.navigateByUrl('/total');
       return;
@@ -54,7 +59,7 @@ export class MenuListItemComponent implements OnInit {
       return;
     }
     this.globals.gl_currentPath = item.path;
-    localStorage.setItem('current_album_title', item.displayName);
+    localStorage.setItem('current_album_title', item.displayName);    
     this.router.navigate([item.category, item.path]);
     // if (!item.children || !item.children.length) {
     //   this.router.navigate([item.route]);
