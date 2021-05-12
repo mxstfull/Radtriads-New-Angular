@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output,Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-topbar',
@@ -10,7 +10,11 @@ export class TopbarComponent implements OnInit {
   onDownloadAlbum = new EventEmitter<string>();
   @Output()
   onRenameAlbum = new EventEmitter<string>();
-  constructor() { }
+  @Input()
+  hideButtons: boolean = false;
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
   }
