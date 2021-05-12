@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('appDrawer') appDrawer: ElementRef;
   navItems: NavItem[] = [];
   folderTree: NavItem;
+  imgNavItems: string[] = [];
 
   constructor(
     private router: Router,
@@ -38,7 +39,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.getSidebarNavItems();
   }
   ngOnInit(): void {
-
+    this.imgNavItems = ["../../../assets/img/Folder.png", 
+    "../../../assets/img/photo.png", 
+    "../../../assets/img/music.png", 
+    "../../../assets/img/video.png", 
+    "../../../assets/img/code.png",
+    "../../../assets/img/trash.png"];
   }
   getSidebarNavItems() {
     let requestPayload = {
@@ -59,10 +65,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   setSidebarNavItems(result: any) {
     this.navItems = result;
     let label = ['Photo', 'Music', 'Video', 'Code'];
+    this.navItems[0]['iconName'] = this.imgNavItems[0];
     for (let i = 1; i <= 4; i++) {
       // this.navItems[i] = Object.assign({}, result) ;
-      this.navItems[i]['displayName'] = label[i-1];
+      this.navItems[i]['displayName'] = label[i - 1];
       this.navItems[i]['path'] = 'home';
+      this.navItems[i]['iconName'] = this.imgNavItems[i];
       if (i == 1) {
         this.folderTree = Object.assign({}, this.navItems[i]);
         this.folderTree['displayName'] = 'Home';
@@ -70,7 +78,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
     this.navItems[5] = {
       displayName: "Trash",
-      iconName: "person",
+      iconName: this.imgNavItems[5],
       path: "",
       category: "deleted",
       children: null
@@ -83,6 +91,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   getActiveRoutes() {
     this.currentActiveNav = this.router.url;
     this.cdr.detectChanges();
+  }
+
+  getClass(path: string) {
+    console.log(this.currentActiveNav.slice(1) === path);
+    return (this.currentActiveNav.slice(1) === path) ? 'active' : '';
   }
 
 }
