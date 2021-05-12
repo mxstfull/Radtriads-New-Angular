@@ -93,7 +93,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       "../../../assets/img/video.png",
       "../../../assets/img/code.png",
       "../../../assets/img/trash.png"];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       this.navItems[i]['displayName'] = this.navItems[i]['displayName'] == '' ? this.navItems[i]['category'] : this.navItems[i]['displayName'];
       this.navItems[i]['path'] = 'home';
       this.navItems[i]['iconName'] = imgNavItems[i];
