@@ -1,0 +1,111 @@
+<div id="dashobard">
+    <div class="header-dashobard-mobile">
+      <div class="container-fluid">
+        <button class="sidebar-icon" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+        <div class="logo"><img src="../../../assets/img/logo-mobile.png" alt="" /></div>
+        <div class="mobile-right">
+          <a routerLink="/"><img src="../../../assets/img/search-mobile.png" alt="" /></a>
+          <a routerLink="/"><img src="../../../assets/img/folder-mobile.png" alt="" /></a>
+          <a routerLink="/"><img src="../../../assets/img/file-mobile.png" alt="" /></a>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <!--header-dashobard-->
+  
+    <div class="main-dashboard">
+  
+      <!--dashobard-sidebar-->
+      <app-sidebar></app-sidebar>
+      <div class="dashboard-content">
+        <app-topbar [hideButtons] = "hideButtons"></app-topbar>
+        <div class="dashboard-bottom">
+          <div class="plan-section" id = "plan-select">
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                  <h2>Choose Subscription Plan</h2>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                  <div class="month-year">
+                    <input type="checkbox" class="checkbox" [(ngModel)]="perioudOption" [ngModelOptions]="{standalone: true}" />
+                    <div class="knobs">
+                      <span>Monthly</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="plan-box">
+                    <div class="plan-name">SILVER</div>
+                    <span class="plan-off">50% off</span>
+                    <div class="price-box">
+                      <span class="regular-price">$5.49</span>
+                      <span class="sell-price">$2.75</span>
+                      <div class="total-storage">3000 IMAGES (30GB)</div>
+                    </div>
+                    <ul>
+                      <li><i class="fa fa-check"></i>Hosting not Included</li>
+                      <li><i class="fa fa-check"></i>Image Editor</li>
+                      <li><i class="fa fa-check"></i>Social Sharing</li>
+                      <li><i class="fa fa-check"></i>No Adverts</li>
+                      <li><i class="fa fa-check"></i>Unlimited Albums</li>
+                      <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
+                      <li><i class="fa fa-check"></i>Lifetime Storage</li>
+                    </ul>
+                    <a (click)="register('silver')" class="plan-btn">SUBSCRIBE</a>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="plan-box gold-plan-box">
+                    <div class="plan-name">GOLD</div>
+                    <span class="plan-off">50% off</span>
+                    <div class="price-box">
+                      <span class="regular-price">$7.49</span>
+                      <span class="sell-price">$3.75</span>
+                      <div class="total-storage">3000 IMAGES (30GB)</div>
+                    </div>
+                    <ul>
+                      <li><i class="fa fa-check"></i>Hosting not Included</li>
+                      <li><i class="fa fa-check"></i>Image Editor</li>
+                      <li><i class="fa fa-check"></i>Social Sharing</li>
+                      <li><i class="fa fa-check"></i>No Adverts</li>
+                      <li><i class="fa fa-check"></i>Unlimited Albums</li>
+                      <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
+                      <li><i class="fa fa-check"></i>Lifetime Storage</li>
+                    </ul>
+                    <a (click)="register('gold')" class="plan-btn">SUBSCRIBE</a>
+                  </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="plan-box">
+                    <div class="plan-name">PLATINUM</div>
+                    <span class="plan-off">50% off</span>
+                    <div class="price-box">
+                      <span class="regular-price">$12.59</span>
+                      <span class="sell-price">$6.30</span>
+                      <div class="total-storage">UNLIMITED IMAGES</div>
+                    </div>
+                    <ul>
+                      <li><i class="fa fa-check"></i>Hosting not Included</li>
+                      <li><i class="fa fa-check"></i>Image Editor</li>
+                      <li><i class="fa fa-check"></i>Social Sharing</li>
+                      <li><i class="fa fa-check"></i>No Adverts</li>
+                      <li><i class="fa fa-check"></i>Unlimited Albums</li>
+                      <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
+                      <li><i class="fa fa-check"></i>Lifetime Storage</li>
+                    </ul>
+                    <a (click)="register('platinum')" class="plan-btn">SUBSCRIBE</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+        </div>
+      </div>
+      <!--dashobard-content-->
+      <div class="clear"></div>
+    </div>
+  </div>
+  

@@ -11,7 +11,7 @@
                     <div class="sign-box-outer">
                         <div class="sign-box sign-in-box">
                             <h3>Sign In</h3>
-                            <a routerLink="/register" class="sign-in">Sign Up</a>
+                            <a routerLink="/landing" class="sign-in">Sign Up</a>
                             <div class="clear"></div>
                             <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                 <div *ngIf="submitted && this.errors?.error" style="color: brown;">

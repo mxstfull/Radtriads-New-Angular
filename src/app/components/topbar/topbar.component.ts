@@ -23,7 +23,7 @@ export class TopbarComponent implements OnInit {
     ) { 
     
   }
-  allRate: number;
+  allRate: number = 0;
   usedRate: number;
   ngOnInit(): void {
     this.allRate = Number(localStorage.getItem('allRate'));
@@ -43,6 +43,9 @@ export class TopbarComponent implements OnInit {
     this.token.removeToken();
     localStorage.clear();
     this.router.navigate(['landing']);
+  }
+  getPercent() {
+    return Math.round(this.usedRate * 100 / this.allRate);
   }
 
 }

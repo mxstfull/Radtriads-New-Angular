@@ -18,7 +18,7 @@ import { TotalComponent } from './components/total/total.component';
 import { UploadingComponent } from './components/uploading/uploading.component';
 import { VideoComponent } from './components/video/video.component';
 import { TrashComponent } from './components/trash/trash.component';
-
+import { UpgradeAccountComponent } from './components/upgrade-account/upgrade-account.component';
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
   { path: 'login', component: SigninComponent },
@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: 'trash', component: TrashComponent },
   { path: 'total', component: TotalComponent },
   { path: 'photo-details', component: PhotoDetailComponent },
+  { path: 'upgrade-account', component: UpgradeAccountComponent },
 ];
 
 @NgModule({
