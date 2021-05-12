@@ -43,6 +43,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.broadcastService.subscribe("NAVITEMS_CHANGED", () => { this.getSidebarNavItems(); });
     this.getSidebarNavItems();
   }
+  closeNav() {
+    this.navService.closeNav();
+  }
   ngOnInit(): void {
     let requestPayload = {
       user_id: localStorage.getItem('user_id'),
@@ -109,6 +112,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     // if(this.currentActiveNav == '/trash'){
     //   this.navItems[5].selected = true;
     // }
+    console.log(this.navItems);
   }
   ngAfterViewInit() {
     this.navService.appDrawer = this.appDrawer;
@@ -122,6 +126,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   getClass(path: string) {
     console.log(this.currentActiveNav.slice(1) === path);
     return (this.currentActiveNav.slice(1) === path) ? 'active' : '';
+  }
+
+  itemChanged(selectedItem: NavItem) {
+    console.log(selectedItem);
   }
 
 }
