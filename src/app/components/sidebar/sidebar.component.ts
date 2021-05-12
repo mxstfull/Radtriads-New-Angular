@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   folderTree: NavItem;
   imgNavItems: string[] = [];
 
-  allRate: number;
+  allRate: number = 0;
   usedRate: number;
 
   constructor(

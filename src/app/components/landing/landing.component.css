@@ -7,3 +7,6 @@
     opacity: 1;
     transition: opacity .25s ease-out, height .15s ease;
 }
+a {
+    cursor: pointer;
+}

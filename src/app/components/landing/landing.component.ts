@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
+  public perioudOption = false;
   isSticky: boolean = false;
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -20,11 +21,16 @@ export class LandingComponent implements OnInit {
 
   ) {
     if(this.authState.getAuthState()) {
-      this.router.navigate(['total']);      
+      this.router.navigate(['total']);    
     }
   }
 
   ngOnInit(): void {
   }
-
+  register(param) {
+    if(this.perioudOption)
+      param = param + "_yearly";
+    else param = param + "_monthly";
+    this.router.navigate(['register'], {queryParams:{plan: param}});
+  }
 }

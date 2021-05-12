@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms'; 
 import { ConfirmedValidator } from '../../confirmed.validator';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -16,27 +17,36 @@ export class SignupComponent implements OnInit {
   loading = false;
   submitted = false;
   sucess_register = false;
+  planOption;
+
   get f(){
     return this.registerForm.controls;
   }
-
   constructor(
     public router: Router,
     public fb: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    private router_input: ActivatedRoute,
+
   ) {
+    this.router_input.queryParams.subscribe(params => {
+      this.planOption = params['plan'];
+    });
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       password_confirmation: ['', [Validators.required]],
-      acceptTerms: ['']
+      acceptTerms: [''], 
+      planOption: this.planOption
     }, { 
       validator: ConfirmedValidator('password', 'password_confirmation')
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -45,6 +55,9 @@ export class SignupComponent implements OnInit {
       result => {
       },
       error => {
+        if(error.error == "no_plan_selected") {
+          alert("Invalid Plan selected.");
+        } 
         this.errors = error.error;
         this.loading = false;
       },
@@ -54,5 +67,4 @@ export class SignupComponent implements OnInit {
       }
     )
   }
-
 }

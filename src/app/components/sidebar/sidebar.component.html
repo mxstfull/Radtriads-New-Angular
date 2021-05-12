@@ -17,9 +17,9 @@
     </div>
     <div class="sidebar-logout"><a routerLink="/"><i class="fa fa-sign-out"></i> Logout</a></div>
     <div class="disk-space">
-        <h5>Disk Space Usage</h5>
-        <div class="space-count">{{convertToBigUnit(usedRate)}} / {{convertToBigUnit(allRate)}}</div>
-        <div class="space-bar"><span class="space-bar-fill" [ngStyle]="{'width': (usedRate * 100 / allRate) + '%'}"></span></div>
-        <a routerLink="/account">Upgrade Account</a>
+        <h5 [ngStyle] = "{'display': ((allRate==0)?'none':'')}" >Disk Space Usage</h5>
+        <div [ngStyle] = "{'display': ((allRate==0)?'none':'')}"  class="space-count">{{convertToBigUnit(usedRate)}} / {{convertToBigUnit(allRate)}}</div>
+        <div [ngStyle] = "{'display': ((allRate==0)?'none':'')}"  class="space-bar"><span class="space-bar-fill" style = "width: 0%;" [ngStyle]="{'width': (usedRate * 100 / allRate) + '%'}"></span></div>
+        <a routerLink="/upgrade-account">Upgrade Account</a>
     </div>
 </div>

@@ -72,6 +72,7 @@ import { VideoModalComponent } from './tools/modals/video-modal/video-modal.comp
 import { TrashComponent } from './components/trash/trash.component';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { UpgradeAccountComponent } from './components/upgrade-account/upgrade-account.component';
 @NgModule({
   exports: [
     MatIconModule,
@@ -129,7 +130,8 @@ export class MaterialModule { }
     MoveModalComponent,
     AudioModalComponent,
     VideoModalComponent,
-    TrashComponent
+    TrashComponent,
+    UpgradeAccountComponent
   ],
   imports: [
     ReactiveFormsModule,
