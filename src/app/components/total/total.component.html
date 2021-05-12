@@ -24,7 +24,7 @@
           <mat-tab label="Home" style="overflow: visible;">
             <div class="storage-box-outer">
               <div class="storage-box">
-                <div class="storage-tab">
+                <div class="storage-tab"  [ngStyle] = "{'display': ((allRate==0)?'none':'')}" >
                   <div class="storage-line photo-line" [ngStyle]="{'width': (photoRate * 100 / allRate) + '%'}"></div>
                   <div class="storage-line music-line" [ngStyle]="{'width': (musicRate * 100 / allRate) + '%'}"></div>
                   <div class="storage-line video-line" [ngStyle]="{'width': (videoRate * 100 / allRate) + '%'}"></div>
@@ -32,7 +32,7 @@
                   <div class="storage-line trash-line" [ngStyle]="{'width': (trashRate * 100 / allRate) + '%'}"></div>
                   <div class="clear"></div>
                 </div>
-                <div class="remain-space">{{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
+                <div class="remain-space" [ngStyle] = "{'display': ((allRate==0)?'none':'')}" >{{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
                 <ul>
                   <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">{{convertToBigUnit(photoRate)}}</span></li>
                   <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">{{convertToBigUnit(musicRate)}}</span></li>

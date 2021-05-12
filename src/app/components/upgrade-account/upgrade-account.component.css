@@ -1,0 +1,6 @@
+.plan-section h2 {
+    font-size: 4em;
+}
+::ng-deep a {
+    cursor: pointer;
+}

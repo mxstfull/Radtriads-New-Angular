@@ -33,7 +33,7 @@ export class TotalComponent implements OnInit {
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
   rangeMode: number = 0; //this means now is for all medias(when it's 1 it means to be for recent uploaded medias).
   //These are for media percentage.
-  allRate: number;
+  allRate: number = 0;
   photoRate: number;
   musicRate: number;
   videoRate: number;
@@ -76,7 +76,6 @@ export class TotalComponent implements OnInit {
   }
   drawPercentBar(result: any) {
     if(result) {
-      
       this.allRate = result['all'];
       this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
       this.trashRate = result['deleted'];
