@@ -9,8 +9,8 @@
     background-color: rgb(255, 255, 255);
 }
 
-:host:hover>.mat-list-item:not(.expanded),
- :host:focus>.mat-list-item:not(.expanded) {
+:host:hover>.mat-list-item,
+ :host:focus>.mat-list-item {
     background-color: rgba(255, 255, 255, 0.192) !important;
 }
 

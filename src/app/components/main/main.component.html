@@ -1,0 +1,21 @@
+<div id="dashobard">
+    <div class="header-dashobard-mobile">
+        <div class="container-fluid">
+            <button class="sidebar-icon" onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <div class="logo"><img src="../../../assets/img/logo-mobile.png" alt="" /></div>
+            <div class="mobile-right">
+                <a routerLink="/"><img src="../../../assets/img/search-mobile.png" alt="" /></a>
+                <a routerLink="/"><img src="../../../assets/img/folder-mobile.png" alt="" /></a>
+                <a routerLink="/"><img src="../../../assets/img/file-mobile.png" alt="" /></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--header-dashobard-->
+    <div class="main-dashboard">
+        <app-sidebar></app-sidebar>
+        <router-outlet></router-outlet>
+        <!--dashobard-content-->
+        <div class="clear"></div>
+    </div>
+</div>

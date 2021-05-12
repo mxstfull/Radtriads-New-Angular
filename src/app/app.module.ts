@@ -22,36 +22,20 @@ import { PhotoDetailComponent } from './components/photo-detail/photo-detail.com
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageEditorNewComponent } from './components/image-editor-new/image-editor-new.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AccountComponent } from './components/account/account.component';
-import { CodeComponent } from './components/code/code.component';
-import { FolderCreationComponent } from './components/folder-creation/folder-creation.component';
-import { MusicComponent } from './components/music/music.component';
-import { PhotosComponent } from './components/photos/photos.component';
-import { TotalComponent } from './components/total/total.component';
-import { UploadingComponent } from './components/uploading/uploading.component';
-import { VideoComponent } from './components/video/video.component';
-import { TopbarComponent } from './components/topbar/topbar.component';
+
 import { ModalsComponent } from './components/modals/modals.component';
 import { NavService } from './components/sidebar/nav-service';
 import { MenuListItemComponent } from './components/sidebar/menu-list-item/menu-list-item.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { NgxFlowModule, FlowInjectionToken } from '@flowjs/ngx-flow';
-import Flow from '@flowjs/flow.js';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import {
-  MatListModule
-} from '@angular/material/list';
-
-import {
-  MatSidenavModule
-} from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -69,10 +53,12 @@ import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie
 import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
 import { AudioModalComponent } from './tools/modals/audio-modal/audio-modal.component';
 import { VideoModalComponent } from './tools/modals/video-modal/video-modal.component';
-import { TrashComponent } from './components/trash/trash.component';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
-import { UpgradeAccountComponent } from './components/upgrade-account/upgrade-account.component';
+import { MainComponent } from './components/main/main.component';
+
+import { MainModule } from './components/main/main.module';
+
 @NgModule({
   exports: [
     MatIconModule,
@@ -90,9 +76,7 @@ import { UpgradeAccountComponent } from './components/upgrade-account/upgrade-ac
     MatCheckboxModule,
     MatTabsModule,
     MatProgressBarModule
-  ],
-  declarations: [
-  ],
+  ]
 })
 export class MaterialModule { }
 
@@ -107,15 +91,6 @@ export class MaterialModule { }
     PhotoDetailComponent,
     ImageEditorComponent,
     SidebarComponent,
-    AccountComponent,
-    CodeComponent,
-    FolderCreationComponent,
-    MusicComponent,
-    PhotosComponent,
-    TotalComponent,
-    UploadingComponent,
-    VideoComponent,
-    TopbarComponent,
     ModalsComponent,
     MenuListItemComponent,
     CardComponent,
@@ -130,8 +105,7 @@ export class MaterialModule { }
     MoveModalComponent,
     AudioModalComponent,
     VideoModalComponent,
-    TrashComponent,
-    UpgradeAccountComponent
+    MainComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -142,11 +116,11 @@ export class MaterialModule { }
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    NgxFlowModule,
     MatTreeModule,
     AngMusicPlayerModule,
     NgxPageScrollModule,
-    NgxPageScrollCoreModule.forRoot({duration: 1})
+    NgxPageScrollCoreModule.forRoot({duration: 1}),
+    MainModule
   ],
   exports: [
     SidebarComponent,
@@ -155,10 +129,6 @@ export class MaterialModule { }
     PixieImageEditorComponent
   ],
   providers: [
-    {
-      provide: FlowInjectionToken,
-      useValue: Flow
-    },
     NavService,
     {
       provide: HTTP_INTERCEPTORS,
