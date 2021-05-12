@@ -1,7 +1,6 @@
 <a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" [ngClass]="{'expanded': expanded}" class="menu-list-item">
     <div fxFlex fxLayout="row" fxLayoutAlign="none center" (click)="onItemSelected(item)">
-        <!-- <mat-icon class="routeIcon">{{item.iconName}}</mat-icon> -->
-        <img mat-card-image src="{{item.iconName}}" alt="icon" width="25px" height="18px" class="mr-2 mb-1"> {{item.displayName}}
+        <img *ngIf="item.iconName != 'person'" mat-card-image src="{{item.iconName}}" alt="icon" width="25px" height="18px" class="mr-2 mb-1"> {{item.displayName}}
     </div>
 
     <span fxFlex *ngIf="item.children && item.children.length">

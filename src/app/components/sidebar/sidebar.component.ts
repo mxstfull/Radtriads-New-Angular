@@ -117,7 +117,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   getActiveRoutes() {
-    this.currentActiveNav = this.router.url;
+    this.currentActiveNav = this.router.url;debugger;
     this.cdr.detectChanges();
   }
 
