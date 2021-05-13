@@ -36,6 +36,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { CdkTableModule } from '@angular/cdk/table';
+
+import { CardComponent } from '../../tools/card/card.component';
 @NgModule({
     declarations: [AccountComponent,
         CodeComponent,
@@ -47,7 +49,8 @@ import { CdkTableModule } from '@angular/cdk/table';
         VideoComponent,
         UpgradeAccountComponent,
         TrashComponent,
-        TopbarComponent
+        TopbarComponent,
+        CardComponent
     ],
     providers: [{
         provide: FlowInjectionToken,

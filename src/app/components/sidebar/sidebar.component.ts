@@ -34,6 +34,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     private sidebarService: SidebarService,
     public AccountService: AccountService,
   ) {
+    
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getActiveRoutes();

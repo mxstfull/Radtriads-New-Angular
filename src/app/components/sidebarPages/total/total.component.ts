@@ -9,8 +9,7 @@ import { PrivacyModalComponent } from '../../../tools/modals/privacy-modal/priva
 import { ShareModalComponent } from '../../../tools/modals/share-modal/share-modal.component';
 import { RenameModalComponent } from '../../../tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from '../../../tools/modals/delete-modal/delete-modal.component';
-import { MoveModalComponent } from '../../../tools/modals/move-modal/move-modal.component';
-import { NavItem } from '../../interfaces/nav-item';
+
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
 import { AccountService } from 'src/app/shared/account.service';
@@ -78,7 +77,7 @@ export class TotalComponent implements OnInit {
     if(result) {
       this.allRate = result['all'];
       this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
-      this.trashRate = result['deleted'];
+      if(result['deleted'] != null) this.trashRate = result['deleted'];
       result['category'].forEach (
         element => {
           switch(element['category']) {

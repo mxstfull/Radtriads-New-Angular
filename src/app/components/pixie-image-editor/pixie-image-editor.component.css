@@ -1,17 +1,5 @@
 .pixie-image-editor-container {
   width: 100%;
-  max-height: 100px;
-}
-
-.pixie-image-editor-container image-editor {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-  height: calc(100vh - 124px);
 }
 
 .pixie-image-editor-container image-editor toolbar {
@@ -25,116 +13,239 @@
   display: none;
 }
 
-.pixie-image-editor-container image-editor .canvas-wrapper {
-  width: calc(100% - 475px);
-  margin-top: 50px;
-  vertical-align: middle;
-  min-height: 100%;
+@media screen and (min-width: 921px) {
+  .pixie-image-editor-container image-editor {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    height: calc(100vh - 124px);
+  }
+  .pixie-image-editor-container image-editor .canvas-wrapper {
+    width: calc(100% - 475px);
+    margin-top: 50px;
+    vertical-align: middle;
+    min-height: 100%;
+  }
+  .pixie-image-editor-container image-editor editor-controls {
+    width: 475px;
+    height: 100%;
+    margin-top: 50px;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 435px;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+    height: calc(100% - 67px);
+    -ms-flex-line-pack: space-evenly;
+        align-content: space-evenly;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button {
+    display: block;
+    border-radius: 4px;
+    background: rgba(236, 245, 253, 0.5);
+    border: 1px solid rgba(141, 171, 196, 0.5);
+    padding: 20px 0 12px;
+    line-height: 100%;
+    color: #8dabc4;
+    font-size: 0.8125em;
+    font-family: "Heebo", sans-serif;
+    min-width: 200px;
+    height: 103px;
+    font-weight: 100;
+    color: #0093ee;
+    text-align: center;
+    margin: 7px;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button image-or-icon {
+    color: #0093ee;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover {
+    color: #e74a3b;
+    border-color: rgba(231, 74, 59, 0.5);
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover image-or-icon {
+    color: #e74a3b;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > div {
+    margin-bottom: 10px;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .aspect-ratios {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .aspect-ratios > div {
+    margin-bottom: 10px;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .round-action-button mat-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :last-child {
+    margin-right: inherit;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :first-child {
+    margin-left: inherit;
+  }
 }
 
-.pixie-image-editor-container image-editor editor-controls {
-  width: 475px;
-  height: 100%;
-  margin-top: 50px;
-}
-
-.pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 435px;
-  -ms-flex-flow: wrap;
-      flex-flow: wrap;
-  height: calc(100% - 67px);
-}
-
-.pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button {
-  display: block;
-  border-radius: 4px;
-  background: rgba(236, 245, 253, 0.5);
-  border: 1px solid rgba(141, 171, 196, 0.5);
-  padding: 20px 0 12px;
-  line-height: 100%;
-  color: #8dabc4;
-  font-size: 0.8125em;
-  font-family: "Heebo", sans-serif;
-  min-width: 200px;
-  height: 103px;
-  font-weight: 100;
-  color: #0093ee;
-  text-align: center;
-  margin: 5px;
-}
-
-.pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button image-or-icon {
-  color: #0093ee;
-}
-
-.pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover {
-  color: #e74a3b;
-  border-color: rgba(231, 74, 59, 0.5);
-}
-
-.pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover image-or-icon {
-  color: #e74a3b;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x {
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > div {
-  margin-bottom: 10px;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .aspect-ratios {
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-align: center;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .aspect-ratios > div {
-  margin-bottom: 10px;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .round-action-button mat-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :last-child {
-  margin-right: inherit;
-}
-
-.pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :first-child {
-  margin-left: inherit;
+@media screen and (max-width: 920px) {
+  .pixie-image-editor-container image-editor {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .pixie-image-editor-container image-editor .canvas-wrapper {
+    width: 100%;
+    margin-top: 50px;
+    vertical-align: middle;
+    min-height: calc(100vh - 184px);
+  }
+  .pixie-image-editor-container image-editor editor-controls {
+    width: 100%;
+    height: 400px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .pixie-image-editor-container image-editor editor-controls color-widget {
+    margin-right: 0;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button {
+    display: block;
+    border-radius: 4px;
+    background: rgba(236, 245, 253, 0.5);
+    border: 1px solid rgba(141, 171, 196, 0.5);
+    padding: 20px 0 12px;
+    line-height: 100%;
+    color: #8dabc4;
+    font-size: 0.8125em;
+    font-family: "Heebo", sans-serif;
+    min-width: 30%;
+    height: 85px;
+    font-weight: 100;
+    color: #0093ee;
+    text-align: center;
+    margin: 5px;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button image-or-icon {
+    color: #0093ee;
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover {
+    color: #e74a3b;
+    border-color: rgba(231, 74, 59, 0.5);
+  }
+  .pixie-image-editor-container image-editor editor-controls navigation-bar > .scroll-container button:hover image-or-icon {
+    color: #e74a3b;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container .apply-button, .pixie-image-editor-container image-editor editor-controls .tool-panel-container .cancel-button {
+    display: block;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container .controls-drawer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container crop-drawer, .pixie-image-editor-container image-editor editor-controls .tool-panel-container shapes-drawer, .pixie-image-editor-container image-editor editor-controls .tool-panel-container stickers-drawer, .pixie-image-editor-container image-editor editor-controls .tool-panel-container frame-drawer, .pixie-image-editor-container image-editor editor-controls .tool-panel-container filter-drawer {
+    -webkit-box-pack: stretch !important;
+        -ms-flex-pack: stretch !important;
+            justify-content: stretch !important;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container text-drawer .tool-panel-content {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container color-widget .colors {
+    overflow-x: auto;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container draw-drawer .brush-type-button-wrapper {
+    position: relative;
+    inset: unset;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .pixie-image-editor-container image-editor editor-controls .tool-panel-container .size-inputs-container, .pixie-image-editor-container image-editor editor-controls .tool-panel-container .checkbox-container, .pixie-image-editor-container image-editor editor-controls .tool-panel-container .font-selector-wrapper {
+    margin: 0;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > div {
+    margin-bottom: 10px;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .cancel-button, .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .apply-button {
+    display: block;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content .round-action-button mat-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :last-child {
+    margin-right: inherit;
+  }
+  .pixie-image-editor-container image-editor editor-controls .scroll-container-x .tool-panel-content > :first-child {
+    margin-left: inherit;
+  }
 }
 /*# sourceMappingURL=pixie-image-editor.component.css.map */

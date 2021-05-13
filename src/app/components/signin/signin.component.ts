@@ -59,6 +59,10 @@ export class SigninComponent implements OnInit {
   responseHandler(data){
     localStorage.setItem('user_id', data.user.id);
     localStorage.setItem('unique_id', data.user.unique_id);
+    localStorage.setItem('show_direct_link', data.user.show_direct_link);
+    localStorage.setItem('show_forum_code', data.user.show_forum_code);
+    localStorage.setItem('show_html_code', data.user.show_html_code);
+    localStorage.setItem('show_social_share', data.user.show_social_share);
     this.token.handleData(data.access_token);
   }
 }

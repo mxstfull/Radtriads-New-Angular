@@ -10,6 +10,7 @@ export class NavService {
     constructor(private router: Router) {
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
+                
                 this.currentUrl.next(event.urlAfterRedirects);
             }
         });
