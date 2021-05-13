@@ -42,11 +42,16 @@ export class CardComponent implements OnInit {
         });
     }
     else if (type === "share") {
-      if(localStorage.getItem('show_social_share') == "0" &&
-        localStorage.getItem(''))
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: this.item
         },
         width: '740px',
       });
