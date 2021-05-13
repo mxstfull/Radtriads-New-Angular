@@ -24,6 +24,16 @@ export class AccountComponent implements OnInit {
   user_info = { u_id: localStorage.getItem('unique_id') };
   user_inf: object;
 
+  allRate: number = 0;
+  photoRate: number;
+  musicRate: number;
+  videoRate: number;
+  codeRate: number;
+  trashRate: number;
+
+  stripe_plan: string;
+
+
   constructor(
     public router: Router,
     public fb: FormBuilder,
@@ -68,7 +78,47 @@ export class AccountComponent implements OnInit {
     else this.selected = 'option2';
 
     this.PrivacyForm.patchValue({ Privacy_seleted: this.selected });
-    
+    this.stripe_plan = this.user_inf['stripe_plan'];
+    this.getDiskUsage();
+  }
+
+  getDiskUsage() {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+    }
+    this.AccountService.getDiskUsage(requestPayload).subscribe(
+      result => {
+        this.drawPercentBar(result);
+      },
+    );
+  }
+  drawPercentBar(result: any) {
+    if(result) {
+      this.allRate = result['all'];
+      this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
+      if(result['deleted'] != null) this.trashRate = result['deleted'];
+      result['category'].forEach (
+        element => {
+          switch(element['category']) {
+            case 0: this.photoRate = element['diskspace']; break;
+            case 1: this.musicRate = element['diskspace']; break;
+            case 2: this.videoRate = element['diskspace']; break;
+            case 3: this.codeRate = element['diskspace']; break;
+          }
+        }
+      );
+    }
+  }
+  convertToBigUnit(byteSize) {
+    if(byteSize < 1000) {
+      return byteSize + "byte";
+    } else if(byteSize < 1000 * 1000) {
+      return Math.round(byteSize / 1000) + "KB";
+    } else if(byteSize < 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000) + "MB";
+    } else if(byteSize < 1000 * 1000 * 1000 * 1000) {
+      return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
+    }
   }
 
   onSubmit_myinfo() {

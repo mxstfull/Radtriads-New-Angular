@@ -41,7 +41,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AngMusicPlayerModule } from  'ang-music-player';
 
-import { CardComponent } from './tools/card/card.component';
 import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
 import { ShareModalComponent } from './tools/modals/share-modal/share-modal.component';
 import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.component';
@@ -93,7 +92,6 @@ export class MaterialModule { }
     SidebarComponent,
     ModalsComponent,
     MenuListItemComponent,
-    CardComponent,
     PrivacyModalComponent,
     ShareModalComponent,
     RenameModalComponent,

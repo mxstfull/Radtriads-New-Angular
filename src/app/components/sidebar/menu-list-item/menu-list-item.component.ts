@@ -35,6 +35,7 @@ export class MenuListItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.navService.currentUrl.subscribe((url: string) => {
       if (this.item.path && url) {
         url = decodeURIComponent(url);

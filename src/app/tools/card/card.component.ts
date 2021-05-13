@@ -42,6 +42,8 @@ export class CardComponent implements OnInit {
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_social_share') == "0" &&
+        localStorage.getItem(''))
       this.dialog.open(ShareModalComponent, {
         data: {
           animal: 'panda'
