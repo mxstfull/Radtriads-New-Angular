@@ -1,3 +1,7 @@
 .sign-box {
     height: min-content;
 }
+
+.input-box {
+    width: 100%;
+}

@@ -33,42 +33,45 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="input-box input-box-left">
-                                        <i class="fa fa-lock"></i>
-                                        <input type="password" formControlName="password" placeholder="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.password }" />
-                                        <div *ngIf="submitted && this.errors?.password" class="invalid-feedback">
-                                            <div *ngIf="this.errors?.password">{{this.errors?.password}}</div>
+                                    <div class="col-6 pl-0">
+                                        <div class="input-box">
+                                            <i class="fa fa-lock"></i>
+                                            <input type="password" formControlName="password" placeholder="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.password }" />
+                                            <div *ngIf="submitted && this.errors?.password" class="invalid-feedback">
+                                                <div *ngIf="this.errors?.password">{{this.errors?.password}}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="input-box input-box-right">
-                                        <i class="fa fa-lock"></i>
-                                        <input type="password" formControlName="password_confirmation" placeholder="Confirm" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.password }" />
-                                        <div *ngIf="submitted && this.errors?.password" class="invalid-feedback">
-                                            <div *ngIf="this.errors?.password">Confirm must match password.</div>
+                                    <div class="col-6 pr-0">
+                                        <div class="input-box">
+                                            <i class="fa fa-lock"></i>
+                                            <input type="password" formControlName="password_confirmation" placeholder="Confirm" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.password }" />
+                                            <div *ngIf="submitted && this.errors?.password" class="invalid-feedback">
+                                                <div *ngIf="this.errors?.password">Confirm must match password.</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group form-check">
                                     <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && this.errors?.acceptTerms }" />
-                                    <label for="acceptTerms" class="form-check-label">By creating an account, you agree to the Terms and Conditions
-                      and Privacy Policy</label>
-                                    <div *ngIf="submitted && this.errors?.acceptTerms" class="invalid-feedback">Accept Ts & Cs is required</div>
+                                    <label for="acceptTerms" class="form-check-label">By creating an account, you agree to the Terms and
+                    Conditions
+                    and Privacy Policy</label>
+                                    <div *ngIf="submitted && this.errors?.acceptTerms" class="invalid-feedback">Accept Ts & Cs is required
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <button [disabled]="loading" class="btn btn-primary">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Register
-                    </button>
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Register
+                  </button>
                                 </div>
                             </form>
                             <div class="or-sign-up">
                                 <p>Or sign up with</p>
-                                <a routerLink="/" target="_blank"><i class="fa fa-google"></i
-                ></a>
-                                <a routerLink="/" target="_blank"><i class="fa fa-twitter"></i
-                ></a>
-                                <a routerLink="/" target="_blank"><i class="fa fa-facebook"></i
-                ></a>
+                                <a routerLink="/" target="_blank"><i class="fa fa-google"></i></a>
+                                <a routerLink="/" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a routerLink="/" target="_blank"><i class="fa fa-facebook"></i></a>
                             </div>
                         </div>
                     </div>
