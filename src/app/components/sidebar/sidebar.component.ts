@@ -128,8 +128,4 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     return (this.currentActiveNav.slice(1) === path) ? 'active' : '';
   }
 
-  itemChanged(selectedItem: NavItem) {
-    console.log(selectedItem);
-  }
-
 }

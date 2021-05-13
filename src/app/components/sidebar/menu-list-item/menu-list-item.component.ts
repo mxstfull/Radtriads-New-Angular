@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { NavItem } from '../../interfaces/nav-item';
 import { Router } from '@angular/router';
 import { NavService } from '../nav-service';
@@ -25,7 +25,6 @@ export class MenuListItemComponent implements OnInit {
   @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
   @Input() item: NavItem;
   @Input() depth: number;
-  @Output() itemChanged: EventEmitter<NavItem> =   new EventEmitter();
 
   constructor(public navService: NavService,
     public router: Router, private globals: Globals) {
@@ -35,20 +34,24 @@ export class MenuListItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.item.selected = false;
     this.navService.currentUrl.subscribe((url: string) => {
       if (this.item.path && url) {
         url = decodeURIComponent(url);
-        if(this.item.route != undefined){
+        if (this.item.route != undefined) {
           this.expanded = url.indexOf(`${this.item.route}`) === 1;
-        }          
-        else{
-          if(url.indexOf(`${this.item.category}`) > 0 && url.indexOf(`${this.item.path}`) > 0){
+          this.item.selected = url == `/${this.item.route}/home` || url == `/${this.item.route}`;
+        }
+        else {
+          if (url.indexOf(`${this.item.category}`) > 0 && url.indexOf(`${this.item.path}`) > 0) {
             this.expanded = true;
+            var tempUrl = url.replace(`/${this.item.category}/`, '');
+            this.item.selected = tempUrl == this.item.path;
           }
-          else{
+          else {
             this.expanded = false;
           }
-        }          
+        }
         this.ariaExpanded = this.expanded;
         // console.log(`${this.item.route} is expanded: ${this.expanded}`);
       }
@@ -56,18 +59,17 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: NavItem) {
-    item.selected = true;
-    this.itemChanged.emit(item);
-    if(item.category == "all") {
+    //item.selected = true;
+    if (item.category == "all") {
       this.router.navigateByUrl('/total');
       return;
     }
-    if(item.category == "deleted") {
+    if (item.category == "deleted") {
       this.router.navigateByUrl('/trash');
       return;
     }
     this.globals.gl_currentPath = item.path;
-    localStorage.setItem('current_album_title', item.displayName);    
+    localStorage.setItem('current_album_title', item.displayName);
     this.router.navigate([item.category, item.path]);
     // if (!item.children || !item.children.length) {
     //   this.router.navigate([item.route]);

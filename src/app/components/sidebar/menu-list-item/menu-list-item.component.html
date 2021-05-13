@@ -1,4 +1,4 @@
-<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" [ngClass]="{'expanded': expanded}" class="menu-list-item">
+<a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" [ngClass]="{'expanded': expanded, 'selected': item?.selected && expanded}" class="menu-list-item">
     <div fxFlex fxLayout="row" fxLayoutAlign="none center" (click)="onItemSelected(item)">
         <img *ngIf="item.iconName != 'person'" mat-card-image src="{{item.iconName}}" alt="icon" width="25px" height="18px" class="mr-2 mb-1"> {{item.displayName}}
     </div>
@@ -15,3 +15,5 @@
     <app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
     </app-menu-list-item>
 </div>
+
+<!-- <a mat-list-item [ngStyle]="{'padding-left': (depth * 12) + 'px'}" [ngClass]="{'expanded': expanded, 'selected': item?.selected && expanded}" class="menu-list-item"></a> -->

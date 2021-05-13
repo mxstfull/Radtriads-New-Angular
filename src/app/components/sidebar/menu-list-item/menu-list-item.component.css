@@ -21,3 +21,8 @@
 :host /deep/ .mat-list-item-content {
     justify-content: space-between;
 }
+
+:host a.menu-list-item.selected {
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+}
