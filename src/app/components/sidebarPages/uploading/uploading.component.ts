@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
 import { Globals } from '../../../global';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-uploading',
@@ -18,9 +19,11 @@ export class UploadingComponent implements OnInit {
     'video': '.mp4, .mov, .swf, .flv',
     'code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java'
   };
+  backendURL;
   constructor(private globals: Globals) {
     this.currentPath = localStorage.getItem("current_path");
     this.currentCategory = localStorage.getItem('current_category');
+    this.backendURL = AppSettings.backendURL;
   }
 
   ngOnInit(): void {

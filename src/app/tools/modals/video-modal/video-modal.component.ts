@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CardItem } from '../../../components/interfaces/CardItem';
 import { FileviewService } from '../../../shared/fileview.service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-video-modal',
@@ -34,7 +35,7 @@ export class VideoModalComponent implements OnInit {
       }, 5000);
   }
   getVideoStream(item: CardItem) {
-    return "http://127.0.0.1:8000/files/"+this.jsEncode(item.url);
+    return AppSettings.backendURL+"files/"+this.jsEncode(item.url);
   }
   jsEncode(param: string) {
     if(param == null || param == "" ) return "";

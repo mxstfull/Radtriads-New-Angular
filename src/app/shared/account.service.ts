@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AppSettings } from './appSettings';
 
 // User interface
 // export class MyInfo {
@@ -31,29 +32,29 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   GetUserData(value: object): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/account/GetUserData', value);
+    return this.http.post(AppSettings.backendURL+'api/account/GetUserData', value);
   }
   
   // User registration
    MyInfo(value: object , val:object): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/account/MyInfo', {value,val} );
+    return this.http.post(AppSettings.backendURL+'api/account/MyInfo', {value,val} );
   }
 
   // Login
   Settings(value: object , val:object): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/account/Settings', {value,val});
+    return this.http.post<any>(AppSettings.backendURL+'api/account/Settings', {value,val});
   }
 
   // Login
   Privacy(value: object , val:object): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/account/Privacy', {value,val});
+    return this.http.post<any>(AppSettings.backendURL+'api/account/Privacy', {value,val});
   }
   //delete Account
   delete(val :object): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/account/delete', val);
+    return this.http.post<any>(AppSettings.backendURL+'api/account/delete', val);
   }
   //get disk usage.
   getDiskUsage(requestPayload: object): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/account/getDiskUsage', requestPayload);
+    return this.http.post<any>(AppSettings.backendURL+'api/account/getDiskUsage', requestPayload);
   }
 }

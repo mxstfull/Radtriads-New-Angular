@@ -10,6 +10,7 @@ import { CardItem } from '../../components/interfaces/CardItem';
 import { AudioModalComponent } from '../modals/audio-modal/audio-modal.component';
 import { VideoModalComponent } from '../modals/video-modal/video-modal.component';
 import { Router, NavigationEnd } from '@angular/router';
+import { AppSettings } from '../../shared/appSettings';
 
 @Component({
   selector: 'app-card',
@@ -93,7 +94,7 @@ export class CardComponent implements OnInit {
   viewImageThumbnail(item: CardItem) {
     let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
     else if(wellknownExtensions.includes(item.ext)) {
       return "assets/img/thumb-"+item.ext+".png";
     } else {
