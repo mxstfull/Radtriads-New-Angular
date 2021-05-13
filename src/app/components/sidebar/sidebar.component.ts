@@ -34,6 +34,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     private sidebarService: SidebarService,
     public AccountService: AccountService,
   ) {
+    
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getActiveRoutes();
@@ -112,7 +113,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     // if(this.currentActiveNav == '/trash'){
     //   this.navItems[5].selected = true;
     // }
-    console.log(this.navItems);
   }
   ngAfterViewInit() {
     this.navService.appDrawer = this.appDrawer;
