@@ -15,13 +15,15 @@ import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
 
+import { NavService } from '../../sidebar/nav-service';
+
 @Component({
   selector: 'app-music',
   templateUrl: './music.component.html',
   styleUrls: ['./music.component.css']
 })
 export class MusicComponent implements OnInit {
-  @ViewChild(SidebarComponent) child: SidebarComponent;
+  // @ViewChild(SidebarComponent) child: SidebarComponent;
 
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
@@ -30,7 +32,7 @@ export class MusicComponent implements OnInit {
   currentPath = "";
   category = 1; //This means we need music
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
-  // folderTree: NavItem;
+  folderTree: NavItem;
   private dialogRef: any;
   constructor(
     private router: ActivatedRoute,
@@ -38,6 +40,7 @@ export class MusicComponent implements OnInit {
     private router_1: Router,
     public dialog: MatDialog, 
     private globals: Globals,
+    private navService: NavService
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -65,13 +68,13 @@ export class MusicComponent implements OnInit {
     
           }
         );
-        
       }
+      
     });
   }
 
   ngOnInit(): void {
-    
+    this.navService.folderTree.subscribe(folderTree => this.folderTree = folderTree);
   }
   onDownloadFiles() {
     let requestPayload = this.selection_list.selected;
@@ -146,8 +149,9 @@ export class MusicComponent implements OnInit {
         url: requestPayload[index]['url']
       });
     }
+    
     let modalData ={
-      folderTree: this.child.folderTree,
+      folderTree: this.folderTree,
       fileList: fileArray, 
       action: m_action
     };
@@ -203,9 +207,14 @@ export class MusicComponent implements OnInit {
     return param;
   }
   viewImageThumbnail(item: CardItem) {
+    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
       return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+    else if(wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-"+item.ext+".png";
+    } else {
+      return "assets/img/thumb-other.png";
+    }
   }
   openDialog(type: string, item: CardItem) {
     
@@ -220,9 +229,16 @@ export class MusicComponent implements OnInit {
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: item
         },
         width: '740px',
       });

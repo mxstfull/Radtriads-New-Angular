@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output, Input, ViewEncapsulation } from '@angular/core';
 import './pixie/scripts.min.js';
 
 /**
@@ -52,17 +52,20 @@ const Ru = (function (t: any) {
 export class PixieImageEditorComponent implements AfterViewInit {
   pixie: any;
   @Output() save = new EventEmitter<any>();
-
   getData() {
-    debugger;
     return this.pixie.getDataUrl();
+    
   }
+  constructor() {
+    
+  }
+
 
   ngAfterViewInit() {
     this.pixie = new Pixie({
       // ENTER CONFIGURATION HERE
       // ENTER CONFIGURATION HERE
-      image: '/assets/img/photo-image.png',
+      image: localStorage.getItem('currentItemForEditor'),
       baseUrl: '/assets/img/pixie_editor',
       maxHeight: '800',
       ui: {
@@ -210,6 +213,7 @@ export class PixieImageEditorComponent implements AfterViewInit {
         });
       }
     });
+    
   }
   
   saveTrigger() {

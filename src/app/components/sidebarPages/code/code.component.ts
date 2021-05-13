@@ -14,6 +14,7 @@ import { MoveModalComponent } from '../../../tools/modals/move-modal/move-modal.
 import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
+import { NavService } from '../../sidebar/nav-service';
 
 @Component({
   selector: 'app-code',
@@ -21,7 +22,7 @@ import { Globals } from '../../../global';
   styleUrls: ['./code.component.css']
 })
 export class CodeComponent implements OnInit {
-  @ViewChild(SidebarComponent) child: SidebarComponent;
+  // @ViewChild(SidebarComponent) child: SidebarComponent;
 
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
@@ -30,7 +31,7 @@ export class CodeComponent implements OnInit {
   currentPath = "";
   category = 3; // this means we need codes.
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
-  // folderTree: NavItem;
+  folderTree: NavItem;
   private dialogRef: any;
   constructor(
     private router: ActivatedRoute,
@@ -38,6 +39,8 @@ export class CodeComponent implements OnInit {
     private router_1: Router,
     public dialog: MatDialog,
     private globals: Globals,
+    private navService: NavService
+
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -70,7 +73,7 @@ export class CodeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.navService.folderTree.subscribe(folderTree => this.folderTree = folderTree);
   }
   onDownloadFiles() {
     let requestPayload = this.selection_list.selected;
@@ -147,7 +150,7 @@ export class CodeComponent implements OnInit {
       });
     }
     let modalData = {
-      folderTree: this.child.folderTree,
+      folderTree: this.folderTree,
       fileList: fileArray,
       action: m_action
     };
@@ -225,9 +228,16 @@ export class CodeComponent implements OnInit {
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: item
         },
         width: '740px',
       });
