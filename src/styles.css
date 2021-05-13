@@ -2996,7 +2996,7 @@ input:checked+.slider:before {
 }
 
 .photo-box {
-    padding: 1.5625em;
+    text-align: center;
     background: #fff;
     border-radius: 0.375em;
     box-shadow: -8px 12px 18px rgba(25, 42, 70, 0.13);
@@ -3675,9 +3675,6 @@ h5 {
         width: 70%;
         padding: 1em;
     }
-    .photo-box {
-        padding: 0.7em;
-    }
     .photo-details-box-right {
         width: 30%;
     }
@@ -3989,10 +3986,6 @@ h5 {
         border: none;
         float: none;
         padding: 0;
-    }
-    .photo-box {
-        padding: 0;
-        border-radius: 0;
     }
     .photo-details-bottom table tr th,
     .photo-details-bottom table tr td {
