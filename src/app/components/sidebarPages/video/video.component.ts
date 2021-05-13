@@ -14,6 +14,7 @@ import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
 import { NavService } from '../../sidebar/nav-service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-video',
@@ -207,7 +208,7 @@ export class VideoComponent implements OnInit {
   }
   viewImageThumbnail(item: CardItem) {
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
     else return "assets/img/thumb-"+item.ext+".png";
   }
   openDialog(type: string, item: CardItem) {

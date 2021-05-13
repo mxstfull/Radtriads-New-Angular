@@ -59,14 +59,14 @@ export class PixieImageEditorComponent implements AfterViewInit {
   constructor() {
     
   }
-
-
   ngAfterViewInit() {
+    if (this.pixie) {
+      this.pixie.resetEditor();
+    }
     this.pixie = new Pixie({
       // ENTER CONFIGURATION HERE
       // ENTER CONFIGURATION HERE
-      image: localStorage.getItem('currentItemForEditor'),
-      baseUrl: '/assets/img/pixie_editor',
+      baseUrl: console.log(localStorage.getItem('currentItemForEditor')),
       maxHeight: '800',
       ui: {
         visible: !0,

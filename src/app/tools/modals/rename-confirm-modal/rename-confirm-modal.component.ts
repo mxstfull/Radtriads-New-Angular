@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CardItem } from '../../../components/interfaces/CardItem';
 import { FileviewService } from '../../../shared/fileview.service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-rename-confirm-modal',
@@ -30,7 +31,7 @@ export class RenameConfirmModalComponent {
     }
     else if (data.type == "file") {
       if (data.data.is_picture == 1)
-        return "http://127.0.0.1:8000/files/" + this.jsEncode(data.data.thumb_url);
+        return AppSettings.backendURL+"files/" + this.jsEncode(data.data.thumb_url);
       else return "assets/img/thumb-" + data.data.ext + ".png";
     }
   }

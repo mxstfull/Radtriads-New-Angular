@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { DeleteModalComponent } from '../../tools/modals/delete-modal/delete-modal.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
+import { AppSettings } from '../../shared/appSettings';
 
 @Component({
   selector: 'app-photo-detail',
@@ -48,7 +49,7 @@ export class PhotoDetailComponent implements OnInit {
   }
   viewImageDetail(item: CardItem) {
     if(item == null) return;
-    return "http://127.0.0.1:8000/files/"+this.jsEncode(item.url);
+    return AppSettings.backendURL+"files/"+this.jsEncode(item.url);
   }
   jsEncode(param: string){
     if(param == null || param == "" ) return "";

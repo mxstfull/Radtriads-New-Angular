@@ -3,7 +3,7 @@ import { PixieImageEditorComponent } from '../pixie-image-editor/pixie-image-edi
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FileviewService } from '../../shared/fileview.service';
 import { CardItem } from '../interfaces/CardItem';
-
+import { AppSettings } from '../../shared/appSettings';
 @Component({
   selector: 'app-image-editor',
   templateUrl: './image-editor-new.component.html',
@@ -32,7 +32,7 @@ export class ImageEditorNewComponent implements OnInit {
             
           }
           else {
-            this.source = "http://127.0.0.1:8000/files/"+this.jsEncode(result.url);
+            this.source = AppSettings.backendURL+"files/"+this.jsEncode(result.url);
           }
         },error => {
           // this.errors = error.error;
@@ -58,7 +58,6 @@ export class ImageEditorNewComponent implements OnInit {
   }
 
   onSave(data): void {
-    
     console.log(data);
   }
 }

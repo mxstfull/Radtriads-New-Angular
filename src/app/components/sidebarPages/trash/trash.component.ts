@@ -13,6 +13,7 @@ import { DeleteModalComponent } from '../../../tools/modals/delete-modal/delete-
 import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-trash',
@@ -111,7 +112,7 @@ export class TrashComponent implements OnInit {
   viewImageThumbnail(item: CardItem) {
     let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
     else if(wellknownExtensions.includes(item.ext)) {
       return "assets/img/thumb-"+item.ext+".png";
     } else {
