@@ -1,55 +1,60 @@
 .example-small-box,
 .example-large-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 16px;
-  padding: 16px;
-  border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
 }
 
 .example-small-box {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
 
 .example-large-box {
-  height: 300px;
-  width: 300px;
+    height: 300px;
+    width: 300px;
 }
+
 
 /* /////////////////// */
-::ng-deep .mat-tab-header {
-  margin: 0 0 2.1875em;
+
+.mat-tab-header {
+    margin: 0 0 2.1875em;
 }
 
-::ng-deep .mat-tab-body-wrapper {
-  box-shadow: 0 0 0.9375em rgb(25 42 70 / 10%);
+.mat-tab-body-wrapper {
+    box-shadow: 0 0 0.9375em rgb(25 42 70 / 10%);
 }
 
-::ng-deep .mat-tab-body-content {
-  padding: 3.125em 5em;
+.mat-tab-body-content {
+    padding: 3.125em 5em;
 }
 
 h2 {
-  float: none;
+    float: none;
 }
 
 .upload-img-wrapper {
-  max-width: none !important;
+    max-width: none !important;
 }
 
 .mat-form-field {
-  width: 100%;
+    width: 100%;
 }
 
 .form-container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
-::ng-deep .mat-tab-label{
+
+::ng-deep .mat-tab-label {
     font-family: 'Archivo', sans-serif;
 }
-:host ::ng-deep .account-tab .tab-content h2 {
-  margin-bottom: 1.25em;
+
+.mat-card {
+    width: calc(100% - 6px);
+    margin: auto;
 }
