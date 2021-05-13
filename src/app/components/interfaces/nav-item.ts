@@ -5,5 +5,6 @@ export interface NavItem {
     path: string;
     category: string;
     children?: NavItem[];
-    selected?: boolean
+    selected?: boolean;
+    route?: string;
 }
