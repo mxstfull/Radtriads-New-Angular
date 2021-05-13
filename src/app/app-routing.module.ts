@@ -32,14 +32,14 @@ const routes: Routes = [
   },
   {
     path: 'image-editor',
-    component: ImageEditorComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'image-editor-new',
     component: ImageEditorNewComponent,
     canActivate: [AuthGuard],
   },
+  // {
+  //   path: 'image-editor-new',
+  //   component: ImageEditorNewComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'photo-details',
     component: PhotoDetailComponent,
