@@ -1,10 +1,10 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { NavItem } from '../../interfaces/nav-item';
 import { Router } from '@angular/router';
-import { NavService } from '../nav-service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Globals } from '../../../global';
 import { tick } from '@angular/core/testing';
+import { NavService } from '../nav-service';
 @Component({
   selector: 'app-menu-list-item',
   templateUrl: './menu-list-item.component.html',

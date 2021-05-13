@@ -9,6 +9,7 @@ import { Globals } from '../../../global';
   styleUrls: ['./uploading.component.css']
 })
 export class UploadingComponent implements OnInit {
+
   currentPath = "home";
   public currentCategory;
   public allowedExtensions = {
@@ -41,7 +42,7 @@ export class UploadingComponent implements OnInit {
     }
     
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
-
+      
       this.flow.flowJs.files.forEach(item => {
         if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension())){          
           item.cancel();

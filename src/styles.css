@@ -3521,15 +3521,10 @@ h5 {
         transition: 0.5s;
     }
     .closebtn {
-        display: block;
-        position: absolute;
+        display: block!important;
+        position: absolute!important;
         right: 0;
-        top: 0;
-        background: none;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-        line-height: 35px;
+        top: 16px;
         color: #fff !important;
         font-size: 1.875em;
     }
