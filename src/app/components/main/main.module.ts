@@ -36,6 +36,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { CdkTableModule } from '@angular/cdk/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CardComponent } from '../../tools/card/card.component';
 @NgModule({
@@ -77,7 +78,8 @@ import { CardComponent } from '../../tools/card/card.component';
         MatProgressBarModule,
         MatTreeModule,
         NgxFlowModule,
-        MainRoutingModule
+        MainRoutingModule,
+        FlexLayoutModule
     ]
 })
 export class MainModule { }

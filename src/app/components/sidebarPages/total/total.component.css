@@ -1,87 +1,94 @@
 .example-small-box,
 .example-large-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 16px;
-  padding: 16px;
-  border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
 }
 
 .example-small-box {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
 
 .example-large-box {
-  height: 300px;
-  width: 300px;
+    height: 300px;
+    width: 300px;
 }
+
 
 /* /////////////////// */
 
-
 ::ng-deep .mat-tab-body-content {
-  padding-top: 0.6em;
+    padding-top: 0.6em;
 }
 
 h2 {
-  float: none;
+    float: none;
 }
 
 .upload-img-wrapper {
-  max-width: none !important;
+    max-width: none !important;
 }
 
 .mat-form-field {
-  width: 100%;
+    width: 100%;
 }
 
 .form-container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
-::ng-deep .mat-tab-label{
+
+::ng-deep .mat-tab-label {
     font-family: 'Archivo', sans-serif;
 }
+
 :host ::ng-deep .mat-tab-label {
-  font-size: 30px;
+    font-size: 30px;
 }
+
 :host ::ng-deep .mat-tab-label {
-  min-width: 0px !important;
+    min-width: 0px !important;
 }
 
 :host ::ng-deep .list-grid {
-  margin: 0;
+    margin: 0;
 }
-:host ::ng-deep .list-grid a{
-  cursor: pointer;
+
+:host ::ng-deep .list-grid a {
+    cursor: pointer;
 }
-:host ::ng-deep .mat-tab-label, .mat-tab-link {
-  color: black !important;
+
+:host ::ng-deep .mat-tab-label,
+.mat-tab-link {
+    color: black !important;
 }
+
+
 /* :host ::ng-deep .storage-box {
   float: none !important;
 } */
+
 ::ng-deep .mat-grid-tile .mat-figure {
-  margin: 0 0px 0.9375em !important;
-  padding: 0 0.4375em !important;
+    margin: 0 0px 0.9375em !important;
+    padding: 0 0.4375em !important;
 }
 
 .media-file {
-  width: 100%;
+    width: 100%;
 }
 
 .file-name-img img {
-  width: 31px;
+    width: 31px;
 }
 
 a {
-  cursor: pointer;
+    cursor: pointer;
 }
- ::ng-deep .tab-content {
-  margin-bottom: 400px !important;
-}
+
 .storage-box {
-  width: 100%;
+    width: 100%;
 }
