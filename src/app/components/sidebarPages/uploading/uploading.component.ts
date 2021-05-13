@@ -3,13 +3,13 @@ import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
 import { Globals } from '../../../global';
 
-const URL = 'http://127.0.0.1:8000/api/fileupload/upload';
 @Component({
   selector: 'app-uploading',
   templateUrl: './uploading.component.html',
   styleUrls: ['./uploading.component.css']
 })
 export class UploadingComponent implements OnInit {
+
   currentPath = "home";
   public currentCategory;
   public allowedExtensions = {
@@ -24,7 +24,6 @@ export class UploadingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
   }
 
   @ViewChild('flowAdvanced')
@@ -43,10 +42,11 @@ export class UploadingComponent implements OnInit {
     }
     
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
-
+      
       this.flow.flowJs.files.forEach(item => {
-        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension()))
-         item.cancel();
+        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension())){          
+          item.cancel();
+        }         
       });
       if (this.autoupload && event.type === 'filesSubmitted') {
         this.uploadFinished = false;

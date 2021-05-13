@@ -1,57 +1,59 @@
 <div id="dashobard">
-  <div class="photo-heading">
-    <a onclick="javascript:history.back();" style="cursor: pointer;"><i class="fa fa-angle-left"></i> Back</a>
-  </div>
-  <div class="photo-details-box">
-    <div class="photo-details-box-left">
-      <div class="photo-box">
-        <img src="{{viewImageDetail(currentItem)}}" alt="" />
-        <div class="photo-box-icons">
-          <a (click)="onDeleteItem()"><i class="fa fa-trash" aria-hidden="true"></i></a>
-          <a (click)="onDownloadItem()"><i class="fa fa-download" aria-hidden="true"></i></a>
-          <a (click)="showEditWindow()"><i class="fa fa-sliders" aria-hidden="true"></i></a>
-          <a (click)="openDialog('share')"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+    <div class="photo-heading">
+        <a onclick="javascript:history.back();" style="cursor: pointer;"><i class="fa fa-angle-left"></i> Back</a>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+        <div fxLayoutAlign="center" fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="60%" class="card p-4 m-5">
+            <div class="photo-box">
+                <img src="{{viewImageDetail(currentItem)}}" alt="" />
+                <div class="photo-box-icons">
+                  <a (click)="onDeleteItem()"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a (click)="onDownloadItem()"><i class="fa fa-download" aria-hidden="true"></i></a>
+                  <a (click)="showEditWindow()"><i class="fa fa-sliders" aria-hidden="true"></i></a>
+                  <a (click)="openDialog('share')"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
+        <div fxLayoutAlign="center" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="40%" class="info">
+            <div fxLayout="column" fxLayoutGap="10px" class="photo-information">
+                <div class="photo-details-top p-5" *ngIf="currentItem">
+                    <h2>{{currentItem.title}}</h2>
+                    <p>{{getCreatedDateAsString()}}</p>
+                </div>
+                <div class="photo-details-bottom">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>INFO</th>
+                                <th><a routerLink="/">View All</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Owner</td>
+                                <td>Andrew Smith</td>
+                            </tr>
+                            <tr>
+                                <td>Modfied</td>
+                                <td>5 years ago</td>
+                            </tr>
+                            <tr>
+                                <td>Last Seen</td>
+                                <td>1 day ago</td>
+                            </tr>
+                            <tr>
+                                <td>Privacy</td>
+                                <td>{{(currentItem && currentItem.is_protected == 0)? "public" : "private"}}</td>
+                            </tr>
+                            <tr>
+                                <td>Size</td>
+                                <td>{{currentItem && currentItem.diskspace/1000.0}}KB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
-    <div class="photo-details-box-right">
-      <div class="photo-details-top" *ngIf="currentItem">
-        <h2>{{currentItem.title}}</h2>
-        <p>{{getCreatedDateAsString()}}</p>
-      </div>
-      <div class="photo-details-bottom">
-        <table>
-          <thead>
-            <tr>
-              <th>INFO</th>
-              <th><a routerLink="/">View All</a></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Owner</td>
-              <td>Andrew Smith</td>
-            </tr>
-            <tr>
-              <td>Modfied</td>
-              <td>5 years ago</td>
-            </tr>
-            <tr>
-              <td>Last Seen</td>
-              <td>1 day ago</td>
-            </tr>
-            <tr>
-              <td>Privacy</td>
-              <td>{{(currentItem && currentItem.is_protected == 0)? "public" : "private"}}</td>
-            </tr>
-            <tr>
-              <td>Size</td>
-              <td>{{currentItem && currentItem.diskspace/1000.0}}KB</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="clear"></div>
-  </div>
 </div>

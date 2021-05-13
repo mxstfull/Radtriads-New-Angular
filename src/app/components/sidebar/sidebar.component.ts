@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, Output, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -19,6 +19,14 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   private ngUnsubscribe = new Subject();
   public currentActiveNav: string = "";
   @ViewChild('appDrawer') appDrawer: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (window.innerWidth > 992)
+      this.navService.openNav();
+    else {
+      this.navService.closeNav();
+    }
+  }
   navItems: NavItem[] = [];
   folderTree: NavItem;
   imgNavItems: string[] = [];
@@ -34,7 +42,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     private sidebarService: SidebarService,
     public AccountService: AccountService,
   ) {
-    
+
     this.router.events.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getActiveRoutes();
