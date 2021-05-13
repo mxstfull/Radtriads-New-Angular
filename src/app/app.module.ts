@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -83,7 +82,6 @@ export class MaterialModule { }
     AppComponent,
     SigninComponent,
     SignupComponent,
-    UserProfileComponent,
     LandingComponent,
     PublicMediaBoardComponent,
     PhotoDetailComponent,

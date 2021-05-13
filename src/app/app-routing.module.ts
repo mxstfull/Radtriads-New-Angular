@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { PublicMediaBoardComponent } from './components/public-media-board/public-media-board.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'register', component: SignupComponent },
-  // { path: 'profile', component: UserProfileComponent },
   { path: 'landing', component: LandingComponent },
   {
     path: 'public-media-board',
