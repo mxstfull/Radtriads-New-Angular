@@ -90,14 +90,21 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   setSidebarNavItems(result: NavItem[]) {
 
     this.navItems = result;
+    this.navItems.push({
+      displayName: 'trash',
+      iconName: '',
+      path: '',
+      category: 'deleted',
+      children: null
+    });
     let imgNavItems = ["../../../assets/img/Folder.png",
       "../../../assets/img/photo.png",
       "../../../assets/img/music.png",
       "../../../assets/img/video.png",
       "../../../assets/img/code.png",
       "../../../assets/img/trash.png"];
-      let navRoutes = ["total", 'photos', "music", "video", "code"];
-    for (let i = 0; i < 5; i++) {
+    let navRoutes = ["total", 'photos', "music", "video", "code", "trash"];
+    for (let i = 0; i <= 5; i++) {
       this.navItems[i]['displayName'] = this.navItems[i]['displayName'] == '' ? this.navItems[i]['category'] : this.navItems[i]['displayName'];
       this.navItems[i]['path'] = 'home';
       this.navItems[i]['route'] = navRoutes[i];
@@ -105,16 +112,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       if (i == 1) {
         this.folderTree = Object.assign({}, this.navItems[i]);
       }
-      if (i == 5) {
-        this.navItems[i]['children'] = null;
-        this.navItems[i]['category'] = 'deleted';
-      }
     }
-    //if(this.currentActiveNav.indexOf(substring) !== -1)
-    // if(this.currentActiveNav == '/trash'){
-    //   this.navItems[5].selected = true;
-    // }
-    console.log(this.navItems);
   }
   ngAfterViewInit() {
     this.navService.appDrawer = this.appDrawer;
