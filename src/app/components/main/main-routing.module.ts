@@ -12,13 +12,15 @@ import { VideoComponent } from '../sidebarPages/video/video.component';
 import { UpgradeAccountComponent } from '../sidebarPages/upgrade-account/upgrade-account.component';
 import { TrashComponent } from '../sidebarPages/trash/trash.component';
 import { MainComponent } from './main.component';
+import { AuthGuard } from 'src/app/shared/auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: MainComponent,
+        canActivate: [AuthGuard],
         children: [
-            { path: 'total', component: TotalComponent },
+            { path: 'total', component: TotalComponent,  },
             { path: 'account', component: AccountComponent },
             { path: 'code/:path', component: CodeComponent },
             { path: 'folder-creation', component: FolderCreationComponent },

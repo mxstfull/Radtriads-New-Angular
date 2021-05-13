@@ -9,22 +9,46 @@ import { PublicMediaBoardComponent } from './components/public-media-board/publi
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageEditorNewComponent } from './components/image-editor-new/image-editor-new.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/landing', pathMatch: 'full' },
-  { path: 'login', component: SigninComponent },
+  {
+    path: '',
+    redirectTo: '/landing',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: SigninComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'register', component: SignupComponent },
   // { path: 'profile', component: UserProfileComponent },
   { path: 'landing', component: LandingComponent },
-  { path: 'public-media-board', component: PublicMediaBoardComponent },
-  { path: 'image-editor', component: ImageEditorComponent },
-  { path: 'image-editor-new', component: ImageEditorNewComponent },
-  { path: 'photo-details', component: PhotoDetailComponent }
+  {
+    path: 'public-media-board',
+    component: PublicMediaBoardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'image-editor',
+    component: ImageEditorComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'image-editor-new',
+    component: ImageEditorNewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'photo-details',
+    component: PhotoDetailComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
