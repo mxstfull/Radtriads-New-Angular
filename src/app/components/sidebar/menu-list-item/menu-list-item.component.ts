@@ -38,11 +38,18 @@ export class MenuListItemComponent implements OnInit {
     
     this.navService.currentUrl.subscribe((url: string) => {
       if (this.item.path && url) {
-        if(url.indexOf(`${this.item.category}/${this.item.path}`) >= 0) {
-          // debugger;
-        }
-        this.expanded = url.indexOf(`${this.item.category}/${this.item.path}`) >= 0;
-        // debugger;
+        url = decodeURIComponent(url);
+        if(this.item.route != undefined){
+          this.expanded = url.indexOf(`${this.item.route}`) === 1;
+        }          
+        else{
+          if(url.indexOf(`${this.item.category}`) > 0 && url.indexOf(`${this.item.path}`) > 0){
+            this.expanded = true;
+          }
+          else{
+            this.expanded = false;
+          }
+        }          
         this.ariaExpanded = this.expanded;
         // console.log(`${this.item.route} is expanded: ${this.expanded}`);
       }

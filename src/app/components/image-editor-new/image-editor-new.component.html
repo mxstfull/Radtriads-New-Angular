@@ -4,8 +4,8 @@
   </div>
   <div class="image-editor-head">
     <h6>Hero.jpg</h6>
-    <button type="button">Save</button>
+    <button type="button" (click)="triggerSave()">Save</button>
     <div class="clear"></div>
   </div>
-  <pixie-image-editor></pixie-image-editor>
+  <pixie-image-editor #imageEditor (save)="onSave($event)"></pixie-image-editor>
 </div>
