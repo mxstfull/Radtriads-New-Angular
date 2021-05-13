@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import './pixie/scripts.min.js';
 
 /**
@@ -50,8 +50,16 @@ const Ru = (function (t: any) {
   encapsulation: ViewEncapsulation.None
 })
 export class PixieImageEditorComponent implements AfterViewInit {
+  pixie: any;
+  @Output() save = new EventEmitter<any>();
+
+  getData() {
+    debugger;
+    return this.pixie.getDataUrl();
+  }
+
   ngAfterViewInit() {
-    var pixie = new Pixie({
+    this.pixie = new Pixie({
       // ENTER CONFIGURATION HERE
       // ENTER CONFIGURATION HERE
       image: '/assets/img/photo-image.png',
@@ -74,20 +82,11 @@ export class PixieImageEditorComponent implements AfterViewInit {
               action: 'toggleObjects',
             },
             {
-              type: 'button',
-              icon: 'close',
-              action: 'closeEditor',
-              marginLeft: '25px',
-              condition: {
-                'ui.mode': 'overlay',
-              },
-            },
-            {
-              type: 'button',
-              icon: 'file-download',
-              action: 'exportImage',
-              compactModeOnly: !0,
-            },
+              type: "button",
+              icon: "file-download",
+              text: "Save",
+              action: "exportImage"
+            }
           ],
           rightItems: [
             {
@@ -204,13 +203,18 @@ export class PixieImageEditorComponent implements AfterViewInit {
           allowUserZoom: true,
         },
       },
-      onFileOpen: function (file, e, t) {
-        console.log(file.name);
-        pixie.setConfig('tools.export.defaultName', file.name);
-      },
-      onLoad: function (e, t) {
-        window.postMessage('pixieLoaded', '*');
-      },
+      onSave: (data, name) => {
+        this.save.emit({
+          data: data,
+          name: name
+        });
+      }
     });
   }
+  
+  saveTrigger() {
+    var ele = (<HTMLElement>document.querySelector("image-editor toolbar .left toolbar-item:last-child button"));
+    ele.click();
+  }
+  
 }

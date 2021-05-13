@@ -3,17 +3,36 @@
     max-height: 100px;
 
     image-editor{
+        display: flex;
+        flex-direction: row-reverse;
+        height: calc(100vh - 124px);
+
         toolbar {
             background: #fff !important;
             color: #475f7b;
+            position: absolute;
+            width: 100%;
+            .left {
+                toolbar-item:last-child {
+                    display: none;
+                }
+            }
+        }
+        .canvas-wrapper {
+            width: calc(100% - 475px);
+            margin-top: 50px;
+            vertical-align: middle;
+            min-height: 100%;
         }
         editor-controls {
-            height: 624px;
+            width: 475px;
+            height: 100%;
+            margin-top: 50px;
             navigation-bar > .scroll-container {
                 display: flex;
-                width: 333px;
-                height: 624px;
+                width: 435px;
                 flex-flow: wrap;
+                height: calc(100% - 67px);
                 button {
                     display: block;
                     border-radius: 4px;
@@ -24,7 +43,7 @@
                     color: #8dabc4;
                     font-size: 0.8125em;
                     font-family: "Heebo", sans-serif;
-                    min-width: 140px;
+                    min-width: 200px;
                     height: 103px;
                     font-weight: 100;
                     color: #0093ee;
@@ -40,6 +59,40 @@
                             color: #e74a3b;
                         }
                     }
+                }
+            }
+            .scroll-container-x {
+                overflow-y: auto;
+                overflow-x: hidden;
+                .tool-panel-content {
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    &>div {
+                        margin-bottom: 10px;
+                    }
+                    .aspect-ratios {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        &>div {
+                            margin-bottom: 10px;
+                        }
+                    }
+                    .round-action-button mat-icon {
+                        display: flex;
+                    }
+                    &>:last-child {
+                        margin-right: inherit;
+                    }
+                    &>:first-child {
+                        margin-left: inherit;
+                    }
+                    
                 }
             }
         }
