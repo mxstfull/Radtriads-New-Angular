@@ -46,7 +46,6 @@ import { ShareModalComponent } from './tools/modals/share-modal/share-modal.comp
 import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.component';
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
-import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 import { Globals } from './global';
 import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie-image-editor.component';
 import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
@@ -98,7 +97,6 @@ export class MaterialModule { }
     DeleteModalComponent,
     RenameConfirmModalComponent,
     ImageEditorNewComponent,
-    ToastUiImageEditorComponent,
     PixieImageEditorComponent,
     MoveModalComponent,
     AudioModalComponent,
@@ -123,7 +121,6 @@ export class MaterialModule { }
   exports: [
     SidebarComponent,
     ModalsComponent,
-    ToastUiImageEditorComponent,
     PixieImageEditorComponent
   ],
   providers: [
