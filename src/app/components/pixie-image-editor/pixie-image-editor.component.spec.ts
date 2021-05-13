@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { PixieImageEditorComponent } from "./pixie-image-editor.component";
 
-describe("ToastUiImageEditorComponent", () => {
+describe("PixieImageEditorComponent", () => {
   let component: PixieImageEditorComponent;
   let fixture: ComponentFixture<PixieImageEditorComponent>;
 

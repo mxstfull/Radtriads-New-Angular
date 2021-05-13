@@ -26,3 +26,10 @@
     background-color: rgb(255, 255, 255);
     border-radius: 3px;
 }
+
+img {
+    width: inherit;
+    height: inherit;
+    margin-top: 0px!important;
+    margin-left: 0px!important;
+}

@@ -1,150 +1,164 @@
 <div class="dashboard-content">
     <app-topbar></app-topbar>
     <div class="dashboard-bottom">
-        <mat-tab-group dynamicHeight>
+        <mat-tab-group dynamicHeight [color]="'primary'">
             <mat-tab label="MY INFO">
-                <h2>My Info</h2>
-                <form [formGroup]="MyInfoForm" (ngSubmit)="onSubmit_myinfo()">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2 order-lg-1">
-                            <div class="acc-input-box">
-                                <label>Username</label>
-                                <input type="text" formControlName="Username" placeholder="Angel" readonly='true' class="form-control" />
-                            </div>
-                            <div class="acc-input-box">
-                                <label>Email</label>
-                                <input type="email" formControlName="email" placeholder="sp6166400@gmail.com" readonly='true' class="form-control" />
-                            </div>
-                            <h6>Personal Info</h6>
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="acc-input-box">
-                                        <label>Old Password</label>
-                                        <input type="password" formControlName="old_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.old_password }" />
-                                        <div *ngIf="submitted && this.errors.old_password" class="invalid-feedback">
-                                            <div *ngIf="this.errors.old_password">{{this.errors.old_password}}</div>
+                <mat-card class="px-5 py-5 mt-5">
+                    <h2 class="pb-4">My Info</h2>
+                    <form [formGroup]="MyInfoForm" (ngSubmit)="onSubmit_myinfo()">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-2 order-lg-1">
+                                <div class="acc-input-box">
+                                    <label>Username</label>
+                                    <input type="text" formControlName="Username" placeholder="Angel" readonly='true' class="form-control" />
+                                </div>
+                                <div class="acc-input-box">
+                                    <label>Email</label>
+                                    <input type="email" formControlName="email" placeholder="sp6166400@gmail.com" readonly='true' class="form-control" />
+                                </div>
+                                <h5 class="pb-4 pt-3">Personal Info</h5>
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="acc-input-box">
+                                            <label>Old Password</label>
+                                            <input type="password" formControlName="old_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.old_password }" />
+                                            <div *ngIf="submitted && this.errors.old_password" class="invalid-feedback">
+                                                <div *ngIf="this.errors.old_password">{{this.errors.old_password}}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="acc-input-box">
-                                        <label>New Password</label>
-                                        <input type="password" formControlName="new_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password }" />
-                                        <div *ngIf="submitted && this.errors.new_password" class="invalid-feedback">
-                                            <div *ngIf="this.errors.new_password">{{this.errors.new_password}}</div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="acc-input-box">
+                                            <label>New Password</label>
+                                            <input type="password" formControlName="new_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password }" />
+                                            <div *ngIf="submitted && this.errors.new_password" class="invalid-feedback">
+                                                <div *ngIf="this.errors.new_password">{{this.errors.new_password}}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                    <div class="acc-input-box">
-                                        <label>Repeat Password</label>
-                                        <input type="password" formControlName="new_password_confirmation" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password_confirmation }" />
-                                        <div *ngIf="submitted && this.errors.new_password_confirmation" class="invalid-feedback">
-                                            <div *ngIf="this.errors.new_password_confirmation">{{this.errors.new_password_confirmation}}</div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="acc-input-box">
+                                            <label>Repeat Password</label>
+                                            <input type="password" formControlName="new_password_confirmation" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password_confirmation }" />
+                                            <div *ngIf="submitted && this.errors.new_password_confirmation" class="invalid-feedback">
+                                                <div *ngIf="this.errors.new_password_confirmation">
+                                                    {{this.errors.new_password_confirmation}}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-1 order-lg-2">
-                            <div class="upload-img-wrapper">
-                                <button class="upload-img"><span>+</span>You can upload your image up to 300x300px. PNG, JPG
-                    only</button>
-                                <input type="file" name="myImg" (change)="onFileSelected($event)" required accept=".png">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-1 order-lg-2">
+                                <div class="upload-img-wrapper">
+                                    <button class="upload-img"><span>+</span>You can upload your image up to 300x300px.
+                                        PNG, JPG
+                                        only</button>
+                                    <input type="file" name="myImg" (change)="onFileSelected($event)" required accept=".png">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="sky-blue-btn">Save Settings</button>
-                    <div class="delete-acc"><a (click)="signOut()"><i class="fa fa-trash" aria-hidden="true" ></i> Delete
-                Account</a>
-                    </div>
-                </form>
+                        <button type="submit" class="sky-blue-btn">Save Settings</button>
+                        <div class="delete-acc"><a (click)="signOut()"><i class="fa fa-trash" aria-hidden="true"></i>
+                                Delete
+                                Account</a>
+                        </div>
+                    </form>
+                </mat-card>
             </mat-tab>
-            <mat-tab label="Plan & Usage">
-                <div class="plan-top">
-                    <div class="plan-top-left">
-                        <h2>Silver Plan</h2>
-                        <p>You are currently on a FREE TRIAL until 03/18/2021.<br /> $3.75 per month</p>
-                    </div>
-                    <div class="plan-top-right">
-                        <a class="sky-blue-btn" routerLink="/upgrade-account">Update Plan</a>
-                        <div class="cancel-btn"><a routerLink="/">Cancel Plan</a></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="plan-bottom">
-                    <p>Disk Space Usage<br /> You have uploaded 3 files in your account.</p>
-                    <div class="storage-box">
-                        <div class="storage-tab" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
-                            <div class="storage-line photo-line" [ngStyle]="{'width': (photoRate * 100 / allRate) + '%'}"></div>
-                            <div class="storage-line music-line" [ngStyle]="{'width': (musicRate * 100 / allRate) + '%'}"></div>
-                            <div class="storage-line video-line" [ngStyle]="{'width': (videoRate * 100 / allRate) + '%'}"></div>
-                            <div class="storage-line doc-line" [ngStyle]="{'width': (codeRate * 100 / allRate) + '%'}"></div>
-                            <div class="storage-line trash-line" [ngStyle]="{'width': (trashRate * 100 / allRate) + '%'}"></div>
-                            <div class="clear"></div>
+            <mat-tab label="PLAN & USAGE">
+                <mat-card class="p-0 mt-5">
+                    <div class="plan-top">
+                        <div class="plan-top-left">
+                            <h2>Silver Plan</h2>
+                            <p>You are currently on a FREE TRIAL until 03/18/2021.<br /> $3.75 per month</p>
                         </div>
-                        <div class="remain-space" [ngStyle]="{'display': ((allRate==0)?'none':'')}">{{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
-                        <ul>
-                            <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">{{convertToBigUnit(photoRate)}}</span></li>
-                            <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">{{convertToBigUnit(musicRate)}}</span></li>
-                            <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">{{convertToBigUnit(videoRate)}}</span></li>
-                            <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">{{convertToBigUnit(codeRate)}}</span></li>
-                            <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">{{convertToBigUnit(trashRate)}}</span></li>
-                        </ul>
-
+                        <div class="plan-top-right">
+                            <a class="sky-blue-btn" routerLink="/upgrade-account">Update Plan</a>
+                            <div class="cancel-btn"><a routerLink="/">Cancel Plan</a></div>
+                        </div>
                         <div class="clear"></div>
                     </div>
-                </div>
+                    <div class="plan-bottom">
+                        <p>Disk Space Usage<br /> You have uploaded 3 files in your account.</p>
+                        <div class="storage-box">
+                            <div class="storage-tab" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
+                                <div class="storage-line photo-line" [ngStyle]="{'width': (photoRate * 100 / allRate) + '%'}"></div>
+                                <div class="storage-line music-line" [ngStyle]="{'width': (musicRate * 100 / allRate) + '%'}"></div>
+                                <div class="storage-line video-line" [ngStyle]="{'width': (videoRate * 100 / allRate) + '%'}"></div>
+                                <div class="storage-line doc-line" [ngStyle]="{'width': (codeRate * 100 / allRate) + '%'}">
+                                </div>
+                                <div class="storage-line trash-line" [ngStyle]="{'width': (trashRate * 100 / allRate) + '%'}"></div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="remain-space" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
+                                {{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
+                            <ul>
+                                <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">{{convertToBigUnit(photoRate)}}</span></li>
+                                <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">{{convertToBigUnit(musicRate)}}</span></li>
+                                <li class="video-dot"><span class="sto-name">Video</span><span class="sto-space">{{convertToBigUnit(videoRate)}}</span></li>
+                                <li class="doc-dot"><span class="sto-name">Documents</span><span class="sto-space">{{convertToBigUnit(codeRate)}}</span></li>
+                                <li class="trash-dot"><span class="sto-name">Trash</span><span class="sto-space">{{convertToBigUnit(trashRate)}}</span></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </mat-card>
             </mat-tab>
             <mat-tab label="SETTING">
-                <h2>Settings</h2>
-                <form action="" [formGroup]="SettingForm" (ngSubmit)="onSubmit_Settings()">
-                    <h4>Quick Link Share Show / Hide links below your files</h4>
-                    <div class="switch-box">
-                        <label class="switch">
-              <input type="checkbox" formControlName="check_direct">
-              <span class="slider"></span>
-            </label> Show Direct Link
-                    </div>
-                    <div class="switch-box">
-                        <label class="switch">
-              <input type="checkbox" formControlName="check_html">
-              <span class="slider"></span>
-            </label> Show HTML Code
-                    </div>
-                    <div class="switch-box">
-                        <label class="switch">
-              <input type="checkbox" formControlName="check_bulletin">
-              <span class="slider"></span>
-            </label> Show Bulletin Boards & Forums Code
-                    </div>
-                    <div class="switch-box">
-                        <label class="switch">
-              <input type="checkbox" formControlName="check_button">
-              <span class="slider"></span>
-            </label> Show Social Share Buttons
-                    </div>
-                    <button type="submit" class="sky-blue-btn">Save Settings</button>
-                </form>
+                <mat-card class="px-5 py-5 mt-5">
+                    <h2>Settings</h2>
+                    <form action="" [formGroup]="SettingForm" (ngSubmit)="onSubmit_Settings()">
+                        <h5 class="mt-5 mb-4">Quick Link Share Show / Hide links below your files</h5>
+                        <div class="switch-box">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="check_direct">
+                                <span class="slider"></span>
+                            </label> Show Direct Link
+                        </div>
+                        <div class="switch-box">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="check_html">
+                                <span class="slider"></span>
+                            </label> Show HTML Code
+                        </div>
+                        <div class="switch-box">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="check_bulletin">
+                                <span class="slider"></span>
+                            </label> Show Bulletin Boards & Forums Code
+                        </div>
+                        <div class="switch-box">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="check_button">
+                                <span class="slider"></span>
+                            </label> Show Social Share Buttons
+                        </div>
+                        <button type="submit" class="sky-blue-btn">Save Settings</button>
+                    </form>
+                </mat-card>
             </mat-tab>
             <mat-tab label="PRIVACY & SECURITY">
-                <h2>Privacy & Security</h2>
-                <form action="" [formGroup]="PrivacyForm" (ngSubmit)="onSubmit_Privacy()">
-                    <h4>Set your account privacy to private if you don't want anyone to be able to access your files or public if you want to allow anyone who has the links to your files to access them.</h4>
-                    <mat-form-field appearance="fill">
-                        <mat-label><img src="../../../assets/img/public.png" alt="" />Select an option</mat-label>
-                        <mat-select [(value)]="selected" formControlName="Privacy_seleted">
-                            <mat-option value="option1"><img src="../../../assets/img/public.png" alt="" />Account is Public</mat-option>
-                            <mat-option value="option2"><img src="../../../assets/img/public.png" alt="" />Account is Private</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button type="submit" class="sky-blue-btn">Save Settings</button>
-                </form>
+                <mat-card class="px-5 py-5 mt-5">
+                    <h2>Privacy & Security</h2>
+                    <form action="" [formGroup]="PrivacyForm" (ngSubmit)="onSubmit_Privacy()">
+                        <h5 class="mt-5">Set your account privacy to private if you don't want anyone to be able to access your files or public if you want to allow anyone who has the links to your files to access them.</h5>
+                        <mat-form-field appearance="fill" class="mb-5 mt-4">
+                            <mat-label><img src="../../../assets/img/public.png" alt="" />Select an option</mat-label>
+                            <mat-select [(value)]="selected" formControlName="Privacy_seleted">
+                                <mat-option value="option1"><img src="../../../assets/img/public.png" alt="" />Account is Public
+                                </mat-option>
+                                <mat-option value="option2"><img src="../../../assets/img/public.png" alt="" />Account is Private
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button type="submit" class="sky-blue-btn">Save Settings</button>
+                    </form>
+                </mat-card>
             </mat-tab>
         </mat-tab-group>
 
-    </div>
+  </div>
 </div>
