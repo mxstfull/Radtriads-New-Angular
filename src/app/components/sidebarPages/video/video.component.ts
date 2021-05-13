@@ -46,6 +46,8 @@ export class VideoComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "video");
+
+        
         let requestPayload = {
           user_id: localStorage.getItem('user_id'),
           unique_id: localStorage.getItem('unique_id'),
@@ -64,7 +66,6 @@ export class VideoComponent implements OnInit {
     
           }
         );
-        
       }
     });
   }
