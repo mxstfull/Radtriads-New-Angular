@@ -112,6 +112,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.navItems[i]['iconName'] = imgNavItems[i];
       if (i == 1) {
         this.folderTree = Object.assign({}, this.navItems[i]);
+        this.navService.changeFolderTree(this.folderTree);
       }
     }
   }

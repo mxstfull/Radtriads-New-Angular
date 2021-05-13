@@ -9,8 +9,8 @@
         <div class="photo-box-icons">
           <a (click)="onDeleteItem()"><i class="fa fa-trash" aria-hidden="true"></i></a>
           <a (click)="onDownloadItem()"><i class="fa fa-download" aria-hidden="true"></i></a>
-          <a ><i class="fa fa-sliders" aria-hidden="true"></i></a>
-          <a ><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+          <a (click)="showEditWindow()"><i class="fa fa-sliders" aria-hidden="true"></i></a>
+          <a (click)="openDialog('share')"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>

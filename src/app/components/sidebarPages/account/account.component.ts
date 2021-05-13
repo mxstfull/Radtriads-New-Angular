@@ -78,6 +78,7 @@ export class AccountComponent implements OnInit {
     else this.selected = 'option2';
 
     this.PrivacyForm.patchValue({ Privacy_seleted: this.selected });
+
     this.stripe_plan = this.user_inf['stripe_plan'];
     this.getDiskUsage();
   }

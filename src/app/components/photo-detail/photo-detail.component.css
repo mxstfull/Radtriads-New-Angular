@@ -7,3 +7,6 @@
 .photo-details-top {
     word-wrap: break-word;
 }
+a {
+    cursor: pointer;
+}
