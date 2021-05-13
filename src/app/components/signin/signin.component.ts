@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { TokenService } from '../../shared/token.service';
@@ -16,12 +16,14 @@ export class SigninComponent implements OnInit {
   errors = null;
   loading = false;
   submitted = false;
+  returnUrl: string;
 
   get f(){
     return this.loginForm.controls;
   }
 
   constructor(
+    private route: ActivatedRoute,
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
@@ -32,6 +34,8 @@ export class SigninComponent implements OnInit {
       email: [],
       password: []
     })
+    
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnInit() { }
@@ -50,7 +54,8 @@ export class SigninComponent implements OnInit {
         },() => {
           this.authState.setAuthState(true);
           this.loginForm.reset();
-          this.router.navigate(['total']);
+          this.router.navigateByUrl(this.returnUrl);
+          // this.router.navigate(['total']);
         }
       );
   }
