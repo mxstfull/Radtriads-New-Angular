@@ -107,3 +107,7 @@ mat-sidenav {
 ::ng-deep div[cdkscrollable]::-webkit-scrollbar-thumb:hover {
     background: #a7abb4;
 }
+
+.mat-icon-button.closebtn {
+    display: none;
+}
