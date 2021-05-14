@@ -25,6 +25,7 @@ export class CardComponent implements OnInit {
   @Output() deleteItems: EventEmitter<any> = new EventEmitter();
   private dialogRef: any;
   public category;
+  
   constructor(public dialog: MatDialog, 
     private router: Router,
   ) {
@@ -90,9 +91,14 @@ export class CardComponent implements OnInit {
     return param;
   }
   viewImageThumbnail(item: CardItem) {
+    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
       return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+    else if(wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-"+item.ext+".png";
+    } else {
+      return "assets/img/thumb-other.png";
+    }
   }
   dispDate(m_date: string): string {
     let date = new Date(m_date);

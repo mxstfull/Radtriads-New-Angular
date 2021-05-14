@@ -150,11 +150,16 @@ export class AccountComponent implements OnInit {
 
   responseHandler(result: any) {
   }
-
+  responseHandler_setting(result: any) {
+    localStorage.setItem('show_direct_link', result.message.show_direct_link);
+    localStorage.setItem('show_html_code', result.message.show_html_code);
+    localStorage.setItem('show_forum_code', result.message.show_forum_code);
+    localStorage.setItem('show_social_share', result.message.show_social_share);
+  }
   onSubmit_Settings() {
     this.AccountService.Settings(this.SettingForm.value, this.user_info).subscribe(
       result => {
-        this.responseHandler(result);
+        this.responseHandler_setting(result);
       },
       error => {
         this.errors = error.error;
