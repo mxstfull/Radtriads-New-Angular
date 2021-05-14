@@ -1,70 +1,70 @@
 .example-small-box,
 .example-large-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 16px;
-    padding: 16px;
-    border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
 }
 
 .example-small-box {
-    height: 100px;
-    width: 100px;
+  height: 100px;
+  width: 100px;
 }
 
 .example-large-box {
-    height: 300px;
-    width: 300px;
+  height: 300px;
+  width: 300px;
 }
 
 
 /* /////////////////// */
 
 ::ng-deep .mat-tab-body-content {
-    padding-top: 0.6em;
+  padding-top: 0.6em;
 }
 
 h2 {
-    float: none;
+  float: none;
 }
 
 .upload-img-wrapper {
-    max-width: none !important;
+  max-width: none !important;
 }
 
 .mat-form-field {
-    width: 100%;
+  width: 100%;
 }
 
 .form-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 ::ng-deep .mat-tab-label {
-    font-family: 'Archivo', sans-serif;
+  font-family: 'Archivo', sans-serif;
 }
 
 :host ::ng-deep .mat-tab-label {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 :host ::ng-deep .mat-tab-label {
-    min-width: 0px !important;
+  min-width: 0px !important;
 }
 
 :host ::ng-deep .list-grid {
-    margin: 0;
+  margin: 0;
 }
 
 :host ::ng-deep .list-grid a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 :host ::ng-deep .mat-tab-label,
 .mat-tab-link {
-    color: black !important;
+  color: black !important;
 }
 
 
@@ -73,22 +73,61 @@ h2 {
 } */
 
 ::ng-deep .mat-grid-tile .mat-figure {
-    margin: 0 0px 0.9375em !important;
-    padding: 0 0.4375em !important;
+  margin: 0 0px 0.9375em !important;
+  padding: 0 0.4375em !important;
 }
 
 .media-file {
-    width: 100%;
+  width: 100%;
 }
 
 .file-name-img img {
-    width: 31px;
+  width: 31px;
 }
 
 a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .storage-box {
-    width: 100%;
+  width: 100%;
+}
+
+
+ .load-more-btn {
+  width: 150px;
+  line-height: 40px;
+  border-radius: 2px;
+  margin: 0 auto;
+  display: block;
+  background: #219150;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+ .load-more-btn:hover {
+  background: green;
+}
+
+ .load-more-btn .loaded {
+  display: none;
+}
+
+ #load-more {
+  display: none;
+}
+
+ #load-more:checked~ul li:nth-child(1n+5) {
+  max-height: 999px;
+  opacity: 1;
+  transition: 0.2s ease-in;
+}
+
+ #load-more:checked~.load-more-btn .loaded {
+  display: block;
+}
+
+ #load-more:checked~.load-more-btn .unloaded {
+  display: none;
 }

@@ -33,6 +33,8 @@ export class CodeComponent implements OnInit {
   category = 3; // this means we need codes.
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
   folderTree: NavItem;
+  pageNumber: number = 0;
+
   private dialogRef: any;
   constructor(
     private router: ActivatedRoute,
@@ -288,4 +290,5 @@ export class CodeComponent implements OnInit {
     this.cardItems = this.cardItems.reverse();
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
+  
 }
