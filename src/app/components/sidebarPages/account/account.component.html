@@ -53,10 +53,11 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 order-1 order-lg-2">
                                 <div class="upload-img-wrapper">
-                                    <button class="upload-img"><span>+</span>You can upload your image up to 300x300px.
+                                    <button *ngIf="!imageUrl" class="upload-img"><span>+</span>You can upload your image up to 300x300px.
                                         PNG, JPG
                                         only</button>
-                                    <input type="file" name="myImg" (change)="onFileSelected($event)" required accept=".png">
+                                    <input type="file" name="myImg"  (change)="handleFileInput($event.target.files)" required accept=".png">
+                                    <img  *ngIf="imageUrl" [src]="imageUrl" class="avatar">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +83,7 @@
                         <div class="clear"></div>
                     </div>
                     <div class="plan-bottom">
-                        <p>Disk Space Usage<br /> You have uploaded 3 files in your account.</p>
+                        <p>Disk Space Usage<br /> You have uploaded {{fileCount}} files in your account.</p>
                         <div class="storage-box">
                             <div class="storage-tab" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
                                 <div class="storage-line photo-line" [ngStyle]="{'width': (photoRate * 100 / allRate) + '%'}"></div>

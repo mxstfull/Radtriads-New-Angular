@@ -40,6 +40,7 @@ export class CardComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         result => {
+          if(!result || result == undefined) return;
           this.item.is_protected = Number(result);
         });
     }

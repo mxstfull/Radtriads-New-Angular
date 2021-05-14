@@ -58,3 +58,9 @@ h2 {
     width: calc(100% - 6px);
     margin: auto;
 }
+:host ::ng-deep .avatar  {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin-left: 25%;
+}

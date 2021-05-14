@@ -66,7 +66,8 @@ export class PixieImageEditorComponent implements AfterViewInit {
     this.pixie = new Pixie({
       // ENTER CONFIGURATION HERE
       // ENTER CONFIGURATION HERE
-      baseUrl: console.log(localStorage.getItem('currentItemForEditor')),
+      image: localStorage.getItem('currentItemForEditor'),
+      baseUrl: '/assets/img/pixie_editor',
       maxHeight: '800',
       ui: {
         visible: !0,

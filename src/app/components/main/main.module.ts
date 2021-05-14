@@ -39,8 +39,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CardComponent } from '../../tools/card/card.component';
-import { ConfirmationComponent } from "../../shared/confirmation/confirmation.component";
-import { AlertComponent } from '../../shared/alert/alert.component';
+
 @NgModule({
     declarations: [AccountComponent,
         CodeComponent,
@@ -53,18 +52,12 @@ import { AlertComponent } from '../../shared/alert/alert.component';
         UpgradeAccountComponent,
         TrashComponent,
         TopbarComponent,
-        CardComponent,
-        ConfirmationComponent,
-        AlertComponent   
+        CardComponent 
     ],
     providers: [{
         provide: FlowInjectionToken,
         useValue: Flow
     }],
-    entryComponents: [
-        ConfirmationComponent,
-        AlertComponent
-    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,

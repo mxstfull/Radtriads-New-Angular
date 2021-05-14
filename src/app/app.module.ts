@@ -56,6 +56,9 @@ import { MainComponent } from './components/main/main.component';
 
 import { MainModule } from './components/main/main.module';
 
+import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
+import { AlertComponent } from './shared/alert/alert.component';
+
 @NgModule({
   exports: [
     MatIconModule,
@@ -99,7 +102,9 @@ export class MaterialModule { }
     MoveModalComponent,
     AudioModalComponent,
     VideoModalComponent,
-    MainComponent
+    MainComponent,
+    ConfirmationComponent,
+    AlertComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -133,6 +138,10 @@ export class MaterialModule { }
       provide: MatDialogRef,
       useValue: []
     }
+  ],
+  entryComponents: [
+    ConfirmationComponent,
+    AlertComponent
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
