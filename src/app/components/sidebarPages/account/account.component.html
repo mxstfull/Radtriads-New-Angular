@@ -1,7 +1,7 @@
 <div class="dashboard-content">
     <app-topbar></app-topbar>
     <div class="dashboard-bottom">
-        <mat-tab-group dynamicHeight [color]="'primary'">
+        <mat-tab-group dynamicHeight [color]="'primary'" [selectedIndex]="this.tab">
             <mat-tab label="MY INFO">
                 <mat-card class="px-5 py-5 mt-5">
                     <h2 class="pb-4">My Info</h2>
@@ -70,15 +70,23 @@
                 </mat-card>
             </mat-tab>
             <mat-tab label="PLAN & USAGE">
-                <mat-card class="p-0 mt-5">
+                <mat-card class="p-0 mt-5" *ngIf="this.plan_inf">
                     <div class="plan-top">
                         <div class="plan-top-left">
-                            <h2>{{stripe_plan}}</h2>
-                            <p>You are currently on a FREE TRIAL until 03/18/2021.<br /> $3.75 per month</p>
+                          <h2>{{ this.plan_inf.displayed_plan_name }} Plan</h2>
+                          <p *ngIf="this.plan_inf.is_free_trial">
+                            You are currently on a FREE TRIAL until
+                            {{ this.plan_inf.trial_ends_date }}.<br />
+                            ${{ this.plan_inf.detail.monthly_price }} per month
+                          </p>
                         </div>
                         <div class="plan-top-right">
-                            <a class="sky-blue-btn" routerLink="/upgrade-account">Update Plan</a>
-                            <div class="cancel-btn"><a routerLink="/">Cancel Plan</a></div>
+                          <a class="sky-blue-btn" routerLink="/upgrade-account"
+                            >Update Plan</a
+                          >
+                          <div class="cancel-btn" *ngIf="!this.plan_inf.is_free_trial">
+                            <a routerLink="/">Cancel Plan</a>
+                          </div>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -160,6 +168,5 @@
                 </mat-card>
             </mat-tab>
         </mat-tab-group>
-
   </div>
 </div>

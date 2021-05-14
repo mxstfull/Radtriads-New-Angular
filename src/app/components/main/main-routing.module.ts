@@ -13,23 +13,24 @@ import { UpgradeAccountComponent } from '../sidebarPages/upgrade-account/upgrade
 import { TrashComponent } from '../sidebarPages/trash/trash.component';
 import { MainComponent } from './main.component';
 import { AuthGuard } from 'src/app/shared/auth.guard';
+import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-success.component';
 
 const routes: Routes = [
     {
         path: '',
         component: MainComponent,
-        canActivate: [AuthGuard],
         children: [
-            { path: 'total', component: TotalComponent,  },
-            { path: 'account', component: AccountComponent },
-            { path: 'code/:path', component: CodeComponent },
-            { path: 'folder-creation', component: FolderCreationComponent },
-            { path: 'music/:path', component: MusicComponent },
-            { path: 'photos/:path', component: PhotosComponent },
-            { path: 'trash', component: TrashComponent },
-            { path: 'upgrade-account', component: UpgradeAccountComponent },
-            { path: 'uploading', component: UploadingComponent },
-            { path: 'video/:path', component: VideoComponent },
+            { path: 'total', component: TotalComponent, canActivate: [AuthGuard] },
+            { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+            { path: 'code/:path', component: CodeComponent, canActivate: [AuthGuard] },
+            { path: 'folder-creation', component: FolderCreationComponent, canActivate: [AuthGuard] },
+            { path: 'music/:path', component: MusicComponent, canActivate: [AuthGuard] },
+            { path: 'photos/:path', component: PhotosComponent, canActivate: [AuthGuard] },
+            { path: 'trash', component: TrashComponent, canActivate: [AuthGuard] },
+            { path: 'upgrade-account', component: UpgradeAccountComponent, canActivate: [AuthGuard] },
+            { path: 'submit-success', component: SubmitSuccessComponent, canActivate: [AuthGuard] },
+            { path: 'uploading', component: UploadingComponent, canActivate: [AuthGuard] },
+            { path: 'video/:path', component: VideoComponent, canActivate: [AuthGuard] },
         ]
     }
 ];

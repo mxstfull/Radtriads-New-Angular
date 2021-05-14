@@ -39,6 +39,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CardComponent } from '../../tools/card/card.component';
+import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-success.component';
 
 @NgModule({
     declarations: [AccountComponent,
@@ -50,6 +51,7 @@ import { CardComponent } from '../../tools/card/card.component';
         UploadingComponent,
         VideoComponent,
         UpgradeAccountComponent,
+        SubmitSuccessComponent,
         TrashComponent,
         TopbarComponent,
         CardComponent 
