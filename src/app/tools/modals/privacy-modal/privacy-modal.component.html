@@ -20,7 +20,7 @@
     <input matInput type="password" style="margin-top:20px;" [hidden]="privacy_select!='2'" [(ngModel)]="password">
   </div>
   <div class="modal-btn">
-    <button mat-button class="btn-cancel" [mat-dialog-close]="'cancel'">Cancel</button>
+    <button mat-button class="btn-cancel" [mat-dialog-close]="undefined">Cancel</button>
     <button mat-button class="btn-ok" (click)="onPrivacyConfirm()">Confirm</button>
   </div>
 </div>

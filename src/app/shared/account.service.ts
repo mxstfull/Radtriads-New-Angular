@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppSettings } from './appSettings';
@@ -19,8 +19,8 @@ import { AppSettings } from './appSettings';
 //   check_button: string;
 // }
 
-export class Uniq{
-  unique_id : string;
+export class Uniq {
+  unique_id: string;
 }
 
 @Injectable({
@@ -32,29 +32,41 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   GetUserData(value: object): Observable<any> {
-    return this.http.post(AppSettings.backendURL+'api/account/GetUserData', value);
+    return this.http.post(AppSettings.backendURL + 'api/account/GetUserData', value);
   }
-  
+
   // User registration
-   MyInfo(value: object , val:object): Observable<any> {
-    return this.http.post(AppSettings.backendURL+'api/account/MyInfo', {value,val} );
+  MyInfo(value: object, val: object): Observable<any> {
+    return this.http.post(AppSettings.backendURL + 'api/account/MyInfo', { value, val });
   }
 
   // Login
-  Settings(value: object , val:object): Observable<any> {
-    return this.http.post<any>(AppSettings.backendURL+'api/account/Settings', {value,val});
+  Settings(value: object, val: object): Observable<any> {
+    return this.http.post<any>(AppSettings.backendURL + 'api/account/Settings', { value, val });
   }
 
   // Login
-  Privacy(value: object , val:object): Observable<any> {
-    return this.http.post<any>(AppSettings.backendURL+'api/account/Privacy', {value,val});
+  Privacy(value: object, val: object): Observable<any> {
+    return this.http.post<any>(AppSettings.backendURL + 'api/account/Privacy', { value, val });
   }
   //delete Account
-  delete(val :object): Observable<any> {
-    return this.http.post<any>(AppSettings.backendURL+'api/account/delete', val);
+  delete(val: object): Observable<any> {
+    return this.http.post<any>(AppSettings.backendURL + 'api/account/delete', val);
   }
   //get disk usage.
   getDiskUsage(requestPayload: object): Observable<any> {
-    return this.http.post<any>(AppSettings.backendURL+'api/account/getDiskUsage', requestPayload);
+    return this.http.post<any>(AppSettings.backendURL + 'api/account/getDiskUsage', requestPayload);
+  }
+  //upload avatar.
+  uploadAvatar(requestPayload: object): Observable<any> {
+
+    var myFormData = new FormData();
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    myFormData.append('image', requestPayload['fileToUpload']);
+    myFormData.append('unique_id', requestPayload['unique_id']);
+ 
+    return this.http.post<any>(AppSettings.backendURL + 'api/account/uploadAvatar', myFormData, { headers: headers });
   }
 }

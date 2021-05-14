@@ -92,7 +92,11 @@ export class PhotosComponent implements OnInit {
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(result)
         a.href = objectUrl
-        a.download = 'archive.zip';
+        if(urlArray.length == 1) {
+          a.download = urlArray[0]['title'];
+        } else {
+          a.download = 'archive.zip';
+        }
         a.click();
         URL.revokeObjectURL(objectUrl);
       },error => {
@@ -220,7 +224,8 @@ export class PhotosComponent implements OnInit {
         width: '600px',
       });
       this.dialogRef.afterClosed().subscribe(
-        (        result: any) => {
+        (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }

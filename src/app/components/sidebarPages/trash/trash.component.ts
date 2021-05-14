@@ -128,6 +128,7 @@ export class TrashComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }

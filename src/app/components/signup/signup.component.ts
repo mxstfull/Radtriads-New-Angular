@@ -3,6 +3,9 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms'; 
 import { ConfirmedValidator } from '../../confirmed.validator';
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationComponent } from "../../shared/confirmation/confirmation.component";
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +30,7 @@ export class SignupComponent implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     private router_input: ActivatedRoute,
-
+    public dialog: MatDialog
   ) {
     this.router_input.queryParams.subscribe(params => {
       this.planOption = params['plan'];
@@ -56,7 +59,14 @@ export class SignupComponent implements OnInit {
       },
       error => {
         if(error.error == "no_plan_selected") {
-          alert("Invalid Plan selected.");
+          this.dialog.open(AlertComponent,{
+            data:{
+              message: 'Invalid Plan selected.',
+              buttonText: {
+                cancel: 'Close'
+              }
+            },
+          });
         } 
         this.errors = error.error;
         this.loading = false;

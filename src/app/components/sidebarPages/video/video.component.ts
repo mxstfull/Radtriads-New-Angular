@@ -219,7 +219,8 @@ export class VideoComponent implements OnInit {
         width: '600px',
       });
       this.dialogRef.afterClosed().subscribe(
-        (        result: any) => {
+        (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }

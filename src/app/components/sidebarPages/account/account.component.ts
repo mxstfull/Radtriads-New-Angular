@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/shared/token.service';
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationComponent } from "../../../shared/confirmation/confirmation.component";
 import { AlertComponent } from '../../../shared/alert/alert.component';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-account',
@@ -31,9 +32,12 @@ export class AccountComponent implements OnInit {
   videoRate: number;
   codeRate: number;
   trashRate: number;
+  fileCount: string = "";
 
   stripe_plan: string;
 
+  fileToUpload: any;
+  imageUrl: any;
 
   constructor(
     public router: Router,
@@ -70,7 +74,24 @@ export class AccountComponent implements OnInit {
       },
     );
   }
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0);
 
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    let requestPayload = {
+      unique_id: localStorage.getItem('unique_id'),
+      fileToUpload: this.fileToUpload
+    };
+    this.AccountService.uploadAvatar(requestPayload).subscribe(
+      result => {
+      },
+    );
+  }
   responseGetDataHandler(result: any) {
     this.user_inf = result['message'];
     this.MyInfoForm.patchValue({ Username: this.user_inf['name'], email: this.user_inf['email'], old_password: "", new_password: "", new_password_confirmation: "" });
@@ -83,6 +104,9 @@ export class AccountComponent implements OnInit {
 
     this.stripe_plan = this.user_inf['stripe_plan'];
     this.getDiskUsage();
+    if(this.user_inf['profile_picture']) {
+      this.imageUrl = AppSettings.backendURL+"avatar/"+this.user_inf['profile_picture'];
+    }
   }
 
   getDiskUsage() {
@@ -110,6 +134,7 @@ export class AccountComponent implements OnInit {
           }
         }
       );
+      this.fileCount = result['file_count'].toString();
     }
   }
   convertToBigUnit(byteSize) {
@@ -126,7 +151,6 @@ export class AccountComponent implements OnInit {
 
   onSubmit_myinfo() {
     this.submitted = true;
-
     this.AccountService.MyInfo(this.MyInfoForm.value, this.user_info).subscribe(
       result => {
         this.responseHandler(result);
@@ -134,9 +158,8 @@ export class AccountComponent implements OnInit {
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
-        this.dialog.open(AlertComponent,{
-          data:{
+        this.dialog.open(AlertComponent, {
+          data: {
             message: 'Success!',
             buttonText: {
               cancel: 'Close'
@@ -165,9 +188,8 @@ export class AccountComponent implements OnInit {
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
-        this.dialog.open(AlertComponent,{
-          data:{
+        this.dialog.open(AlertComponent, {
+          data: {
             message: 'Success!',
             buttonText: {
               cancel: 'Close'
@@ -186,9 +208,8 @@ export class AccountComponent implements OnInit {
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
-        this.dialog.open(AlertComponent,{
-          data:{
+        this.dialog.open(AlertComponent, {
+          data: {
             message: 'Success!',
             buttonText: {
               cancel: 'Close'
@@ -210,8 +231,8 @@ export class AccountComponent implements OnInit {
   }
 
   signOut() {
-    const dialogRef = this.dialog.open(ConfirmationComponent,{
-      data:{
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      data: {
         message: 'Are you sure want to delete?',
         buttonText: {
           ok: 'Delete',
