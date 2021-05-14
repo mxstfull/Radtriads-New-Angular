@@ -21,9 +21,9 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="acc-input-box">
                                             <label>Old Password</label>
-                                            <input type="password" formControlName="old_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.old_password }" />
-                                            <div *ngIf="submitted && this.errors.old_password" class="invalid-feedback">
-                                                <div *ngIf="this.errors.old_password">{{this.errors.old_password}}</div>
+                                            <input type="password" formControlName="old_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.old_password }" />
+                                            <div *ngIf="submitted && this.errors?.old_password" class="invalid-feedback">
+                                                <div *ngIf="this.errors?.old_password">{{this.errors?.old_password}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -33,19 +33,19 @@
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="acc-input-box">
                                             <label>New Password</label>
-                                            <input type="password" formControlName="new_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password }" />
-                                            <div *ngIf="submitted && this.errors.new_password" class="invalid-feedback">
-                                                <div *ngIf="this.errors.new_password">{{this.errors.new_password}}</div>
+                                            <input type="password" formControlName="new_password" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.new_password }" />
+                                            <div *ngIf="submitted && this.errors?.new_password" class="invalid-feedback">
+                                                <div *ngIf="this.errors?.new_password">{{this.errors?.new_password}}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                         <div class="acc-input-box">
                                             <label>Repeat Password</label>
-                                            <input type="password" formControlName="new_password_confirmation" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors.new_password_confirmation }" />
-                                            <div *ngIf="submitted && this.errors.new_password_confirmation" class="invalid-feedback">
-                                                <div *ngIf="this.errors.new_password_confirmation">
-                                                    {{this.errors.new_password_confirmation}}</div>
+                                            <input type="password" formControlName="new_password_confirmation" placeholder="********" class="form-control" [ngClass]="{ 'is-invalid': submitted && this.errors?.new_password_confirmation }" />
+                                            <div *ngIf="submitted && this.errors?.new_password_confirmation" class="invalid-feedback">
+                                                <div *ngIf="this.errors?.new_password_confirmation">
+                                                    {{this.errors?.new_password_confirmation}}</div>
                                             </div>
                                         </div>
                                     </div>

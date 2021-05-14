@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AccountService } from 'src/app/shared/account.service';
 import { TokenService } from 'src/app/shared/token.service';
-import { stringify } from '@angular/compiler/src/util';
-import { error } from 'selenium-webdriver';
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationComponent } from "../../../shared/confirmation/confirmation.component";
+import { AlertComponent } from '../../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-account',
@@ -40,6 +41,7 @@ export class AccountComponent implements OnInit {
     public AccountService: AccountService,
     private token: TokenService,
     private authState: AuthStateService,
+    public dialog: MatDialog
   ) {
 
     this.MyInfoForm = this.fb.group({
@@ -93,13 +95,13 @@ export class AccountComponent implements OnInit {
     );
   }
   drawPercentBar(result: any) {
-    if(result) {
+    if (result) {
       this.allRate = result['all'];
       this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
-      if(result['deleted'] != null) this.trashRate = result['deleted'];
-      result['category'].forEach (
+      if (result['deleted'] != null) this.trashRate = result['deleted'];
+      result['category'].forEach(
         element => {
-          switch(element['category']) {
+          switch (element['category']) {
             case 0: this.photoRate = element['diskspace']; break;
             case 1: this.musicRate = element['diskspace']; break;
             case 2: this.videoRate = element['diskspace']; break;
@@ -110,13 +112,13 @@ export class AccountComponent implements OnInit {
     }
   }
   convertToBigUnit(byteSize) {
-    if(byteSize < 1000) {
+    if (byteSize < 1000) {
       return byteSize + "byte";
-    } else if(byteSize < 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000) {
       return Math.round(byteSize / 1000) + "KB";
-    } else if(byteSize < 1000 * 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000 * 1000) {
       return Math.round(byteSize / 1000 / 1000) + "MB";
-    } else if(byteSize < 1000 * 1000 * 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000 * 1000 * 1000) {
       return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
     }
   }
@@ -132,6 +134,14 @@ export class AccountComponent implements OnInit {
         this.errors = error.error;
       }, () => {
         console.log('sucess_reset!');
+        this.dialog.open(AlertComponent,{
+          data:{
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
         this.submitted = false;
         this.MyInfoForm.reset();
       }
@@ -150,6 +160,14 @@ export class AccountComponent implements OnInit {
         this.errors = error.error;
       }, () => {
         console.log('sucess_reset!');
+        this.dialog.open(AlertComponent,{
+          data:{
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
       }
     );
   }
@@ -163,6 +181,14 @@ export class AccountComponent implements OnInit {
         this.errors = error.error;
       }, () => {
         console.log('sucess_reset!');
+        this.dialog.open(AlertComponent,{
+          data:{
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
       }
     );
   }
@@ -176,18 +202,33 @@ export class AccountComponent implements OnInit {
       // If selected file exist make upload request
     }
   }
+
   signOut() {
-    this.AccountService.delete(this.user_info).subscribe(
-      result => {
-        this.responseHandler(result);
-      },
-      error => {
-        this.errors = error.error;
-      }, () => {
-        this.authState.setAuthState(false);
-        this.token.removeToken();
-        this.router.navigate(['login']);
+    const dialogRef = this.dialog.open(ConfirmationComponent,{
+      data:{
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Delete',
+          cancel: 'No'
+        }
       }
-    );
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.AccountService.delete(this.user_info).subscribe(
+          result => {
+            this.responseHandler(result);
+          },
+          error => {
+            this.errors = error.error;
+          }, () => {
+            this.authState.setAuthState(false);
+            this.token.removeToken();
+            this.router.navigate(['login']);
+          }
+        );
+      }
+    });
   }
 }

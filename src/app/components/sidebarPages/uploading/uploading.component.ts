@@ -2,8 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
 import { Globals } from '../../../global';
+declare var nsfwjs: any;
 
-const URL = 'http://127.0.0.1:8000/api/fileupload/upload';
 @Component({
   selector: 'app-uploading',
   templateUrl: './uploading.component.html',
@@ -24,7 +24,6 @@ export class UploadingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
   }
 
   @ViewChild('flowAdvanced')
@@ -45,8 +44,16 @@ export class UploadingComponent implements OnInit {
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
 
       this.flow.flowJs.files.forEach(item => {
-        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension()))
-         item.cancel();
+        debugger
+          nsfwjs.load().then((model) => {
+            // Classify the image.
+            model.classify(item).then((predictions) => {
+              console.log("Predictions", predictions);
+            });
+          });
+        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension())){          
+          item.cancel();
+        }         
       });
       if (this.autoupload && event.type === 'filesSubmitted') {
         this.uploadFinished = false;
