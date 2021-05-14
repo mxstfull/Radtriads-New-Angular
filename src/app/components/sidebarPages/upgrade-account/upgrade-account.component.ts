@@ -1,24 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PlanStateService } from 'src/app/shared/plan.service';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-upgrade-account',
   templateUrl: './upgrade-account.component.html',
-  styleUrls: ['./upgrade-account.component.css']
+  styleUrls: ['./upgrade-account.component.css'],
+})
+@Injectable({
+  providedIn: 'root',
 })
 export class UpgradeAccountComponent implements OnInit {
+  hideButtons: boolean = true;
+  user_info = { u_id: localStorage.getItem('unique_id') };
+  perioudOption: boolean = false;
+	stripePromise: Promise<Stripe | null>;
 
-  hideButtons:boolean = true;
-  public perioudOption: boolean = false;
-  
-  constructor() { }
+  constructor(private planService: PlanStateService, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  register(plan_id: number) {
+    this.planService
+      .request_url({
+        plan_id: plan_id,
+        plan_method: this.perioudOption ? 'yearly' : 'monthly',
+        u_id: this.user_info.u_id,
+        success_url: window.location.origin + '/submit-success',
+        cancel_url: window.location.origin + '/upgrade-account',
+      })
+      .subscribe((result) => {
+        this.responseGetUrlHandler(result);
+      });
   }
-  register(param: string) {
-    if(this.perioudOption)
-      param = param + "_yearly";
-    else param = param + "_monthly";
-    
-  }
 
+	async responseGetUrlHandler(result) {
+		var {stripe_key, stripe_id} = result;
+
+		this.stripePromise = loadStripe(stripe_key); 
+
+		const stripe = await this.stripePromise;
+
+		const { error } = await stripe.redirectToCheckout({
+			sessionId: stripe_id,
+		});
+		
+		if (error) {
+			console.log(error);
+  	}
+	}
 }

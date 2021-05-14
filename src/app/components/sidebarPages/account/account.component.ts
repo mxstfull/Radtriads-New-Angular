@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AccountService } from 'src/app/shared/account.service';
 import { TokenService } from 'src/app/shared/token.service';
@@ -23,6 +23,7 @@ export class AccountComponent implements OnInit {
   submitted = false;
   user_info = { u_id: localStorage.getItem('unique_id') };
   user_inf: object;
+  plan_inf: any;
 
   allRate: number = 0;
   photoRate: number;
@@ -30,8 +31,9 @@ export class AccountComponent implements OnInit {
   videoRate: number;
   codeRate: number;
   trashRate: number;
-
+  selectedFile: File = null;
   stripe_plan: string;
+  tab: number;
 
 
   constructor(
@@ -40,6 +42,7 @@ export class AccountComponent implements OnInit {
     public AccountService: AccountService,
     private token: TokenService,
     private authState: AuthStateService,
+    private activatedRoute: ActivatedRoute
   ) {
 
     this.MyInfoForm = this.fb.group({
@@ -62,6 +65,13 @@ export class AccountComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params.tab) {
+        if (params.tab === 'plan') {
+          this.tab = 1;
+        }
+      }
+    });
     this.AccountService.GetUserData(this.user_info).subscribe(
       result => {
         this.responseGetDataHandler(result);
@@ -70,12 +80,18 @@ export class AccountComponent implements OnInit {
   }
 
   responseGetDataHandler(result: any) {
-    this.user_inf = result['message'];
+    this.user_inf = result.message.user;
+    this.plan_inf = result.message.plan;
+
     this.MyInfoForm.patchValue({ Username: this.user_inf['name'], email: this.user_inf['email'], old_password: "", new_password: "", new_password_confirmation: "" });
     this.SettingForm.patchValue({ check_direct: this.user_inf['show_direct_link'], check_html: this.user_inf['show_html_code'], check_bulletin: this.user_inf['show_forum_code'], check_button: this.user_inf['show_social_share'] });
 
     if (this.user_inf['is_account_public']) this.selected = 'option1';
     else this.selected = 'option2';
+
+    if (this.plan_inf.is_free_trial) {
+      this.plan_inf.trial_ends_date = new Date(this.plan_inf.trial_ends_date * 1000).toLocaleDateString();
+    }
 
     this.PrivacyForm.patchValue({ Privacy_seleted: this.selected });
     this.stripe_plan = this.user_inf['stripe_plan'];
@@ -167,7 +183,6 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  selectedFile: File = null;
   public onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
     console.log(this.selectedFile);

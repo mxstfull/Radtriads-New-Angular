@@ -38,6 +38,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import { CardComponent } from '../../tools/card/card.component';
+import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-success.component';
 @NgModule({
     declarations: [AccountComponent,
         CodeComponent,
@@ -48,6 +49,7 @@ import { CardComponent } from '../../tools/card/card.component';
         UploadingComponent,
         VideoComponent,
         UpgradeAccountComponent,
+        SubmitSuccessComponent,
         TrashComponent,
         TopbarComponent,
         CardComponent

@@ -22,9 +22,17 @@ const routes: Routes = [
     component: SigninComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'register', component: SignupComponent },
+  {
+    path: 'register',
+    component: SignupComponent,
+    canActivate: [AuthGuard],
+  },
   // { path: 'profile', component: UserProfileComponent },
-  { path: 'landing', component: LandingComponent },
+  {
+    path: 'landing',
+    component: LandingComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'public-media-board',
     component: PublicMediaBoardComponent,

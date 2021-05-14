@@ -1,0 +1,32 @@
+.plan-section h2 {
+    font-size: 4em;
+}
+::ng-deep a {
+    cursor: pointer;
+}
+
+.success-section {
+    background-color: #6ac75a;
+    height: calc(100vh - 55px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-center {
+    width: 580px;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    color: #666666;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.625em;
+}
+
+.container-center .plan-btn {
+    width: 50%;
+    margin: 15px auto;
+    margin-bottom: 0;
+    background-color: #25363eab;
+}
