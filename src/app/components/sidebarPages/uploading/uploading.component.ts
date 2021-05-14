@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
 import { Globals } from '../../../global';
-declare var nsfwjs: any;
 
 @Component({
   selector: 'app-uploading',
@@ -44,13 +43,6 @@ export class UploadingComponent implements OnInit {
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
 
       this.flow.flowJs.files.forEach(item => {
-        debugger
-          nsfwjs.load().then((model) => {
-            // Classify the image.
-            model.classify(item).then((predictions) => {
-              console.log("Predictions", predictions);
-            });
-          });
         if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension())){          
           item.cancel();
         }         
