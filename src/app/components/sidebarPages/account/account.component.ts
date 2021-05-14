@@ -47,7 +47,7 @@ export class AccountComponent implements OnInit {
     public AccountService: AccountService,
     private token: TokenService,
     private authState: AuthStateService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
     public dialog: MatDialog
   ) {
 
