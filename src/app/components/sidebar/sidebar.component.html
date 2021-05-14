@@ -1,5 +1,7 @@
-<div class="dashboard-sidebar" id="mySidebar">
-    <button class="closebtn" (click)="closeNav()">×</button>
+<div class="dashboard-sidebar" id="mySidebar" #appDrawer>
+    <button mat-icon-button class="closebtn" aria-label="" (click)="closeNav()">
+        <mat-icon>close</mat-icon>
+    </button>
     <div class="logo"><a routerLink="/" class="user-account"><i class="fa fa-user" aria-hidden="true"></i></a>
         <a routerLink="/"><img src="../../../assets/img/logo.png" alt="" /></a>
     </div>

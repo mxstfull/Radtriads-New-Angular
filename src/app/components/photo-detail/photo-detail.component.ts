@@ -4,6 +4,8 @@ import { FileviewService } from '../../shared/fileview.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { DeleteModalComponent } from '../../tools/modals/delete-modal/delete-modal.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
+import { AppSettings } from '../../shared/appSettings';
 
 @Component({
   selector: 'app-photo-detail',
@@ -18,11 +20,8 @@ export class PhotoDetailComponent implements OnInit {
     private fileviewService: FileviewService,
     private router: ActivatedRoute,
     public dialog: MatDialog, 
+    private router_normal: Router,
   ) { 
-    
-  }
-
-  ngOnInit(): void {
     this.router.queryParams.subscribe(params => {
       let m_unique_id = params['id'];
       let requestPayload = {
@@ -31,10 +30,10 @@ export class PhotoDetailComponent implements OnInit {
       this.fileviewService.getItemByUniqueId(requestPayload).subscribe(
         result => {
           if(!result) {
-            alert("error");
           }
           else {
             this.currentItem = result;
+            localStorage.setItem('currentItemForEditor', this.viewImageDetail(this.currentItem));
           }
         },error => {
           // this.errors = error.error;
@@ -42,11 +41,15 @@ export class PhotoDetailComponent implements OnInit {
         }, () => {
         }
       );  
-    });    
+    });  
+  }
+
+  ngOnInit(): void {
+      
   }
   viewImageDetail(item: CardItem) {
     if(item == null) return;
-    return "http://127.0.0.1:8000/files/"+this.jsEncode(item.url);
+    return AppSettings.backendURL+"files/"+this.jsEncode(item.url);
   }
   jsEncode(param: string){
     if(param == null || param == "" ) return "";
@@ -112,5 +115,25 @@ export class PhotoDetailComponent implements OnInit {
         
       }
     );
+  }
+  openDialog(type: string) {
+    if(type == "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
+      this.dialog.open(ShareModalComponent, {
+        data: {
+          data: this.currentItem
+        },
+        width: '740px',
+      });
+    }
+  }
+  showEditWindow() {
+    this.router_normal.navigate(['/image-editor'], {queryParams:{id:this.currentItem.unique_id}});
   }
 }

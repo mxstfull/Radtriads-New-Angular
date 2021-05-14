@@ -10,6 +10,7 @@ import { CardItem } from '../../components/interfaces/CardItem';
 import { AudioModalComponent } from '../modals/audio-modal/audio-modal.component';
 import { VideoModalComponent } from '../modals/video-modal/video-modal.component';
 import { Router, NavigationEnd } from '@angular/router';
+import { AppSettings } from '../../shared/appSettings';
 
 @Component({
   selector: 'app-card',
@@ -25,6 +26,7 @@ export class CardComponent implements OnInit {
   @Output() deleteItems: EventEmitter<any> = new EventEmitter();
   private dialogRef: any;
   public category;
+  
   constructor(public dialog: MatDialog, 
     private router: Router,
   ) {
@@ -38,15 +40,21 @@ export class CardComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         result => {
+          if(!result || result == undefined) return;
           this.item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
-      if(localStorage.getItem('show_social_share') == "0" &&
-        localStorage.getItem(''))
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: this.item
         },
         width: '740px',
       });
@@ -85,9 +93,14 @@ export class CardComponent implements OnInit {
     return param;
   }
   viewImageThumbnail(item: CardItem) {
+    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
+    else if(wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-"+item.ext+".png";
+    } else {
+      return "assets/img/thumb-other.png";
+    }
   }
   dispDate(m_date: string): string {
     let date = new Date(m_date);

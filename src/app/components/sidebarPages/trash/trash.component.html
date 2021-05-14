@@ -34,12 +34,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="changing-btn pl-0 desktop-div">
-            <a class="grey-btn" (click)="onDeleteFiles()"><i class="fa fa-trash" aria-hidden="true"></i>Permanently
-    Delete</a>
-            <a class="grey-btn" (click)="onRecoverFiles()"><i class="fa fa-undo" aria-hidden="true"></i>Recover</a>
-            <div class="clear"></div>
-        </div>
+
         <div class="tab-content">
             <div id="fm-grid-view" [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}" class="tab-pane fade in active show">
                 <div class="recent-file-outer">
@@ -48,13 +43,19 @@
                         <div class="sort-by">Sort by <span>Date</span><img style="cursor: pointer;" (click)="onSortClicked()" src="assets/img/sort.png" alt="" /></div>
                         <div class="clear"></div>
                     </div>
-                    <mat-grid-list cols="5">
-                        <mat-grid-tile *ngFor="let item of cardItems; let i = index;">
+                    <div class="changing-btn pl-0 desktop-div">
+                        <a class="grey-btn" (click)="onDeleteFiles()"><i class="fa fa-trash" aria-hidden="true"></i>Permanently
+                Delete</a>
+                        <a class="grey-btn" (click)="onRecoverFiles()"><i class="fa fa-undo" aria-hidden="true"></i>Recover</a>
+                        <div class="clear"></div>
+                    </div>
+                    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                        <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of cardItems; let i = index;">
                             <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
 
                             </app-card>
-                        </mat-grid-tile>
-                    </mat-grid-list>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -6,6 +6,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Globals } from '../../../global';
 import { FileviewService } from '../../../shared/fileview.service';
 import { MatDialogRef } from '@angular/material/dialog';
+
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationComponent } from "../../../shared/confirmation/confirmation.component";
+import { AlertComponent } from '../../../shared/alert/alert.component';
+
+
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
   expandable: boolean;
@@ -47,7 +53,9 @@ export class MoveModalComponent implements OnInit {
     private fileviewService: FileviewService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private globals: Globals,
-    private dialogRef: MatDialogRef<MoveModalComponent>
+    private dialogRef: MatDialogRef<MoveModalComponent>,
+    public dialog: MatDialog
+
     ) {
     this.dataSource.data = [data['folderTree']];
     this.fileList = data['fileList'];
@@ -64,11 +72,29 @@ export class MoveModalComponent implements OnInit {
     this.activeNode = node;
   }
   onMoveConfirm() {
+    if (this.activeNode === undefined) {
+      this.dialog.open(AlertComponent,{
+        data:{
+          message: 'Please select an album.',
+          buttonText: {
+            cancel: 'Close'
+          }
+        },
+      });
+      return;
+    }
     if(this.activeNode['path'] == localStorage.getItem('current_path')){
-      alert('Please select another album.');
+      this.dialog.open(AlertComponent,{
+        data:{
+          message: 'Please select another album.',
+          buttonText: {
+            cancel: 'Close'
+          }
+        },
+      });
       return;
     } 
-    if (this.activeNode === undefined) return;
+    
     let requestPayload = {
       user_id: localStorage.getItem('user_id'),
       unique_id: localStorage.getItem('unique_id'),

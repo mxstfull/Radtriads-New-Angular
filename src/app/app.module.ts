@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -46,7 +45,6 @@ import { ShareModalComponent } from './tools/modals/share-modal/share-modal.comp
 import { RenameModalComponent } from './tools/modals/rename-modal/rename-modal.component';
 import { DeleteModalComponent } from './tools/modals/delete-modal/delete-modal.component';
 import { RenameConfirmModalComponent } from './tools/modals/rename-confirm-modal/rename-confirm-modal.component';
-import { ToastUiImageEditorComponent } from './components/toast-ui-image-editor/toast-ui-image-editor.component';
 import { Globals } from './global';
 import { PixieImageEditorComponent } from './components/pixie-image-editor/pixie-image-editor.component';
 import { MoveModalComponent } from './tools/modals/move-modal/move-modal.component';
@@ -57,6 +55,9 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { MainComponent } from './components/main/main.component';
 
 import { MainModule } from './components/main/main.module';
+
+import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   exports: [
@@ -84,7 +85,6 @@ export class MaterialModule { }
     AppComponent,
     SigninComponent,
     SignupComponent,
-    UserProfileComponent,
     LandingComponent,
     PublicMediaBoardComponent,
     PhotoDetailComponent,
@@ -98,12 +98,13 @@ export class MaterialModule { }
     DeleteModalComponent,
     RenameConfirmModalComponent,
     ImageEditorNewComponent,
-    ToastUiImageEditorComponent,
     PixieImageEditorComponent,
     MoveModalComponent,
     AudioModalComponent,
     VideoModalComponent,
-    MainComponent
+    MainComponent,
+    ConfirmationComponent,
+    AlertComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -123,7 +124,6 @@ export class MaterialModule { }
   exports: [
     SidebarComponent,
     ModalsComponent,
-    ToastUiImageEditorComponent,
     PixieImageEditorComponent
   ],
   providers: [
@@ -139,7 +139,11 @@ export class MaterialModule { }
       useValue: []
     }
   ],
+  entryComponents: [
+    ConfirmationComponent,
+    AlertComponent
+  ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

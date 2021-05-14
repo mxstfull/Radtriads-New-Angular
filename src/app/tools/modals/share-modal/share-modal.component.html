@@ -4,39 +4,39 @@
 
 <h1 mat-dialog-title><img src="assets/img/share-icon.png" alt=""> Share Link</h1>
 <div mat-dialog-content>
-  <div class="share-icons">
-    <a ><i class="fa fa-facebook"></i><span>Facebook</span></a>
-    <a ><i class="fa fa-twitter"></i><span>Twitter</span></a>
-    <a ><i class="fa fa-pinterest"></i><span>Pinterest</span></a>
-    <a ><i class="fa fa-whatsapp"></i><span>Whatsapp</span></a>
-    <a ><i class="fa fa-envelope"></i><span>Email</span></a>
+  <div class="share-icons" *ngIf="show_social_share">
+    <a target="_blank" href="{{setFacebookSharingParam()}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+    <a target="_blank" href="{{setTwitterSharingParam()}}" ><i class="fa fa-twitter"></i><span>Twitter</span></a>
+    <a target="_blank" href="{{setPinterestSharingParam()}}" ><i class="fa fa-pinterest"></i><span>Pinterest</span></a>
+    <a target="_self" href="{{setWhatsappSharingParam()}}" ><i class="fa fa-whatsapp"></i><span>Whatsapp</span></a>
+    <a target="_self" href="{{setEmailSharingParam()}}" ><i class="fa fa-envelope" ></i><span>Email</span></a>
   </div>
   <div class="clear"></div>
   <div class="share-links">
-    <div class="share-link">
+    <div class="share-link" *ngIf="show_direct_link">
       <h6>Direct Link</h6>
       <div class="share-link-box">
-        <div class="share-link-text">https://www.radtriads.com/file.php?s=dkghzx62"</div>
+        <div class="share-link-text">{{direct_link}}</div>
         <div class="modal-btn">
-          <button type="button">Copy</button>
+          <button type="button" (click)="copyText(direct_link)">Copy</button>
         </div>
       </div>
     </div>
-    <div class="share-link">
+    <div class="share-link" *ngIf="show_forum_code">
       <h6>HTML Link</h6>
       <div class="share-link-box">
-        <div class="share-link-text">https://www.radtriads.com/file.php</div>
+        <div class="share-link-text">{{html_code}}</div>
         <div class="modal-btn">
-          <button type="button">Copy</button>
+          <button type="button" (click)="copyText(html_code)">Copy</button>
         </div>
       </div>
     </div>
-    <div class="share-link">
+    <div class="share-link" *ngIf="show_html_code">
       <h6>IMG Link</h6>
       <div class="share-link-box">
-        <div class="share-link-text">[IMG]https://www.radtriads.com/</div>
+        <div class="share-link-text">{{forum_code}}</div>
         <div class="modal-btn">
-          <button type="button">Copy</button>
+          <button type="button" (click)="copyText(forum_code)">Copy</button>
         </div>
       </div>
     </div>

@@ -2,14 +2,15 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { FlowDirective, Transfer } from '@flowjs/ngx-flow';
 import { Subscription } from 'rxjs';
 import { Globals } from '../../../global';
+import { AppSettings } from '../../../shared/appSettings';
 
-const URL = 'http://127.0.0.1:8000/api/fileupload/upload';
 @Component({
   selector: 'app-uploading',
   templateUrl: './uploading.component.html',
   styleUrls: ['./uploading.component.css']
 })
 export class UploadingComponent implements OnInit {
+
   currentPath = "home";
   public currentCategory;
   public allowedExtensions = {
@@ -18,13 +19,14 @@ export class UploadingComponent implements OnInit {
     'video': '.mp4, .mov, .swf, .flv',
     'code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java'
   };
+  backendURL;
   constructor(private globals: Globals) {
     this.currentPath = localStorage.getItem("current_path");
     this.currentCategory = localStorage.getItem('current_category');
+    this.backendURL = AppSettings.backendURL;
   }
 
   ngOnInit(): void {
-    
   }
 
   @ViewChild('flowAdvanced')
@@ -43,10 +45,11 @@ export class UploadingComponent implements OnInit {
     }
     
     this.autoUploadSubscription = this.flow.events$.subscribe(event => {
-
+      
       this.flow.flowJs.files.forEach(item => {
-        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension()))
-         item.cancel();
+        if(!this.allowedExtensions[this.currentCategory].includes(item.getExtension())){          
+          item.cancel();
+        }         
       });
       if (this.autoupload && event.type === 'filesSubmitted') {
         this.uploadFinished = false;

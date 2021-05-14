@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { PublicMediaBoardComponent } from './components/public-media-board/public-media-board.component';
 import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
@@ -40,14 +39,14 @@ const routes: Routes = [
   },
   {
     path: 'image-editor',
-    component: ImageEditorComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'image-editor-new',
     component: ImageEditorNewComponent,
     canActivate: [AuthGuard],
   },
+  // {
+  //   path: 'image-editor-new',
+  //   component: ImageEditorNewComponent,
+  //   canActivate: [AuthGuard],
+  // },
   {
     path: 'photo-details',
     component: PhotoDetailComponent,

@@ -13,6 +13,7 @@ import { DeleteModalComponent } from '../../../tools/modals/delete-modal/delete-
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
 import { AccountService } from 'src/app/shared/account.service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-total',
@@ -206,9 +207,14 @@ export class TotalComponent implements OnInit {
     return param;
   }
   viewImageThumbnail(item: CardItem) {
+    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
+    else if(wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-"+item.ext+".png";
+    } else {
+      return "assets/img/thumb-other.png";
+    }
   }
   openDialog(type: string, item: CardItem) {
     
@@ -218,14 +224,22 @@ export class TotalComponent implements OnInit {
         width: '600px',
       });
       this.dialogRef.afterClosed().subscribe(
-        (        result: any) => {
+        (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: item
         },
         width: '740px',
       });

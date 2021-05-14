@@ -36,9 +36,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { CdkTableModule } from '@angular/cdk/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CardComponent } from '../../tools/card/card.component';
 import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-success.component';
+
 @NgModule({
     declarations: [AccountComponent,
         CodeComponent,
@@ -52,7 +54,7 @@ import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-su
         SubmitSuccessComponent,
         TrashComponent,
         TopbarComponent,
-        CardComponent
+        CardComponent 
     ],
     providers: [{
         provide: FlowInjectionToken,
@@ -79,7 +81,8 @@ import { SubmitSuccessComponent } from '../sidebarPages/submit-success/submit-su
         MatProgressBarModule,
         MatTreeModule,
         NgxFlowModule,
-        MainRoutingModule
+        MainRoutingModule,
+        FlexLayoutModule
     ]
 })
 export class MainModule { }

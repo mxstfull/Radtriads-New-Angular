@@ -13,6 +13,8 @@ import { MoveModalComponent } from '../../../tools/modals/move-modal/move-modal.
 import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
+import { NavService } from '../../sidebar/nav-service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-video',
@@ -20,7 +22,7 @@ import { Globals } from '../../../global';
   styleUrls: ['./video.component.css']
 })
 export class VideoComponent implements OnInit {
-  @ViewChild(SidebarComponent) child: SidebarComponent;
+  // @ViewChild(SidebarComponent) child: SidebarComponent;
 
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
@@ -29,7 +31,7 @@ export class VideoComponent implements OnInit {
   currentPath = "";
   category = 2; //This means we need music
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
-  // folderTree: NavItem;
+  folderTree: NavItem;
   private dialogRef: any;
   constructor(
     private router: ActivatedRoute,
@@ -37,6 +39,8 @@ export class VideoComponent implements OnInit {
     private router_1: Router,
     public dialog: MatDialog, 
     private globals: Globals,
+    private navService: NavService
+
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -48,29 +52,30 @@ export class VideoComponent implements OnInit {
         localStorage.setItem("current_category", "video");
 
         
+        let requestPayload = {
+          user_id: localStorage.getItem('user_id'),
+          unique_id: localStorage.getItem('unique_id'),
+          currentPath: this.currentPath,
+          category: this.category
+        };
+        this.fileviewService.getFileByCategory(requestPayload).subscribe(
+          result => {
+            this.cardItems = result;
+            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+          },
+          error => {
+    
+          }, () => {
+            //
+    
+          }
+        );
       }
     });
   }
 
   ngOnInit(): void {
-    let requestPayload = {
-      user_id: localStorage.getItem('user_id'),
-      unique_id: localStorage.getItem('unique_id'),
-      currentPath: this.currentPath,
-      category: this.category
-    };
-    this.fileviewService.getFileByCategory(requestPayload).subscribe(
-      result => {
-        this.cardItems = result;
-        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-      },
-      error => {
-
-      }, () => {
-        //
-
-      }
-    );
+    this.navService.folderTree.subscribe(folderTree => this.folderTree = folderTree);
   }
   onDownloadFiles() {
     let requestPayload = this.selection_list.selected;
@@ -146,8 +151,8 @@ export class VideoComponent implements OnInit {
       });
     }
     let modalData ={
-      folderTree: this.child.folderTree,
-      fileList: fileArray, 
+      folderTree: this.folderTree,
+      fileList: fileArray,
       action: m_action
     };
     this.dialogRef = this.dialog.open(MoveModalComponent, {
@@ -203,7 +208,7 @@ export class VideoComponent implements OnInit {
   }
   viewImageThumbnail(item: CardItem) {
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
     else return "assets/img/thumb-"+item.ext+".png";
   }
   openDialog(type: string, item: CardItem) {
@@ -214,14 +219,22 @@ export class VideoComponent implements OnInit {
         width: '600px',
       });
       this.dialogRef.afterClosed().subscribe(
-        (        result: any) => {
+        (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: item
         },
         width: '740px',
       });

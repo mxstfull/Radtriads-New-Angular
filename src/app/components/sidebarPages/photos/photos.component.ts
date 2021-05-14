@@ -14,6 +14,8 @@ import { MoveModalComponent } from '../../../tools/modals/move-modal/move-modal.
 import { NavItem } from '../../interfaces/nav-item';
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
+import { NavService } from '../../sidebar/nav-service';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-photos',
@@ -21,7 +23,7 @@ import { Globals } from '../../../global';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
-  @ViewChild(SidebarComponent) child: SidebarComponent;
+  // @ViewChild(SidebarComponent) child: SidebarComponent;
 
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
@@ -30,7 +32,7 @@ export class PhotosComponent implements OnInit {
   currentPath = "";
   category = 0; // this means we need photos.
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
-  // folderTree: NavItem;
+  folderTree: NavItem;
   private dialogRef: any;
   constructor(
     private router: ActivatedRoute,
@@ -38,6 +40,8 @@ export class PhotosComponent implements OnInit {
     private router_1: Router,
     public dialog: MatDialog, 
     private globals: Globals,
+    private navService: NavService
+
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -47,30 +51,31 @@ export class PhotosComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "photo");
-        
+
+        let requestPayload = {
+          user_id: localStorage.getItem('user_id'),
+          unique_id: localStorage.getItem('unique_id'),
+          currentPath: this.currentPath,
+          category: this.category
+        };
+        this.fileviewService.getFileByCategory(requestPayload).subscribe(
+          result => {
+            this.cardItems = result;
+            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+          },
+          error => {
+    
+          }, () => {
+            //
+    
+          }
+        );
       }
     });
   }
 
   ngOnInit(): void {
-    let requestPayload = {
-      user_id: localStorage.getItem('user_id'),
-      unique_id: localStorage.getItem('unique_id'),
-      currentPath: this.currentPath,
-      category: this.category
-    };
-    this.fileviewService.getFileByCategory(requestPayload).subscribe(
-      result => {
-        this.cardItems = result;
-        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-      },
-      error => {
-
-      }, () => {
-        //
-
-      }
-    );
+    this.navService.folderTree.subscribe(folderTree => this.folderTree = folderTree);
   }
   onDownloadFiles() {
     let requestPayload = this.selection_list.selected;
@@ -87,7 +92,11 @@ export class PhotosComponent implements OnInit {
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(result)
         a.href = objectUrl
-        a.download = 'archive.zip';
+        if(urlArray.length == 1) {
+          a.download = urlArray[0]['title'];
+        } else {
+          a.download = 'archive.zip';
+        }
         a.click();
         URL.revokeObjectURL(objectUrl);
       },error => {
@@ -142,7 +151,7 @@ export class PhotosComponent implements OnInit {
       });
     }
     let modalData ={
-      folderTree: this.child.folderTree,
+      folderTree: this.folderTree,
       fileList: fileArray, 
       action: m_action
     };
@@ -198,9 +207,14 @@ export class PhotosComponent implements OnInit {
     return param;
   }
   viewImageThumbnail(item: CardItem) {
+    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
     if(item.is_picture == 1)
-      return "http://127.0.0.1:8000/files/"+this.jsEncode(item.thumb_url);
-    else return "assets/img/thumb-"+item.ext+".png";
+      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
+    else if(wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-"+item.ext+".png";
+    } else {
+      return "assets/img/thumb-other.png";
+    }
   }
   openDialog(type: string, item: CardItem) {
     
@@ -210,14 +224,22 @@ export class PhotosComponent implements OnInit {
         width: '600px',
       });
       this.dialogRef.afterClosed().subscribe(
-        (        result: any) => {
+        (result: any) => {
+          if(!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
+      if(localStorage.getItem('show_direct_link') == "0" &&
+        localStorage.getItem('show_forum_code') == "0" &&
+        localStorage.getItem('show_html_code') == "0" &&
+        localStorage.getItem('show_social_share') == "0")
+      {
+        return;
+      }
       this.dialog.open(ShareModalComponent, {
         data: {
-          animal: 'panda'
+          data: item
         },
         width: '740px',
       });

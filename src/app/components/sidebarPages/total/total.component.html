@@ -4,16 +4,18 @@
         <mat-tab-group dynamicHeight (selectedTabChange)="onTabClick($event)">
             <mat-tab label="Home" style="overflow: visible;">
                 <div class="storage-box-outer">
-                    <div class="storage-box">
+                    <div class="storage-box storage-box pl-3 pb-3">
                         <div class="storage-tab" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
                             <div class="storage-line photo-line" [ngStyle]="{'width': (photoRate * 100 / allRate) + '%'}"></div>
                             <div class="storage-line music-line" [ngStyle]="{'width': (musicRate * 100 / allRate) + '%'}"></div>
                             <div class="storage-line video-line" [ngStyle]="{'width': (videoRate * 100 / allRate) + '%'}"></div>
-                            <div class="storage-line doc-line" [ngStyle]="{'width': (codeRate * 100 / allRate) + '%'}"></div>
+                            <div class="storage-line doc-line" [ngStyle]="{'width': (codeRate * 100 / allRate) + '%'}">
+                            </div>
                             <div class="storage-line trash-line" [ngStyle]="{'width': (trashRate * 100 / allRate) + '%'}"></div>
                             <div class="clear"></div>
                         </div>
-                        <div class="remain-space" [ngStyle]="{'display': ((allRate==0)?'none':'')}">{{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
+                        <div class="remain-space" [ngStyle]="{'display': ((allRate==0)?'none':'')}">
+                            {{convertToBigUnit(allRate - photoRate)}} / {{convertToBigUnit(allRate)}}</div>
                         <ul>
                             <li class="photo-dot"><span class="sto-name">Photo</span><span class="sto-space">{{convertToBigUnit(photoRate)}}</span></li>
                             <li class="music-dot"><span class="sto-name">Music</span><span class="sto-space">{{convertToBigUnit(musicRate)}}</span></li>
@@ -26,16 +28,6 @@
                     </div>
                 </div>
                 <div class="clear"></div>
-                <div class="changing-btn pl-0 desktop-div">
-                    <a class="grey-btn" (click)="onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                    <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
-          aria-hidden="true"></i>Move</a>
-      <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
-          class="fa fa-clone"></i>Copy</a> -->
-                    <a class="grey-btn" (click)="onDeleteFiles()"><i
-            class="fa fa-trash"></i>Delete</a>
-                    <div class="clear"></div>
-                </div>
                 <div class="tab-content">
                     <div id="fm-grid-view" [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}" class="tab-pane fade in active show">
                         <div class="recent-file-outer">
@@ -44,14 +36,23 @@
                                 <div class="sort-by">Sort by <span>Date</span><img style="cursor: pointer;" (click)="onSortClicked()" src="assets/img/sort.png" alt="" /></div>
                                 <div class="clear"></div>
                             </div>
-                            <mat-grid-list cols="5">
-                                <mat-grid-tile *ngFor="let item of cardItems; let i = index;">
+                            <div class="changing-btn pl-0 desktop-div">
+                                <a class="grey-btn" (click)="onDownloadFiles()" download><i class="fa fa-download"
+                                        aria-hidden="true"></i>Download</a>
+                                <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+                      aria-hidden="true"></i>Move</a>
+                  <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
+                      class="fa fa-clone"></i>Copy</a> -->
+                                <a class="grey-btn" (click)="onDeleteFiles()"><i class="fa fa-trash"></i>Delete</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                                <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of cardItems; let i = index;">
                                     <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
 
                                     </app-card>
-                                </mat-grid-tile>
-                            </mat-grid-list>
-
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="fm-list-view" [ngClass]="{'tab-pane fade in active show': viewMode == 1, 'tab-pane fade ': viewMode == 0}">
@@ -77,8 +78,8 @@
                                         <div class="file-name-table">
                                             <div class="file-name-img"><img src="{{viewImageThumbnail(element)}}" alt="">
                                                 <span class="lock-box" *ngIf="element.is_protected!=0">
-                        <img src="assets/img/lock-icon.png" class="" alt="">
-                      </span>
+                                                    <img src="assets/img/lock-icon.png" class="" alt="">
+                                                </span>
                                             </div> {{element.title}}
                                         </div>
                                     </td>
@@ -87,13 +88,15 @@
                                 <!-- Date Column -->
                                 <ng-container matColumnDef="date">
                                     <th mat-header-cell *matHeaderCellDef> Date </th>
-                                    <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}} </td>
+                                    <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}}
+                                    </td>
                                 </ng-container>
 
                                 <!-- Privacy Column -->
                                 <ng-container matColumnDef="privacy">
                                     <th mat-header-cell *matHeaderCellDef> Privacy </th>
-                                    <td mat-cell *matCellDef="let element"> {{convertToPrivacyString(element.is_protected)}} </td>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{convertToPrivacyString(element.is_protected)}} </td>
                                 </ng-container>
                                 <!-- Action Column -->
                                 <ng-container matColumnDef="action">
@@ -123,16 +126,6 @@
                 </div>
             </mat-tab>
             <mat-tab label="Recent uploads">
-                <div class="changing-btn pl-0 desktop-div">
-                    <a class="grey-btn" (click)="onDownloadFiles()" download><i class="fa fa-download" aria-hidden="true"></i>Download</a>
-                    <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
-          aria-hidden="true"></i>Move</a>
-      <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
-          class="fa fa-clone"></i>Copy</a> -->
-                    <a class="grey-btn" (click)="onDeleteFiles()"><i
-            class="fa fa-trash"></i>Delete</a>
-                    <div class="clear"></div>
-                </div>
                 <div class="tab-content">
                     <div id="fm-grid-view" [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}" class="tab-pane fade in active show">
                         <div class="recent-file-outer">
@@ -141,14 +134,23 @@
                                 <div class="sort-by">Sort by <span>Date</span><img style="cursor: pointer;" (click)="onSortClicked()" src="assets/img/sort.png" alt="" /></div>
                                 <div class="clear"></div>
                             </div>
-                            <mat-grid-list cols="5">
-                                <mat-grid-tile *ngFor="let item of cardItems_recent; let i = index;">
+                            <div class="changing-btn pl-0 desktop-div">
+                                <a class="grey-btn" (click)="onDownloadFiles()" download><i class="fa fa-download"
+                                        aria-hidden="true"></i>Download</a>
+                                <!-- <a class="grey-btn" (click) = "onMoveOrCopyFiles('Move')"><i class="fa fa-arrows"
+                      aria-hidden="true"></i>Move</a>
+                  <a class="grey-btn" (click) = "onMoveOrCopyFiles('Copy')"><i
+                      class="fa fa-clone"></i>Copy</a> -->
+                                <a class="grey-btn" (click)="onDeleteFiles()"><i class="fa fa-trash"></i>Delete</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+                                <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let item of cardItems_recent; let i = index;">
                                     <app-card [SetItem]="item" [selection_list]="selection_list" (deleteItems)="deleteItems($event)">
 
                                     </app-card>
-                                </mat-grid-tile>
-                            </mat-grid-list>
-
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="fm-list-view" [ngClass]="{'tab-pane fade in active show': viewMode == 1, 'tab-pane fade ': viewMode == 0}">
@@ -174,8 +176,8 @@
                                         <div class="file-name-table">
                                             <div class="file-name-img"><img src="{{viewImageThumbnail(element)}}" alt="">
                                                 <span class="lock-box" *ngIf="element.is_protected!=0">
-                        <img src="assets/img/lock-icon.png" class="" alt="">
-                      </span>
+                                                    <img src="assets/img/lock-icon.png" class="" alt="">
+                                                </span>
                                             </div> {{element.title}}
                                         </div>
                                     </td>
@@ -184,13 +186,15 @@
                                 <!-- Date Column -->
                                 <ng-container matColumnDef="date">
                                     <th mat-header-cell *matHeaderCellDef> Date </th>
-                                    <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}} </td>
+                                    <td mat-cell *matCellDef="let element"> {{convertoToString(element.updated_at)}}
+                                    </td>
                                 </ng-container>
 
                                 <!-- Privacy Column -->
                                 <ng-container matColumnDef="privacy">
                                     <th mat-header-cell *matHeaderCellDef> Privacy </th>
-                                    <td mat-cell *matCellDef="let element"> {{convertToPrivacyString(element.is_protected)}} </td>
+                                    <td mat-cell *matCellDef="let element">
+                                        {{convertToPrivacyString(element.is_protected)}} </td>
                                 </ng-container>
                                 <!-- Action Column -->
                                 <ng-container matColumnDef="action">
@@ -222,8 +226,10 @@
             <mat-tab disabled>
                 <ng-template mat-tab-label>
                     <ul class="nav nav-tabs list-grid" style="font-size: 16px !important;">
-                        <li><a data-toggle="tab" (click)="setGridViewMode()"><i class="fa fa-th" aria-hidden="true"></i></a></li>
-                        <li><a data-toggle="tab" (click)="setListViewMode()"><i class="fa fa-list" aria-hidden="true"></i></a></li>
+                        <li><a data-toggle="tab" (click)="setGridViewMode()"><i class="fa fa-th"
+                                    aria-hidden="true"></i></a></li>
+                        <li><a data-toggle="tab" (click)="setListViewMode()"><i class="fa fa-list"
+                                    aria-hidden="true"></i></a></li>
                     </ul>
                     <div class="select-all desktop-div" style="font-size: 16px !important;">
                         <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection_list.hasValue() && isAllSelected()" [indeterminate]="selection_list.hasValue() && !isAllSelected()">Select All</mat-checkbox>

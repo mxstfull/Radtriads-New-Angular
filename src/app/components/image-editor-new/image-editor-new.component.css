@@ -4,3 +4,7 @@
   height: 100vh;
 }
 /*# sourceMappingURL=image-editor-new.component.css.map */
+
+a {
+  cursor: pointer;
+}

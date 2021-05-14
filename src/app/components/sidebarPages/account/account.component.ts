@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AccountService } from 'src/app/shared/account.service';
 import { TokenService } from 'src/app/shared/token.service';
-import { stringify } from '@angular/compiler/src/util';
-import { error } from 'selenium-webdriver';
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationComponent } from "../../../shared/confirmation/confirmation.component";
+import { AlertComponent } from '../../../shared/alert/alert.component';
+import { AppSettings } from '../../../shared/appSettings';
 
 @Component({
   selector: 'app-account',
@@ -32,9 +34,12 @@ export class AccountComponent implements OnInit {
   codeRate: number;
   trashRate: number;
   selectedFile: File = null;
+  fileCount: string = "";
   stripe_plan: string;
   tab: number;
 
+  fileToUpload: any;
+  imageUrl: any;
 
   constructor(
     public router: Router,
@@ -43,6 +48,7 @@ export class AccountComponent implements OnInit {
     private token: TokenService,
     private authState: AuthStateService,
     private activatedRoute: ActivatedRoute
+    public dialog: MatDialog
   ) {
 
     this.MyInfoForm = this.fb.group({
@@ -78,7 +84,24 @@ export class AccountComponent implements OnInit {
       },
     );
   }
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0);
 
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    let requestPayload = {
+      unique_id: localStorage.getItem('unique_id'),
+      fileToUpload: this.fileToUpload
+    };
+    this.AccountService.uploadAvatar(requestPayload).subscribe(
+      result => {
+      },
+    );
+  }
   responseGetDataHandler(result: any) {
     this.user_inf = result.message.user;
     this.plan_inf = result.message.plan;
@@ -94,8 +117,12 @@ export class AccountComponent implements OnInit {
     }
 
     this.PrivacyForm.patchValue({ Privacy_seleted: this.selected });
+
     this.stripe_plan = this.user_inf['stripe_plan'];
     this.getDiskUsage();
+    if(this.user_inf['profile_picture']) {
+      this.imageUrl = AppSettings.backendURL+"avatar/"+this.user_inf['profile_picture'];
+    }
   }
 
   getDiskUsage() {
@@ -109,13 +136,13 @@ export class AccountComponent implements OnInit {
     );
   }
   drawPercentBar(result: any) {
-    if(result) {
+    if (result) {
       this.allRate = result['all'];
       this.photoRate = this.musicRate = this.videoRate = this.codeRate = this.trashRate = 0;
-      if(result['deleted'] != null) this.trashRate = result['deleted'];
-      result['category'].forEach (
+      if (result['deleted'] != null) this.trashRate = result['deleted'];
+      result['category'].forEach(
         element => {
-          switch(element['category']) {
+          switch (element['category']) {
             case 0: this.photoRate = element['diskspace']; break;
             case 1: this.musicRate = element['diskspace']; break;
             case 2: this.videoRate = element['diskspace']; break;
@@ -123,23 +150,23 @@ export class AccountComponent implements OnInit {
           }
         }
       );
+      this.fileCount = result['file_count'].toString();
     }
   }
   convertToBigUnit(byteSize) {
-    if(byteSize < 1000) {
+    if (byteSize < 1000) {
       return byteSize + "byte";
-    } else if(byteSize < 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000) {
       return Math.round(byteSize / 1000) + "KB";
-    } else if(byteSize < 1000 * 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000 * 1000) {
       return Math.round(byteSize / 1000 / 1000) + "MB";
-    } else if(byteSize < 1000 * 1000 * 1000 * 1000) {
+    } else if (byteSize < 1000 * 1000 * 1000 * 1000) {
       return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
     }
   }
 
   onSubmit_myinfo() {
     this.submitted = true;
-
     this.AccountService.MyInfo(this.MyInfoForm.value, this.user_info).subscribe(
       result => {
         this.responseHandler(result);
@@ -147,7 +174,14 @@ export class AccountComponent implements OnInit {
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
+        this.dialog.open(AlertComponent, {
+          data: {
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
         this.submitted = false;
         this.MyInfoForm.reset();
       }
@@ -156,16 +190,28 @@ export class AccountComponent implements OnInit {
 
   responseHandler(result: any) {
   }
-
+  responseHandler_setting(result: any) {
+    localStorage.setItem('show_direct_link', result.message.show_direct_link);
+    localStorage.setItem('show_html_code', result.message.show_html_code);
+    localStorage.setItem('show_forum_code', result.message.show_forum_code);
+    localStorage.setItem('show_social_share', result.message.show_social_share);
+  }
   onSubmit_Settings() {
     this.AccountService.Settings(this.SettingForm.value, this.user_info).subscribe(
       result => {
-        this.responseHandler(result);
+        this.responseHandler_setting(result);
       },
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
+        this.dialog.open(AlertComponent, {
+          data: {
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
       }
     );
   }
@@ -178,7 +224,14 @@ export class AccountComponent implements OnInit {
       error => {
         this.errors = error.error;
       }, () => {
-        console.log('sucess_reset!');
+        this.dialog.open(AlertComponent, {
+          data: {
+            message: 'Success!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
       }
     );
   }
@@ -191,18 +244,33 @@ export class AccountComponent implements OnInit {
       // If selected file exist make upload request
     }
   }
+
   signOut() {
-    this.AccountService.delete(this.user_info).subscribe(
-      result => {
-        this.responseHandler(result);
-      },
-      error => {
-        this.errors = error.error;
-      }, () => {
-        this.authState.setAuthState(false);
-        this.token.removeToken();
-        this.router.navigate(['login']);
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      data: {
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Delete',
+          cancel: 'No'
+        }
       }
-    );
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.AccountService.delete(this.user_info).subscribe(
+          result => {
+            this.responseHandler(result);
+          },
+          error => {
+            this.errors = error.error;
+          }, () => {
+            this.authState.setAuthState(false);
+            this.token.removeToken();
+            this.router.navigate(['login']);
+          }
+        );
+      }
+    });
   }
 }
