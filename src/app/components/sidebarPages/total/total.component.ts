@@ -12,8 +12,8 @@ import { DeleteModalComponent } from '../../../tools/modals/delete-modal/delete-
 
 import { SidebarComponent } from '../../sidebar/sidebar.component';
 import { Globals } from '../../../global';
-import { AccountService } from 'src/app/shared/account.service';
 import { AppSettings } from '../../../shared/appSettings';
+import { AccountService } from '../../../shared/account.service';
 
 @Component({
   selector: 'app-total',
@@ -32,6 +32,7 @@ export class TotalComponent implements OnInit {
   category = -1; // this means we need photos.
   viewMode: number = 0; //this means now is GirdViewMode(when it's 1 it means ListViewMode).
   rangeMode: number = 0; //this means now is for all medias(when it's 1 it means to be for recent uploaded medias).
+  pageNumber: number = 0;
   //These are for media percentage.
   allRate: number = 0;
   photoRate: number;
@@ -59,9 +60,10 @@ export class TotalComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "photo");
-        
       }
     });
+    this.pageNumber = 0;
+    this.cardItems = [];
   }
   getDiskUsage() {
     let requestPayload = {
@@ -107,14 +109,15 @@ export class TotalComponent implements OnInit {
       user_id: localStorage.getItem('user_id'),
       unique_id: localStorage.getItem('unique_id'),
       currentPath: this.currentPath,
-      category: this.category
+      category: this.category,
+      pageNumber: this.pageNumber
     };
     this.fileviewService.getFileByCategory(requestPayload).subscribe(
       result => {
-        this.cardItems = result['total'];
+
+        this.cardItems = this.cardItems.concat(result['total']);
         this.cardItems_recent = result['recent'];
         this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-        
       },
       error => {
 
@@ -300,5 +303,8 @@ export class TotalComponent implements OnInit {
       this.dataSource = new MatTableDataSource<CardItem>(this.cardItems_recent);
     }
   }
-
+  load_more() {
+    this.pageNumber ++;
+    this.getMedias();
+  }
 }
