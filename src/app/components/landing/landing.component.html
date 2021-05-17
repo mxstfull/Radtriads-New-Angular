@@ -1,25 +1,16 @@
 <header id="header" [ngClass]="{'sticky' : isSticky}">
   <div class="container-fluid">
     <div class="row">
-      <div
-        class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-8 order-2 order-lg-1"
-      >
+      <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-8 order-2 order-lg-1">
         <nav class="navbar navbar-expand-lg">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="true"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
             <i class="fa fa-bars" aria-hidden="true"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#"> About </a>
+                <a class="nav-link" routerLink="/about"> About </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"> Services </a>
@@ -28,29 +19,21 @@
                 <a class="nav-link" href="#"> Projects </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> Contacts </a>
+                <a class="nav-link" href="mailto:support@radtriads.com"> Contacts </a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
-      <div
-        class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2"
-      >
+      <div class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2">
         <div class="logo">
-          <a routerLink="/"
-            ><img src="../assets/img/logo.png"  alt="logo"
-          /></a>
+          <a routerLink="/"><img src="../assets/img/logo.png" alt="logo" /></a>
         </div>
       </div>
-      <div
-        class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3"
-      >
+      <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3">
         <div class="header-right">
-          <a routerLink="/login" >Log In</a>
-          <a pageScroll  href="#plan-select" class="sign-up-btn"
-            >Sign Up</a
-          >
+          <a routerLink="/login">Log In</a>
+          <a pageScroll href="#plan-select" class="sign-up-btn">Sign Up</a>
           <!-- <button
             class="btn btn-outline-primary"
             (click)="signOut()"
@@ -73,7 +56,7 @@
             forever.
           </h1>
           <p>Reliable media hosting developed by the users, for users</p>
-          <a pageScroll  href="#plan-select" class="green-btn">Get Started</a>
+          <a pageScroll href="#plan-select" class="green-btn">Get Started</a>
         </div>
       </div>
     </div>
@@ -132,9 +115,7 @@
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
           <div class="exploare-all">
-            <a routerLink="/" class="green-btn"
-              >Explore All Features <i class="fa fa-arrow-right"></i
-            ></a>
+            <a routerLink="/" class="green-btn">Explore All Features <i class="fa fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -243,7 +224,7 @@
   </div>
   <!-- testimonial-section-->
 
-  <div class="plan-section" id = "plan-select">
+  <div class="plan-section" id="plan-select">
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
@@ -277,9 +258,7 @@
               <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
               <li><i class="fa fa-check"></i>Lifetime Storage</li>
             </ul>
-            <a (click)="register('silver')" class="plan-btn" 
-              >Sign up<span>30 days free trial</span></a
-            >
+            <a (click)="register('silver')" class="plan-btn">Sign up<span>30 days free trial</span></a>
           </div>
         </div>
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
@@ -300,9 +279,7 @@
               <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
               <li><i class="fa fa-check"></i>Lifetime Storage</li>
             </ul>
-            <a (click)="register('gold')" class="plan-btn"
-              >Sign up<span>30 days free trial</span></a
-            >
+            <a (click)="register('gold')" class="plan-btn">Sign up<span>30 days free trial</span></a>
           </div>
         </div>
         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
@@ -323,9 +300,7 @@
               <li><i class="fa fa-check"></i>Secure Private Album Sharing</li>
               <li><i class="fa fa-check"></i>Lifetime Storage</li>
             </ul>
-            <a (click)="register('platinum')" class="plan-btn"
-              >Sign up<span>30 days free trial</span></a
-            >
+            <a (click)="register('platinum')" class="plan-btn">Sign up<span>30 days free trial</span></a>
           </div>
         </div>
       </div>
@@ -372,7 +347,7 @@
 </section>
 <!--section -->
 <!--footer -->
-<footer id="footer" >
+<footer id="footer">
   <div class="footer-top">
     <div class="container">
       <div class="row">
@@ -381,22 +356,18 @@
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
           <ul>
-            <li><a routerLink="/">About us</a></li>
-            <li><a routerLink="/">Contact us</a></li>
-            <li><a routerLink="/">Terms of use</a></li>
-            <li><a routerLink="/">Privacy Policy</a></li>
-            <li><a routerLink="/">Support</a></li>
-            <li><a routerLink="/">FAQ</a></li>
+            <li><a routerLink="/about">About us</a></li>
+            <li><a href="mailto:support@radtriads.com">Contact us</a></li>
+            <li><a routerLink="/terms">Terms of use</a></li>
+            <li><a routerLink="/privacy">Privacy Policy</a></li>
+            <li><a href="mailto:support@radtriads.com">Support</a></li>
+            <li><a routerLink="/faq">FAQ</a></li>
           </ul>
         </div>
         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
           <div class="footer-social">
-            <a routerLink="/" target="_blank"
-              ><i class="fa fa-facebook"></i
-            ></a>
-            <a routerLink="/" target="_blank"
-              ><i class="fa fa-twitter"></i
-            ></a>
+            <a href="https://www.facebook.com/RadTriads" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/radtriads" target="_blank"><i class="fa fa-twitter"></i></a>
           </div>
         </div>
       </div>

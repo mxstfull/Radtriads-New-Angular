@@ -1,0 +1,61 @@
+#header {
+    background-color: transparent ;
+    position: relative;
+}
+.sticky {
+    background-color: #e74a3b !important;
+    opacity: 1;
+    transition: opacity .25s ease-out, height .15s ease;
+}
+a {
+    cursor: pointer;
+}
+.landing h2 {
+    text-align: center;
+}
+.test-box {
+    max-width: 80%;
+    margin-left:auto;
+    margin-right: auto;
+}
+:host ::ng-deep .test-box {
+    color: black !important;
+    text-align: center;
+}
+.test-text p, .test-text b {
+    font-size: 22px !important;
+}
+:host ::ng-deep li.li8 {
+    list-style-type: lower-alpha;
+    text-align: left;
+    font-size: 22px !important;
+}
+:host ::ng-deep .test-box ul li {
+    text-align: left !important;
+    list-style-type: disc;
+}
+:host ::ng-deep ui.ul1 {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+:host ::ng-deep ul li.li2 {
+    list-style-type: disc;
+    text-align: left;
+    font-size: 22px !important;
+}
+:host ::ng-deep ul.ul1 {
+    padding-left: 40px;
+}
+
+:host ::ng-deep button:focus, :host ::ng-deep h2 {
+    box-shadow: none;
+    text-decoration: none;
+}
+:host ::ng-deep button:hover {
+    text-decoration: none;
+}

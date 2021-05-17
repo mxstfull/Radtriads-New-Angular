@@ -32,7 +32,7 @@
               "src/assets/css/custom.css"
             ],
             "scripts": [
-              
+              "src/assets/js/bootstrap.js"
             ]
           },
           "configurations": {
