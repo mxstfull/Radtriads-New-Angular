@@ -1,0 +1,332 @@
+<header id="header" [ngClass]="'sticky'">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-8 order-2 order-lg-1">
+          <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" routerLink="/about"> About </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"> Services </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#"> Projects </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="mailto:support@radtriads.com"> Contacts </a>
+                    </li>
+                  </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2">
+          <div class="logo">
+            <a routerLink="/"><img src="../assets/img/logo.png" alt="logo" /></a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3">
+          <div class="header-right">
+            <a routerLink="/login">Log In</a>
+            <a pageScroll href="#plan-select" class="sign-up-btn">Sign Up</a>
+            <!-- <button
+                    class="btn btn-outline-primary"
+                    (click)="signOut()"
+                  >
+                    Log out
+                  </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!--section -->
+  <section id="section" class="landing">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <h2 class="mt-4">FAQ</h2>
+      <div class="owl-carousel owl-theme testimonial-slider">
+        <div class="item">
+          <div class="test-box">
+            <div class="test-img">
+                  <img src="assets/img/faq_header.png" />
+                </div>
+            <div class="test-text mt-4 page-content">
+
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How to change your email
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to my account > My Info > Change your email and enter your password
+                            <br />
+                            A confirmation message will be sent to your original email
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How to upgrade/downgrade your plan & payment details
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to my account > Plan & Usage > Change your plan here
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Cancelling your subscription
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Your account will remain with all access to your current subscription until it becomes due, at which time it will not renew. Please ensure that you download all your images & content prior to the next renewal date.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                            Easy Sharing and linking
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to my account > Settings > Check the boxes that you want to show for easy sharing and linking. These will appear in your album view for easy access
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingFive">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                            Who can see your content settings
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to My Account >  Privacy & Security > Make your Account Private or Public
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingSix">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                            Sharing your albums to select group/individual
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to the Album you wish to share > Select ‘Edit Privacy’ : 
+                            <br>
+                            1. Select Public
+                            2. Select Private with password > Create password you will give to gain access
+                            3. Select ‘Share Album’ > Copy link to share
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingSeven">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
+                            Creating albums
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Click ‘Create Album’ > Give your new Album a name and where you want to create it
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingEight">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseThree">
+                            Adding content
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to the Album you wish to add content to > Click ‘Upload’<br>Either drag & drop or click to select content you want to upload. You can select up to 100 files at a time.
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingNone">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseThree">
+                            Renaming an Album
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseNine" class="collapse" aria-labelledby="headingNone" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to the Album you wish to rename and click ‘Rename Album’ > Give your album a new name & save.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTen">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseThree">
+                            Copying & moving files 
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Select the files you want to copy or move and then select either copy or move at the bottom of your screen. Select the album you want to copy or move these files to. Please note that copying will put an additional copy in the new album, leaving the original in its album and moving will remove it from its original album and place it into the new album.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingEleven">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseThree">
+                            Sorting Albums
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Albums are set to Newest to Oldest by default. You can change this by clicking Sort and changing that to A-Z, Z-A, Oldest to Newest etc.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseThree">
+                            Downloading your content
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to the album you want to download and select ‘Download Album’ RadTriads will download to your pc in an RAR folder.  You can also download individual files by going to their page.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThirteen">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThree">
+                            Editing & Enhancing your Images
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#accordionExample">
+                        <div class="card-body">
+                        - Open the image up and select Edit.<br><br>
+                        Here you will be able to: <br>
+                        - Enhance your image with various filters<br>
+                        - Resize <br>
+                        - Crop <br>
+                        - Transform/Rotate<br>
+                        - Draw<br>
+                        - Add Text<br>
+                        - Add Shapes<br>
+                        - Add Stickers<br>
+                        - Frame<br>
+                        - Select Corners<br>
+                        - Add Backgrounds<br>
+                        - Merge<br>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingFourtenn">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveteen" aria-expanded="false" aria-controls="collapseThree">
+                            Changing your Password
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFiveteen" class="collapse" aria-labelledby="headingFourtenn" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Go to My Account > Password > Change your password here. A confirmation will be sent to your email
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+      <!--slider-->
+    </div>
+    <!-- top-section-->
+    <!-- partner-section-->
+  </section>
+  <!--section -->
+  <!--footer -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <img src="../../../assets/img/logo.png" alt="" />
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+            <ul>
+                <li><a routerLink="/about">About us</a></li>
+                <li><a href="mailto:support@radtriads.com">Contact us</a></li>
+                <li><a routerLink="/terms">Terms of use</a></li>
+                <li><a routerLink="/privacy">Privacy Policy</a></li>
+                <li><a href="mailto:support@radtriads.com">Support</a></li>
+                <li><a routerLink="/faq">FAQ</a></li>
+              </ul>
+          </div>
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/RadTriads" target="_blank"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/radtriads" target="_blank"><i class="fa fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-top-->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="copy-right">Copyright RadTriads Inc. 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-bottom-->
+  </footer>
+  <!--footer -->
+  

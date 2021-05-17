@@ -9,6 +9,10 @@ import { PhotoDetailComponent } from './components/photo-detail/photo-detail.com
 import { ImageEditorComponent } from './components/image-editor/image-editor.component';
 import { ImageEditorNewComponent } from './components/image-editor-new/image-editor-new.component';
 import { AuthGuard } from './shared/auth.guard';
+import { AboutComponent } from './components/firstpage/about/about.component';
+import { TermsComponent } from './components/firstpage/terms/terms.component';
+import { PrivacyComponent } from './components/firstpage/privacy/privacy.component';
+import { FaqComponent } from './components/firstpage/faq/faq.component';
 
 const routes: Routes = [
   {
@@ -52,6 +56,22 @@ const routes: Routes = [
     component: PhotoDetailComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'terms',
+    component: TermsComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
+  },
+  {
+    path: 'faq',
+    component: FaqComponent
+  }
 ];
 
 @NgModule({
