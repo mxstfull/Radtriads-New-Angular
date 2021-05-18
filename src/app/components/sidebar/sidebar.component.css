@@ -111,3 +111,6 @@ mat-sidenav {
 .mat-icon-button.closebtn {
     display: none;
 }
+.dashboard-sidebar .logo {
+    margin: 0px 1.25em 1.5em 1.25em;
+}

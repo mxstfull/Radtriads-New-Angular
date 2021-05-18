@@ -30,3 +30,6 @@ a {
     text-align: left;
     font-size: 22px !important;
 }
+.logo.header img {
+    max-width: 40%;
+}

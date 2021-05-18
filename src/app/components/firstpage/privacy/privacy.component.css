@@ -51,3 +51,6 @@ a {
 :host ::ng-deep ul.ul1 {
     padding-left: 40px;
 }
+.logo.header img {
+    max-width: 40%;
+}

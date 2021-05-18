@@ -22,3 +22,6 @@ a {
     color: black !important;
     text-align: center;
 }
+.logo.header img {
+    max-width: 40%;
+}

@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
       this.planOption = params['plan'];
     });
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       password_confirmation: ['', [Validators.required]],
