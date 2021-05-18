@@ -10,3 +10,6 @@
 a {
     cursor: pointer;
 }
+.logo.header img {
+    max-width: 40%;
+}

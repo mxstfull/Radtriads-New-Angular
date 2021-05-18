@@ -2,7 +2,7 @@
     <app-topbar></app-topbar>
     <div class="dashboard-bottom">
         <div class="dash-bot-top">
-            <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.back();"></i> Create Folder</h2>
+            <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.back();"></i> Create Album</h2>
             <div class="clear"></div>
         </div>
         <form action="" class="create-folder-form">
@@ -12,7 +12,7 @@
                 <a class="create-btn" (click)="onCreateFolder()"><i class="fa fa-check" aria-hidden="true"></i> Create</a>
             </div>
             <div class="folder-location">
-                <p>Create folder in Home or select another location...</p>
+                <p>Create Album in Home or select another location...</p>
                 <div class="folder-path" fxLayout="row">
 
                     <div *ngFor="let folder of rootFoldersOfCurrent; let last = last" [class.last-item]="last">

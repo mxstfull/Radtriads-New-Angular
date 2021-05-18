@@ -17,9 +17,9 @@
                                 <div class="form-row">
                                     <div class="input-box">
                                         <i class="fa fa-user"></i>
-                                        <input type="text" formControlName="name" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && this.errors?.name }" />
-                                        <div *ngIf="submitted && this.errors?.name" class="invalid-feedback">
-                                            <div *ngIf="this.errors?.name">{{this.errors?.name}}</div>
+                                        <input type="text" formControlName="username" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && this.errors?.username }" />
+                                        <div *ngIf="submitted && this.errors?.username" class="invalid-feedback">
+                                            <div *ngIf="this.errors?.username">{{this.errors?.username}}</div>
                                         </div>
                                     </div>
                                 </div>
