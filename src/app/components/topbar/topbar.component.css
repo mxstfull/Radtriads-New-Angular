@@ -2,3 +2,12 @@
     cursor: pointer;
     color: #304156;
 }
+.admin-link {
+    background: #27ae60 !important;
+    color: #FFF !important;
+    padding-top: 8px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 6px;
+    width: 100px !important;
+    margin-left: 10px;
+}

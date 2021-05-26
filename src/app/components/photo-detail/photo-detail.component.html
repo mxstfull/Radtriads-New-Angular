@@ -4,7 +4,7 @@
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
         <div fxLayoutAlign="center" fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="60%" class="card p-4 m-5">
-            <div class="photo-box">
+            <div class="photo-box" *ngIf="protected==0">
                 <img src="{{viewImageDetail(currentItem)}}" alt="" />
                 <div class="photo-box-icons">
                   <a (click)="onDeleteItem()"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -13,6 +13,25 @@
                   <a (click)="openDialog('share')"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                 </div>
             </div>
+            <div class = "photo-box" *ngIf="protected==1" style="display: flex;">
+                <div style="margin:auto;font-size:35px">This media is private.</div>
+            </div>
+            <div class = "photo-box" *ngIf="protected==2" style="padding:20px;">
+                <p style="font-size:35px;">
+                    If you want to access it, please enter the password below.
+                </p>
+                <div class="input-box">
+                    <i class="fa fa-lock"></i><input type="password"  class="form-control" [(ngModel)]="passwordInput" />
+                </div>
+                <div class="form-row m-0" style = "float:right">
+                    <button type="submit" class="btn btn-primary" (click) = "confirmPassword()">
+                        Access
+                    </button>
+                </div>
+                <div style="color:red" *ngIf="wrongPassword">
+                    Wrong password.
+                </div>                
+            </div> 
         </div>
         <div fxLayoutAlign="center" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="40%" class="info">
             <div fxLayout="column" fxLayoutGap="10px" class="photo-information">

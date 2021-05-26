@@ -6,6 +6,7 @@ import { DeleteModalComponent } from '../../tools/modals/delete-modal/delete-mod
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
 import { AppSettings } from '../../shared/appSettings';
+import { ConfirmationComponent } from "../../shared/confirmation/confirmation.component";
 
 @Component({
   selector: 'app-photo-detail',
@@ -16,6 +17,9 @@ export class PhotoDetailComponent implements OnInit {
 
   private dialogRef: any;
   public currentItem: CardItem;
+  public protected : number;
+  public wrongPassword: boolean = false;
+  public passwordInput:string;
   constructor(
     private fileviewService: FileviewService,
     private router: ActivatedRoute,
@@ -25,13 +29,15 @@ export class PhotoDetailComponent implements OnInit {
     this.router.queryParams.subscribe(params => {
       let m_unique_id = params['id'];
       let requestPayload = {
-        unique_id: m_unique_id
+        unique_id: m_unique_id,
       };
       this.fileviewService.getItemByUniqueId(requestPayload).subscribe(
         result => {
           if(!result) {
           }
           else {
+            this.protected = result['is_protected'];
+            if(result['user_id'] == localStorage.getItem('user_id')) this.protected = 0;
             this.currentItem = result;
             localStorage.setItem('currentItemForEditor', this.viewImageDetail(this.currentItem));
           }
@@ -44,6 +50,10 @@ export class PhotoDetailComponent implements OnInit {
     });  
   }
 
+  confirmPassword() {
+    if(this.currentItem.password != this.passwordInput) this.wrongPassword = true;
+    else this.protected = 0;
+  }
   ngOnInit(): void {
       
   }

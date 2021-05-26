@@ -28,6 +28,10 @@ export class AuthService {
   signin(user: User): Observable<any> {
     return this.http.post<any>(AppSettings.backendURL+'api/auth/login', user);
   }
+  //Signout
+  logout(user: User): Observable<any> {
+    return this.http.post<any>(AppSettings.backendURL+'api/auth/logout', user);
+  }
 
   // Access user profile
   profileUser(): Observable<any> {
