@@ -1,0 +1,111 @@
+<header id="header" [ngClass]="'sticky'">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-8 order-2 order-lg-1">
+          <nav class="navbar navbar-expand-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/about"> About </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/terms">Terms of use</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/privacy">Privacy Policy</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="mailto:support@radtriads.com"> Contacts </a>
+                  </li>
+                </ul>
+              </div>
+          </nav>
+        </div>
+        <div class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2">
+          <div class="logo header">
+            <a routerLink="/"><img src="../assets/img/main-logo.png" alt="logo" /></a>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3">
+          <div class="header-right">
+            <a routerLink="/login">Log In</a>
+            <a pageScroll  routerLink="/" class="sign-up-btn">Sign Up</a>
+            <!-- <button
+                    class="btn btn-outline-primary"
+                    (click)="signOut()"
+                  >
+                    Log out
+                  </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!--section -->
+  <section id="section" class="landing">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <h2 class="mt-4">{{title}}</h2>
+      <div class="owl-carousel owl-theme testimonial-slider">
+        <div class="item">
+          <div class="test-box">
+            <!-- <div class="test-img">
+                <img src="assets/img/about_us.jpg" />
+              </div> -->
+            <div class="test-text mt-4 page-content" innerHTML={{content}} >
+                
+            </div>
+          </div>
+        </div>
+  
+      </div>
+      <!--slider-->
+    </div>
+    <!-- top-section-->
+    <!-- partner-section-->
+  </section>
+  <!--section -->
+  <!--footer -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <img src="../../../assets/img/main-logo.png" alt="" />
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+            <ul>
+                <li><a routerLink="/about">About us</a></li>
+                <li><a href="mailto:support@radtriads.com">Contact us</a></li>
+                <li><a routerLink="/terms">Terms of use</a></li>
+                <li><a routerLink="/privacy">Privacy Policy</a></li>
+                <li><a href="mailto:support@radtriads.com">Support</a></li>
+                <li><a routerLink="/faq">FAQ</a></li>
+              </ul>
+          </div>
+          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
+            <div class="footer-social">
+              <a href="https://www.facebook.com/RadTriads" target="_blank"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/radtriads" target="_blank"><i class="fa fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-top-->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="copy-right">Copyright RadTriads Inc. 2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--footer-bottom-->
+  </footer>
+  <!--footer -->
+  

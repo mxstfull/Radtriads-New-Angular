@@ -11,4 +11,6 @@ export interface CardItem {
   ext: string,
   created_at: string,
   updated_at: string,
+  user_id: string,
+  password: string
 }

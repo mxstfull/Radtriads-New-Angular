@@ -27,7 +27,10 @@
       </div>
       <div class="col-xl-4 col-lg-2 col-md-6 col-sm-6 col-4 order-1 order-lg-2">
         <div class="logo header">
-          <a routerLink="/"><img src="../assets/img/main-logo.png" alt="logo" /></a>
+          <a routerLink="/">
+            <!-- <img src="../assets/img/main-logo.png" alt="logo" /> -->
+            <img src="{{viewLogo()}}" alt="" />
+          </a>
         </div>
       </div>
       <div class="col-xl-4 col-lg-5 col-md-12 col-sm-12 col-12 order-3 order-lg-3">
@@ -352,7 +355,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
-          <img src="../../../assets/img/main-logo.png" alt="" />
+          <!-- <img src="../../../assets/img/main-logo.png" alt="" /> -->
+          <img src="{{viewLogo()}}" alt="" *ngIf="logoUrl" />
         </div>
         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
           <ul>

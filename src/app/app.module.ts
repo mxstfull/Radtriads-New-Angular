@@ -62,6 +62,7 @@ import { AboutComponent } from './components/firstpage/about/about.component';
 import { TermsComponent } from './components/firstpage/terms/terms.component';
 import { PrivacyComponent } from './components/firstpage/privacy/privacy.component';
 import { FaqComponent } from './components/firstpage/faq/faq.component';
+import { PageComponent } from './components/firstpage/page/page.component';
 
 @NgModule({
   exports: [
@@ -82,7 +83,6 @@ import { FaqComponent } from './components/firstpage/faq/faq.component';
     MatProgressBarModule
   ],
   declarations: [
-    
   ]
 })
 export class MaterialModule { }
@@ -115,7 +115,9 @@ export class MaterialModule { }
     AboutComponent,
     TermsComponent,
     PrivacyComponent,
-    FaqComponent
+    FaqComponent,
+    PageComponent
+
   ],
   imports: [
     ReactiveFormsModule,
