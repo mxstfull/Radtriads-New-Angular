@@ -20,6 +20,6 @@ export class PlanStateService {
 
   // Ask Stripe
   request_url(data): Observable<any> {
-    return this.http.post('http://127.0.0.1:8001/api/stripe/request_url', data);
+    return this.http.post('http://15.222.57.63:8000/api/stripe/request_url', data);
   }
 }
