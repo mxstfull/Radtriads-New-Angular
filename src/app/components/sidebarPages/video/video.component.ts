@@ -52,26 +52,30 @@ export class VideoComponent implements OnInit {
         localStorage.setItem("current_category", "video");
 
         
-        let requestPayload = {
-          user_id: localStorage.getItem('user_id'),
-          unique_id: localStorage.getItem('unique_id'),
-          currentPath: this.currentPath,
-          category: this.category
-        };
-        this.fileviewService.getFileByCategory(requestPayload).subscribe(
-          result => {
-            this.cardItems = result;
-            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-          },
-          error => {
-    
-          }, () => {
-            //
-    
-          }
-        );
+        this.getItems();
       }
     });
+  }
+  getItems(searchText = "") {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+      unique_id: localStorage.getItem('unique_id'),
+      currentPath: this.currentPath,
+      category: this.category,
+      searchText: searchText
+    };
+    this.fileviewService.getFileByCategory(requestPayload).subscribe(
+      result => {
+        this.cardItems = result;
+        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+      },
+      error => {
+
+      }, () => {
+        //
+
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -282,5 +286,8 @@ export class VideoComponent implements OnInit {
   onSortClicked() {
     this.cardItems = this.cardItems.reverse();
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+  }
+  searchThis(data) {
+    this.getItems(data);
   }
 }

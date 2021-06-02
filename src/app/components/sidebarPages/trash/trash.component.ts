@@ -48,28 +48,32 @@ export class TrashComponent implements OnInit {
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "deleted");
         
-        let requestPayload = {
-          user_id: localStorage.getItem('user_id'),
-          unique_id: localStorage.getItem('unique_id'),
-          currentPath: this.currentPath,
-          category: this.category
-        };
-        this.fileviewService.getFileByCategory(requestPayload).subscribe(
-          result => {
-            this.cardItems = result;
-            this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
-          },
-          error => {
-    
-          }, () => {
-            //
-    
-          }
-        );
+        this.getItems();
+        
       }
     });
   }
+  getItems(searchText = "") {
+    let requestPayload = {
+      user_id: localStorage.getItem('user_id'),
+      unique_id: localStorage.getItem('unique_id'),
+      currentPath: this.currentPath,
+      category: this.category,
+      searchText: searchText
+    };
+    this.fileviewService.getFileByCategory(requestPayload).subscribe(
+      result => {
+        this.cardItems = result;
+        this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+      },
+      error => {
 
+      }, () => {
+        //
+
+      }
+    );
+  }
   ngOnInit(): void {
     
   }
@@ -218,4 +222,24 @@ export class TrashComponent implements OnInit {
       }
     );
   }
+  searchThis(data) {let requestPayload = {
+    user_id: localStorage.getItem('user_id'),
+    unique_id: localStorage.getItem('unique_id'),
+    currentPath: this.currentPath,
+    category: this.category
+  };
+  this.fileviewService.getFileByCategory(requestPayload).subscribe(
+    result => {
+      this.cardItems = result;
+      this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+    },
+    error => {
+
+    }, () => {
+      //
+
+    }
+  );
+    this.getItems(data);
+  }  
 }

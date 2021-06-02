@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/shared/account.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
 import { Router } from '@angular/router';
+import { AppSettings } from '../../shared/appSettings';
 
 @Component({
   selector: 'app-topbar',
@@ -17,6 +18,12 @@ export class TopbarComponent implements OnInit {
   @Input()
   hideButtons: boolean = false;
   public isAdmin: boolean = false;
+  public adminURL: string;
+  searchText: string;
+  @Output() searchcriteria = new EventEmitter<String>();
+  searchThis() {
+    this.searchcriteria.emit(this.searchText)
+  }
 
   constructor(    
     public AccountService: AccountService,
@@ -25,6 +32,7 @@ export class TopbarComponent implements OnInit {
     public authService: AuthService
     ) { 
     this.isAdmin = localStorage.getItem('rank') == "1";
+    this.adminURL = AppSettings.backendURL+"admin";
   }
   allRate: number = 0;
   usedRate: number;
@@ -61,4 +69,8 @@ export class TopbarComponent implements OnInit {
   getPercent() {
     return Math.round(this.usedRate * 100 / this.allRate);
   }
+  // search_changed()
+  // {
+  //   console.log(this.searchText);
+  // }
 }

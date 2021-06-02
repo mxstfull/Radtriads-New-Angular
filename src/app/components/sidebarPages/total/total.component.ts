@@ -42,6 +42,7 @@ export class TotalComponent implements OnInit {
   trashRate: number;
 
   private dialogRef: any;
+  searchText: string = "";
 
   constructor(
     private router: ActivatedRoute,
@@ -104,18 +105,19 @@ export class TotalComponent implements OnInit {
       return Math.round(byteSize / 1000 / 1000 / 1000) + "GB";
     }
   }
-  getMedias() {
+  getMedias(searchText = "", method = 0) {
     let requestPayload = {
       user_id: localStorage.getItem('user_id'),
       unique_id: localStorage.getItem('unique_id'),
       currentPath: this.currentPath,
       category: this.category,
-      pageNumber: this.pageNumber
+      pageNumber: this.pageNumber,
+      searchText: this.searchText
     };
     this.fileviewService.getFileByCategory(requestPayload).subscribe(
       result => {
-
-        this.cardItems = this.cardItems.concat(result['total']);
+        if(method == 1) this.cardItems = this.cardItems.concat(result['total']);
+        else this.cardItems = result['total'];
         this.cardItems_recent = result['recent'];
         this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
       },
@@ -305,6 +307,10 @@ export class TotalComponent implements OnInit {
   }
   load_more() {
     this.pageNumber ++;
-    this.getMedias();
+    this.getMedias("", 1);
+  }
+  searchThis(data) {
+    this.searchText = data;
+    this.getMedias(data);
   }
 }
