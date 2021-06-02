@@ -11,6 +11,7 @@ import { AudioModalComponent } from '../modals/audio-modal/audio-modal.component
 import { VideoModalComponent } from '../modals/video-modal/video-modal.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppSettings } from '../../shared/appSettings';
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-card',
@@ -50,6 +51,14 @@ export class CardComponent implements OnInit {
         localStorage.getItem('show_html_code') == "0" &&
         localStorage.getItem('show_social_share') == "0")
       {
+        this.dialog.open(AlertComponent, {
+          data: {
+            message: 'You need to toggle settings on account page!',
+            buttonText: {
+              cancel: 'Close'
+            }
+          },
+        });
         return;
       }
       this.dialog.open(ShareModalComponent, {

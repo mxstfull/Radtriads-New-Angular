@@ -1,6 +1,6 @@
 <div class="dashboard-topbar">
     <form class="search-form" action="">
-        <input type="" placeholder="Search for photos, albums..." />
+        <input type="text" matInput  placeholder="Search for photos, albums..." [(ngModel)] = "searchText" (input)="searchThis()"  [ngModelOptions]="{standalone: true}"/>
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
     <div class="topbar-btns">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <a href="http://localhost:8000" class="admin-link" *ngIf="isAdmin"><span style = "padding: 20px;">Admin</span></a>
+        <a href="{{adminURL}}" class="admin-link" *ngIf="isAdmin"><span style = "padding: 20px;">Admin</span></a>
     </div>
     <div class="clear"></div>
 </div>
