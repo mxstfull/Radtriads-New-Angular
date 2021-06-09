@@ -1,4 +1,4 @@
 export class AppSettings {
-    public static backendURL='http://localhost/';
-    public static frontendURL='http://127.0.0.1';
+    public static backendURL='http://15.222.57.63:8000/';
+    public static frontendURL='http://15.222.57.63';
  }
