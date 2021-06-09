@@ -22,15 +22,15 @@ const routes: Routes = [
         children: [
             { path: 'total', component: TotalComponent, canActivate: [AuthGuard] },
             { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
-            { path: 'code/:path', component: CodeComponent, canActivate: [AuthGuard] },
+            { path: 'Code/:path', component: CodeComponent, canActivate: [AuthGuard] },
             { path: 'folder-creation', component: FolderCreationComponent, canActivate: [AuthGuard] },
-            { path: 'music/:path', component: MusicComponent, canActivate: [AuthGuard] },
-            { path: 'photos/:path', component: PhotosComponent, canActivate: [AuthGuard] },
+            { path: 'Music/:path', component: MusicComponent, canActivate: [AuthGuard] },
+            { path: 'Photo/:path', component: PhotosComponent, canActivate: [AuthGuard] },
             { path: 'trash', component: TrashComponent, canActivate: [AuthGuard] },
             { path: 'upgrade-account', component: UpgradeAccountComponent, canActivate: [AuthGuard] },
             { path: 'submit-success', component: SubmitSuccessComponent, canActivate: [AuthGuard] },
             { path: 'uploading', component: UploadingComponent, canActivate: [AuthGuard] },
-            { path: 'video/:path', component: VideoComponent, canActivate: [AuthGuard] },
+            { path: 'Video/:path', component: VideoComponent, canActivate: [AuthGuard] },
         ]
     }
 ];

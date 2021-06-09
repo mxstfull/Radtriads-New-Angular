@@ -42,4 +42,7 @@ export class FileviewService {
   getItemByUniqueId(requestPayload: object): Observable<any> {
     return this.http.post(AppSettings.backendURL+'api/fileview/getItemByUniqueId', requestPayload);
   }
+  deleteAlbum(requestPayload: object): Observable<any> {
+    return this.http.post(AppSettings.backendURL+'api/fileview/deleteAlbum', requestPayload);
+  }
 }

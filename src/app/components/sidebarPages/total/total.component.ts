@@ -60,7 +60,7 @@ export class TotalComponent implements OnInit {
         this.currentPath = this.router.snapshot.paramMap.get("path");
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
-        localStorage.setItem("current_category", "photo");
+        localStorage.setItem("current_category", "Photo");
       }
     });
     this.pageNumber = 0;

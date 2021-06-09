@@ -52,7 +52,7 @@ export class CodeComponent implements OnInit {
         this.currentPath = this.router.snapshot.paramMap.get("path");
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
-        localStorage.setItem("current_category", "code");
+        localStorage.setItem("current_category", "Code");
         this.getItems();
       }
     });
