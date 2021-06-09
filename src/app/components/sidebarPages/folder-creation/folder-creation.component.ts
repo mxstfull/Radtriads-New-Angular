@@ -20,7 +20,7 @@ export class FolderCreationComponent implements OnInit {
     id: -1,
     title: 'Home',
     is_protected: 0, // false.
-    path: 'uploads/' + localStorage.getItem('unique_id') + '/'
+    path: 'uploads/' + localStorage.getItem('unique_id') + '/' + localStorage.getItem("current_category") + "/"
   }
   public subFoldersOfCurrent: FolderItem[]; // 
   public rootFoldersOfCurrent: FolderItem[]; // also contains itself.

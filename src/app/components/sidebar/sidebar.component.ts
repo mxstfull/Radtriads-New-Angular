@@ -87,6 +87,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     };
     this.sidebarService.getFolderTree(requestPayload).subscribe(
       result => {
+        console.log(result)
         this.setSidebarNavItems(result);
       },
       error => {
@@ -112,7 +113,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       "../../../assets/img/video.png",
       "../../../assets/img/code.png",
       "../../../assets/img/trash.png"];
-    let navRoutes = ["total", 'photos', "music", "video", "code", "trash"];
+    let navRoutes = ["total", 'Photo', "Music", "Video", "Code", "Trash"];
     for (let i = 0; i <= 5; i++) {
       this.navItems[i]['displayName'] = this.navItems[i]['displayName'] == '' ? this.navItems[i]['category'] : this.navItems[i]['displayName'];
       this.navItems[i]['path'] = 'home';

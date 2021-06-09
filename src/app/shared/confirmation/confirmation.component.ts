@@ -12,13 +12,13 @@ export class ConfirmationComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<ConfirmationComponent>) {
-      if(data){
-    this.message = data.message || this.message;
-    if (data.buttonText) {
-      this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-      this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
-    }
+    if (data) {
+      this.message = data.message || this.message;
+      if (data.buttonText) {
+        this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
+        this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
       }
+    }
   }
 
   onConfirmClick(): void {

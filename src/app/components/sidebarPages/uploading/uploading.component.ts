@@ -14,15 +14,16 @@ export class UploadingComponent implements OnInit {
   currentPath = "home";
   public currentCategory;
   public allowedExtensions = {
-    'photo': '.png, .jpg, .gif, .tif, .webp',
-    'music': '.mp3, .wav',
-    'video': '.mp4, .mov, .swf, .flv',
-    'code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java'
+    'Photo': '.png, .jpg, .gif, .tif, .webp',
+    'Music': '.mp3, .wav',
+    'Video': '.mp4, .mov, .swf, .flv',
+    'Code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java'
   };
   backendURL;
   constructor(private globals: Globals) {
     this.currentPath = localStorage.getItem("current_path");
     this.currentCategory = localStorage.getItem('current_category');
+    console.log(this.currentPath);
     this.backendURL = AppSettings.backendURL;
   }
 
