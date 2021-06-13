@@ -87,7 +87,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     };
     this.sidebarService.getFolderTree(requestPayload).subscribe(
       result => {
-        console.log(result)
         this.setSidebarNavItems(result);
       },
       error => {
@@ -135,7 +134,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   getClass(path: string) {
-    console.log(this.currentActiveNav.slice(1) === path);
     return (this.currentActiveNav.slice(1) === path) ? 'active' : '';
   }
 

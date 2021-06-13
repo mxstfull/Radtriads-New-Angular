@@ -238,7 +238,6 @@ export class AccountComponent implements OnInit {
 
   public onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile);
     if (this.selectedFile) {
 
       // If selected file exist make upload request

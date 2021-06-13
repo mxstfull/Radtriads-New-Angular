@@ -62,7 +62,6 @@ export class TopbarComponent implements OnInit {
     let requestPayload = null
     this.authService.logout(requestPayload).subscribe(
       result => {
-        console.log(result);
       },
       error => {
 
