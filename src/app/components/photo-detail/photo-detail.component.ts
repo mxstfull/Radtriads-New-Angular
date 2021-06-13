@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
 import { AppSettings } from '../../shared/appSettings';
 import { ConfirmationComponent } from "../../shared/confirmation/confirmation.component";
+import { Meta } from '@angular/platform-browser';  
 
 @Component({
   selector: 'app-photo-detail',
@@ -25,7 +26,11 @@ export class PhotoDetailComponent implements OnInit {
     private router: ActivatedRoute,
     public dialog: MatDialog, 
     private router_normal: Router,
+    private meta: Meta
   ) { 
+    let meta_url = "";
+    let meta_title = "";
+    let meta_img = "";
     this.router.queryParams.subscribe(params => {
       let m_unique_id = params['id'];
       let requestPayload = {
@@ -40,6 +45,17 @@ export class PhotoDetailComponent implements OnInit {
             if(result['user_id'] == localStorage.getItem('user_id')) this.protected = 0;
             this.currentItem = result;
             localStorage.setItem('currentItemForEditor', this.viewImageDetail(this.currentItem));
+
+            meta_title = "RadTriads - File #" + m_unique_id;
+            meta_url = AppSettings.frontendURL+"/photo-details?id="+m_unique_id;
+            meta_img = this.viewImageDetail(this.currentItem);
+            this.meta.addTags([
+              { property: "og:url", content: meta_url },
+              { property: "og:type", content: 'website' },
+              { property: "og:title", content: meta_title },
+              { property: "og:description", content: 'User friendly image and video hosting & sharing on web and mobile. Privacy controlled by you. Dynamic resizing, cropping on site.' },
+              { property: "og:image", content: meta_img }
+            ]);
           }
         },error => {
           // this.errors = error.error;
@@ -47,7 +63,8 @@ export class PhotoDetailComponent implements OnInit {
         }, () => {
         }
       );  
-    });  
+    });
+    
   }
 
   confirmPassword() {
@@ -55,7 +72,7 @@ export class PhotoDetailComponent implements OnInit {
     else this.protected = 0;
   }
   ngOnInit(): void {
-      
+    
   }
   viewImageDetail(item: CardItem) {
     if(item == null) return;

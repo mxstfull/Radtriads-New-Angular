@@ -23,7 +23,6 @@ export class UploadingComponent implements OnInit {
   constructor(private globals: Globals) {
     this.currentPath = localStorage.getItem("current_path");
     this.currentCategory = localStorage.getItem('current_category');
-    console.log(this.currentPath);
     this.backendURL = AppSettings.backendURL;
   }
 
