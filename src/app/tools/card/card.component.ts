@@ -123,12 +123,12 @@ export class CardComponent implements OnInit {
     } else if(category == 1) {
       this.dialogRef = this.dialog.open(AudioModalComponent, {
         data: this.item,
-        width: '930px',
+        // width: '930px',
       });
     } else if(category == 2) {
       this.dialogRef = this.dialog.open(VideoModalComponent, {
         data: this.item,
-        width: '930px',
+        // width: '930px',
       });
     } else if(category == 3) {
 
