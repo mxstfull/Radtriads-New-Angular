@@ -21,6 +21,8 @@ import { AppSettings } from '../../../shared/appSettings';
   styleUrls: ['./trash.component.css']
 })
 export class TrashComponent implements OnInit {
+  sort_label = ["Date", "Name"];
+  sort_mode = 0; //0:date, 1:name
   @ViewChild(SidebarComponent) child: SidebarComponent;
   hideButtons = true;
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy'];
@@ -65,6 +67,7 @@ export class TrashComponent implements OnInit {
       result => {
         this.cardItems = result;
         this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
+        this.onSortClicked(0); //this means no need to change method.
       },
       error => {
 
@@ -180,8 +183,13 @@ export class TrashComponent implements OnInit {
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
 
-  onSortClicked() {
-    this.cardItems = this.cardItems.reverse();
+  onSortClicked(change_flag = 1) {
+    if(change_flag)this.sort_mode = 1 - this.sort_mode;
+    let sort_mode = this.sort_mode;
+    if(sort_mode == 0)
+      this.cardItems = this.cardItems.sort((a,b) => (a.created_at > b.created_at) ? -1 : ((b.created_at > a.created_at) ? 1 : 0));
+    else if(sort_mode == 1)
+      this.cardItems = this.cardItems.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
   onRecoverFiles() {

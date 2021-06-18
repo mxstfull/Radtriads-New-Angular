@@ -1,4 +1,4 @@
-<div class="dashboard-topbar">
+<div class="dashboard-topbar" [ngClass]="{'sticky' : isSticky}">
     <form class="search-form" action="">
         <input type="text" matInput  placeholder="Search for photos, albums..." [(ngModel)] = "searchText" (input)="searchThis()"  [ngModelOptions]="{standalone: true}"/>
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>

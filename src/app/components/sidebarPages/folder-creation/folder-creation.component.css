@@ -14,3 +14,7 @@ a {
   border-top: 1px solid #EFF2F6;
   border-bottom: 1px solid #EFF2F6;
 }
+
+.dashboard-bottom {
+  padding: 4.5em 2.1875em 1.875em;
+}

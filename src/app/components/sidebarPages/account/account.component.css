@@ -64,3 +64,7 @@ h2 {
     border-radius: 50%;
     margin-left: 25%;
 }
+
+.dashboard-bottom {
+    padding: 4.5em 2.1875em 1.875em;
+}

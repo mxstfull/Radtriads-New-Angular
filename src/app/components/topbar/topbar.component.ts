@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output,Input, EventEmitter, HostListener } from '@angular/core';
 import { AccountService } from 'src/app/shared/account.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { TokenService } from 'src/app/shared/token.service';
@@ -15,6 +15,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./topbar.component.css']
 })
 export class TopbarComponent implements OnInit {
+  isSticky: boolean = false;
   @Output()
   onDownloadAlbum = new EventEmitter<string>();
   @Output()
@@ -29,7 +30,10 @@ export class TopbarComponent implements OnInit {
   searchThis() {
     this.searchcriteria.emit(this.searchText)
   }
-
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    this.isSticky = window.pageYOffset >= 150;
+  }
   constructor(    
     public AccountService: AccountService,
     private token: TokenService,
