@@ -37,7 +37,17 @@
             </div>
             <div class="clear"></div>
         </div>
-
+        <div class="col">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" *ngFor="let item of breadcrumbList; let i = index"
+                [class.active]="i===breadcrumbList.length-1">
+                <a [routerLink]="[item.category, item.path]" *ngIf="i!==breadcrumbList.length-1" style = "color:#007bff;">
+                  {{ item.name }}
+                </a>
+                <span *ngIf="i===breadcrumbList.length-1">{{ item.name }}</span>
+              </li>
+            </ol>
+          </div>
         <div class="tab-content">
             <div id="fm-grid-view" [ngClass]="{'tab-pane fade in active show': viewMode == 0, 'tab-pane fade ': viewMode == 1}" class="tab-pane fade in active show">
                 <div class="recent-file-outer">

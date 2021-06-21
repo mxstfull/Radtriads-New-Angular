@@ -25,6 +25,7 @@ import { AppSettings } from '../../../shared/appSettings';
 })
 export class CodeComponent implements OnInit {
   // @ViewChild(SidebarComponent) child: SidebarComponent;
+  breadcrumbList = [];
   sort_label = ["Date", "Name"];
   sort_mode = 0; //0:date, 1:name
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
@@ -56,6 +57,23 @@ export class CodeComponent implements OnInit {
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "Code");
         this.getItems();
+        let tmpList = this.currentPath.split("/");
+        this.breadcrumbList = [];
+        let path = "";
+        for(let i = 0; i< tmpList.length; i++) {
+          let name;
+          if(!i) {
+            name = "Code";
+            path = "home";
+
+          }
+          else {
+            name = tmpList[i];
+            path += "/" + tmpList[i];
+          }
+          this.breadcrumbList.push({"name": name, "category": "../../Code", "path": path});
+          if(!i) path = "Code";
+        }
       }
     });
   }

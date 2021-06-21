@@ -23,7 +23,7 @@ import { AppSettings } from '../../../shared/appSettings';
 })
 export class VideoComponent implements OnInit {
   // @ViewChild(SidebarComponent) child: SidebarComponent;
-
+  breadcrumbList = [];
   displayedColumns: string[] = ['select', 'title', 'date', 'privacy', 'action'];
   cardItems: CardItem[];
   dataSource: MatTableDataSource<CardItem>;
@@ -50,9 +50,24 @@ export class VideoComponent implements OnInit {
         this.globals.gl_currentPath = this.currentPath;
         localStorage.setItem("current_path", this.currentPath);
         localStorage.setItem("current_category", "Video");
-
-        
         this.getItems();
+        let tmpList = this.currentPath.split("/");
+        this.breadcrumbList = [];
+        let path = "";
+        for(let i = 0; i< tmpList.length; i++) {
+          let name;
+          if(!i) {
+            name = "Video";
+            path = "home";
+
+          }
+          else {
+            name = tmpList[i];
+            path += "/" + tmpList[i];
+          }
+          this.breadcrumbList.push({"name": name, "category": "../../Video", "path": path});
+          if(!i) path = "Video";
+        }
       }
     });
   }
