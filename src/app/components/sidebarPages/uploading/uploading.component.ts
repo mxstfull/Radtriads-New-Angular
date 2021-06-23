@@ -12,18 +12,21 @@ import { AppSettings } from '../../../shared/appSettings';
 export class UploadingComponent implements OnInit {
 
   currentPath = "home";
+  currentAblum;
   public currentCategory;
   public allowedExtensions = {
     'Photo': '.png, .jpg, .gif, .tif, .webp',
     'Music': '.mp3, .wav',
     'Video': '.mp4, .mov, .swf, .flv',
-    'Code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java'
+    'Code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java, .rar, .zip'
   };
   backendURL;
   constructor(private globals: Globals) {
     this.currentPath = localStorage.getItem("current_path");
     this.currentCategory = localStorage.getItem('current_category');
     this.backendURL = AppSettings.backendURL;
+    let loc_array = this.currentPath.split("/");
+    this.currentAblum = loc_array[loc_array.length - 1];
   }
 
   ngOnInit(): void {

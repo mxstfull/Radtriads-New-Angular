@@ -12,6 +12,7 @@ import { FolderItem } from '../../interfaces/FolderItem';
 
 export class FolderCreationComponent implements OnInit {
   
+  currentAblum: string;
   newFolderTitle: string;
   errors = null;
   user_id: string;
@@ -26,12 +27,33 @@ export class FolderCreationComponent implements OnInit {
   public rootFoldersOfCurrent: FolderItem[]; // also contains itself.
 
   constructor(public uploadService: UploadService, private token: TokenService, private broadcastService: SidebarBroadcastService) {
-    this.currentFolder = Object.assign({}, this.initialFolder);
+    // this.currentFolder = Object.assign({}, this.initialFolder);
+    let current_path = localStorage.getItem("current_path");
+    let loc_array = current_path.split("/");
+    this.currentAblum = loc_array[loc_array.length - 1];
+    let path_array = current_path.split("/");
+    let title, path = 'uploads/' + localStorage.getItem('unique_id') + '/' + localStorage.getItem("current_category") + "/";
+    if(path_array.length > 1) {
+      title = path_array[path_array.length - 1];
+      for(var i = 1; i < path_array.length; i++) {
+        path += path_array[i] + '/';
+      }
+    }
+    else {
+      title = 'Home';
+    }
+    this.currentFolder = {
+      id: -1,
+      title: title,
+      is_protected: 0, // false.
+      path: path
+    }
     this.user_id = localStorage.getItem('user_id');
     this.rootFoldersOfCurrent = [this.initialFolder];
   }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('current_path'));
     this.updateCurrentFolder(this.currentFolder);
   }
 

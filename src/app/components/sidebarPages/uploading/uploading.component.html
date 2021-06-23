@@ -1,10 +1,10 @@
 <div class="dashboard-content">
     <app-topbar></app-topbar>
     <div class="dashboard-bottom">
-        <ng-container #flowAdvanced="flow" [flowConfig]="{target: backendURL+'api/fileupload/upload', testChunks:false, chunkSize:150*1024*1024, forceChunkSize:true }">
+        <ng-container #flowAdvanced="flow" [flowConfig]="{target: backendURL+'api/fileupload/upload', testChunks:false, chunkSize:1500*1024*1024, forceChunkSize:true }">
         </ng-container>
         <div class="dash-bot-top">
-            <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.back();" style="cursor: pointer;"></i> Upload files</h2>
+            <h2><i class="fa fa-arrow-left" aria-hidden="true" onclick="javascript:history.back();" style="cursor: pointer;"></i>&nbsp;{{currentAblum}}</h2>
             <div class="clear"></div>
         </div>
         <div class="upload-file-box">
