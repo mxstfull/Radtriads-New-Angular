@@ -16,7 +16,7 @@ export class UploadingComponent implements OnInit {
   public currentCategory;
   public allowedExtensions = {
     'Photo': '.png, .jpg, .gif, .tif, .webp',
-    'Music': '.mp3, .wav',
+    'Music': '.mp3, .wav, .wma',
     'Video': '.mp4, .mov, .swf, .flv',
     'Code': '.txt, .rtf, .html, .html5, .webm, .php, .css, .xml, .json, .pdf, .docx, .doc, .xls, .xlsx, .ppt, .pptx, .java, .rar, .zip'
   };

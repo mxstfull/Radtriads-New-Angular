@@ -33,3 +33,8 @@ img {
     margin-top: 0px!important;
     margin-left: 0px!important;
 }
+app-menu-list-item{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

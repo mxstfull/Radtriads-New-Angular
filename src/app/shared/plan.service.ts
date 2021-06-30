@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AppSettings } from './appSettings';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,6 @@ export class PlanStateService {
 
   // Ask Stripe
   request_url(data): Observable<any> {
-    return this.http.post('http://15.222.57.63:8000/api/stripe/request_url', data);
+    return this.http.post(AppSettings.backendURL+'api/stripe/request_url', data);
   }
 }
