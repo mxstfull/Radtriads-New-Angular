@@ -23,6 +23,7 @@
 
 ::ng-deep .mat-tab-body-content {
   padding-top: 0.6em;
+  padding-bottom: 200px;
 }
 
 h2 {

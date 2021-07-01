@@ -63,6 +63,8 @@ import { TermsComponent } from './components/firstpage/terms/terms.component';
 import { PrivacyComponent } from './components/firstpage/privacy/privacy.component';
 import { FaqComponent } from './components/firstpage/faq/faq.component';
 import { PageComponent } from './components/firstpage/page/page.component';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   exports: [
@@ -132,7 +134,11 @@ export class MaterialModule { }
     AngMusicPlayerModule,
     NgxPageScrollModule,
     NgxPageScrollCoreModule.forRoot({duration: 1}),
-    MainModule
+    MainModule,
+    ShareButtonsModule.withConfig({
+      debug: true
+    }),
+    ShareIconsModule
   ],
   exports: [
     SidebarComponent,
