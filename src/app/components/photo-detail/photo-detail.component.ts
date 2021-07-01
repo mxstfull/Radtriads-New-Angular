@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ShareModalComponent } from '../../tools/modals/share-modal/share-modal.component';
 import { AppSettings } from '../../shared/appSettings';
 import { ConfirmationComponent } from "../../shared/confirmation/confirmation.component";
-import { Meta } from '@angular/platform-browser';  
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-photo-detail',
@@ -18,16 +18,16 @@ export class PhotoDetailComponent implements OnInit {
 
   private dialogRef: any;
   public currentItem: CardItem;
-  public protected : number;
+  public protected: number;
   public wrongPassword: boolean = false;
-  public passwordInput:string;
+  public passwordInput: string;
   constructor(
     private fileviewService: FileviewService,
     private router: ActivatedRoute,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private router_normal: Router,
     private meta: Meta
-  ) { 
+  ) {
     let meta_url = "";
     let meta_title = "";
     let meta_img = "";
@@ -38,53 +38,59 @@ export class PhotoDetailComponent implements OnInit {
       };
       this.fileviewService.getItemByUniqueId(requestPayload).subscribe(
         result => {
-          if(!result) {
+          if (!result) {
           }
           else {
             this.protected = result['is_protected'];
-            if(result['user_id'] == localStorage.getItem('user_id')) this.protected = 0;
+            if (result['user_id'] == localStorage.getItem('user_id')) this.protected = 0;
             this.currentItem = result;
             localStorage.setItem('currentItemForEditor', this.viewImageDetail(this.currentItem));
 
             meta_title = "RadTriads - File #" + m_unique_id;
-            meta_url = AppSettings.frontendURL+"/photo-details?id="+m_unique_id;
+            meta_url = AppSettings.frontendURL + "/photo-details?id=" + m_unique_id;
             meta_img = this.viewImageDetail(this.currentItem);
-            this.meta.addTags([
+            this.meta.updateTag(
               { property: "og:url", content: meta_url },
-              { property: "og:type", content: 'website' },
+              "name='og:url'"
+            );
+            this.meta.updateTag(
               { property: "og:title", content: meta_title },
-              { property: "og:description", content: 'User friendly image and video hosting & sharing on web and mobile. Privacy controlled by you. Dynamic resizing, cropping on site.' },
-              { property: "og:image", content: meta_img }
-            ]);
+              "name='og:title'"
+            );
+            this.meta.updateTag(
+              { property: "og:image", content: meta_img },
+              "name='og:image'"
+            );
           }
-        },error => {
+        }, error => {
           // this.errors = error.error;
-          
+
         }, () => {
         }
-      );  
+      );
     });
-    
+
   }
 
   confirmPassword() {
-    if(this.currentItem.password != this.passwordInput) this.wrongPassword = true;
+    if (this.currentItem.password != this.passwordInput) this.wrongPassword = true;
     else this.protected = 0;
   }
   ngOnInit(): void {
-    
+
   }
   viewImageDetail(item: CardItem) {
-    if(item == null) return;
-    return AppSettings.backendURL+"files/"+this.jsEncode(item.url);
+    if (item == null) return;
+    return AppSettings.backendURL + "files/" + this.jsEncode(item.url);
   }
-  jsEncode(param: string){
-    if(param == null || param == "" ) return "";
+  jsEncode(param: string) {
+    if (param == null || param == "") return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
   }
   getCreatedDateAsString() {
+    if (!this.currentItem) return;
     var d = new Date(this.currentItem.created_at);
     return d.toLocaleString();
   }
@@ -97,10 +103,10 @@ export class PhotoDetailComponent implements OnInit {
     //     if(result) history.back();
     //   },
     //   error => {
-        
+
     //   }, () => {
     //     //
-        
+
     //   }
     // );
     this.dialogRef = this.dialog.open(DeleteModalComponent, {
@@ -109,11 +115,11 @@ export class PhotoDetailComponent implements OnInit {
     });
     this.dialogRef.afterClosed().subscribe(
       result => {
-        if(result) history.back();
-    }, error => {
-    }, () => {
-      
-    })
+        if (result) history.back();
+      }, error => {
+      }, () => {
+
+      })
   }
   onDownloadItem() {
     let requestPayload = [this.currentItem];
@@ -129,27 +135,26 @@ export class PhotoDetailComponent implements OnInit {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(result);
         a.href = objectUrl;
-        if(urlArray.length == 1) {
+        if (urlArray.length == 1) {
           a.download = urlArray[0]['title'];
         } else {
           a.download = 'archive.zip';
         }
         a.click();
         URL.revokeObjectURL(objectUrl);
-      },error => {
+      }, error => {
         // this.errors = error.error;
       }, () => {
-        
+
       }
     );
   }
   openDialog(type: string) {
-    if(type == "share") {
-      if(localStorage.getItem('show_direct_link') == "0" &&
+    if (type == "share") {
+      if (localStorage.getItem('show_direct_link') == "0" &&
         localStorage.getItem('show_forum_code') == "0" &&
         localStorage.getItem('show_html_code') == "0" &&
-        localStorage.getItem('show_social_share') == "0")
-      {
+        localStorage.getItem('show_social_share') == "0") {
         return;
       }
       this.dialog.open(ShareModalComponent, {
@@ -161,6 +166,6 @@ export class PhotoDetailComponent implements OnInit {
     }
   }
   showEditWindow() {
-    this.router_normal.navigate(['/image-editor'], {queryParams:{id:this.currentItem.unique_id}});
+    this.router_normal.navigate(['/image-editor'], { queryParams: { id: this.currentItem.unique_id } });
   }
 }

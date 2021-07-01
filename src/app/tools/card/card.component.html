@@ -1,9 +1,9 @@
 <div class="media-box">
   <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_list.toggle(item) : null"
-  [checked]="selection_list.isSelected(item)"></mat-checkbox>
-  <div class="lock-media" *ngIf = "item.is_protected!=0"><img src="assets/img/lock-icon.png" alt=""></div>
+    [checked]="selection_list.isSelected(item)"></mat-checkbox>
+  <div class="lock-media" *ngIf="item.is_protected!=0"><img src="assets/img/lock-icon.png" alt=""></div>
   <div class="media-file" (click)="imageView(item)" [ngStyle]="{'cursor': (item.category == 0)? 'pointer': ''}">
-    <img src="{{viewImageThumbnail(item)}}"/>
+    <img src="{{viewImageThumbnail(item)}}" />
 
     <div class="video-icon" (click)="viewMedia(item)"><img src="{{viewPreviewButton()}}" alt="">
     </div>
@@ -13,7 +13,7 @@
       <div class="file-name">{{item.title}}</div>
       <div class="file-date">Added {{dispDate(item.created_at)}}</div>
     </div>
-    <div class="media-edit" *ngIf = "category != 'deleted'">
+    <div class="media-edit" *ngIf="category != 'deleted'">
       <i class="fa fa-ellipsis-v"></i>
       <div class="media-edit-inner">
         <div class="media-edit-box">

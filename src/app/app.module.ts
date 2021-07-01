@@ -38,7 +38,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AngMusicPlayerModule } from  'ang-music-player';
+import { AngMusicPlayerModule } from 'ang-music-player';
 
 import { PrivacyModalComponent } from './tools/modals/privacy-modal/privacy-modal.component';
 import { ShareModalComponent } from './tools/modals/share-modal/share-modal.component';
@@ -63,6 +63,7 @@ import { TermsComponent } from './components/firstpage/terms/terms.component';
 import { PrivacyComponent } from './components/firstpage/privacy/privacy.component';
 import { FaqComponent } from './components/firstpage/faq/faq.component';
 import { PageComponent } from './components/firstpage/page/page.component';
+import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
@@ -133,8 +134,9 @@ export class MaterialModule { }
     MatTreeModule,
     AngMusicPlayerModule,
     NgxPageScrollModule,
-    NgxPageScrollCoreModule.forRoot({duration: 1}),
+    NgxPageScrollCoreModule.forRoot({ duration: 1 }),
     MainModule,
+    ShareModule,
     ShareButtonsModule.withConfig({
       debug: true
     }),
@@ -153,7 +155,7 @@ export class MaterialModule { }
       multi: true
     },
     Globals,
-    { 
+    {
       provide: MatDialogRef,
       useValue: []
     }

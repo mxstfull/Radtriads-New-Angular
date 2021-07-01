@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpUrlEncodingCodec } from '@angular/common/http';
+import { Meta } from '@angular/platform-browser';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PrivacyModalComponent } from '../modals/privacy-modal/privacy-modal.component';
@@ -27,9 +28,10 @@ export class CardComponent implements OnInit {
   @Output() deleteItems: EventEmitter<any> = new EventEmitter();
   private dialogRef: any;
   public category;
-  
-  constructor(public dialog: MatDialog, 
+
+  constructor(public dialog: MatDialog,
     private router: Router,
+    private meta: Meta
   ) {
     this.category = localStorage.getItem("current_category");
   }
@@ -41,16 +43,15 @@ export class CardComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         result => {
-          if(!result || result == undefined) return;
+          if (!result || result == undefined) return;
           this.item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
-      if(localStorage.getItem('show_direct_link') == "0" &&
+      if (localStorage.getItem('show_direct_link') == "0" &&
         localStorage.getItem('show_forum_code') == "0" &&
         localStorage.getItem('show_html_code') == "0" &&
-        localStorage.getItem('show_social_share') == "0")
-      {
+        localStorage.getItem('show_social_share') == "0") {
         this.dialog.open(AlertComponent, {
           data: {
             message: 'You need to toggle settings on account page!',
@@ -61,6 +62,26 @@ export class CardComponent implements OnInit {
         });
         return;
       }
+      let meta_url = "";
+      let meta_title = "";
+      let meta_img = "";
+
+      let m_unique_id = this.item['unique_id'];
+      meta_title = "RadTriads - File #" + m_unique_id;
+      meta_url = AppSettings.frontendURL + "/photo-details?id=" + m_unique_id;
+      meta_img = this.viewImageDetail(this.item);
+      this.meta.updateTag(
+        { property: "og:url", content: meta_url },
+        "name='og:url'"
+      );
+      this.meta.updateTag(
+        { property: "og:title", content: meta_title },
+        "name='og:title'"
+      );
+      this.meta.updateTag(
+        { property: "og:image", content: meta_img },
+        "name='og:image'"
+      );
       this.dialog.open(ShareModalComponent, {
         data: {
           data: this.item
@@ -84,72 +105,76 @@ export class CardComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         result => {
-          if(result != true) {
+          if (result != true) {
             this.deleteItems.emit(result);
           }
-      }, error => {
-      }, () => {
-        
-      })
+        }, error => {
+        }, () => {
+
+        })
     }
   }
   ngOnInit(): void {
   }
-  jsEncode(param: string){
-    if(param == null || param == "" ) return "";
+  jsEncode(param: string) {
+    if (param == null || param == "") return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
   }
   viewImageThumbnail(item: CardItem) {
-    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
-    if(item.is_picture == 1)
-      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
-    else if(wellknownExtensions.includes(item.ext)) {
-      return "assets/img/thumb-"+item.ext+".png";
+    let wellknownExtensions = ['flv', 'html', 'mov', 'mp3', 'mp4', 'rtf', 'swf', 'tif', 'txt', 'wav'];
+    if (item.is_picture == 1)
+      return AppSettings.backendURL + "files/" + this.jsEncode(item.thumb_url);
+    else if (wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-" + item.ext + ".png";
     } else {
       return "assets/img/thumb-other.png";
     }
   }
+  viewImageDetail(item: CardItem) {
+    if (item == null) return;
+    return AppSettings.backendURL + "files/" + this.jsEncode(item.url);
+  }
   dispDate(m_date: string): string {
     let date = new Date(m_date);
-    return date.toLocaleString('default', {day: 'numeric', month: 'short', year: 'numeric'});
+    return date.toLocaleString('default', { day: 'numeric', month: 'short', year: 'numeric' });
   }
   viewMedia(item: CardItem) {
     let category = item.category;
     // localStorage.getItem('current_category');
-    if(category == 0) {
+    if (category == 0) {
 
-    } else if(category == 1) {
+    } else if (category == 1) {
       this.dialogRef = this.dialog.open(AudioModalComponent, {
         data: this.item,
         // width: '930px',
       });
-    } else if(category == 2) {
+    } else if (category == 2) {
       this.dialogRef = this.dialog.open(VideoModalComponent, {
         data: this.item,
         // width: '930px',
       });
-    } else if(category == 3) {
+    } else if (category == 3) {
 
     }
   }
-  
+
   viewPreviewButton() {
-    if(this.item.category == 0){
-     return "";
+    if (this.item.category == 0) {
+      return "";
     }
-    else if(this.item.category == 1) {
-      if(this.item.ext == "mp3")
+    else if (this.item.category == 1) {
+      if (this.item.ext == "mp3")
         return "assets/img/music-icon.png";
       return "assets/img/music-icon1.png";
     }
-    else if(this.item.category == 2) {
+    else if (this.item.category == 2) {
       return "assets/img/video-icon.png";
     }
   }
   imageView(item: CardItem) {
-    if(item.category != 0) return;
-    this.router.navigate(['/photo-details'], {queryParams:{id:item.unique_id}});
+    if (item.category != 0) return;
+    this.router.navigate(['/photo-details'], { queryParams: { id: item.unique_id } });
   }
 }

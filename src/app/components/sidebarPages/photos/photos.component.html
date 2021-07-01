@@ -42,7 +42,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item" *ngFor="let item of breadcrumbList; let i = index"
           [class.active]="i===breadcrumbList.length-1">
-          <a [routerLink]="[item.category, item.path]" *ngIf="i!==breadcrumbList.length-1" style = "color:#007bff;">
+          <a [routerLink]="[item.category, item.path]" *ngIf="i!==breadcrumbList.length-1" style="color:#007bff;">
             {{ item.name }}
           </a>
           <span *ngIf="i===breadcrumbList.length-1">{{ item.name }}</span>

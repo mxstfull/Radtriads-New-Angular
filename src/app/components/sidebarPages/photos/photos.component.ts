@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+
 import { FileviewService } from '../../../shared/fileview.service';
 import { CardItem } from '../../interfaces/CardItem';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -40,10 +41,9 @@ export class PhotosComponent implements OnInit {
     private router: ActivatedRoute,
     private fileviewService: FileviewService,
     private router_1: Router,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private globals: Globals,
-    private navService: NavService
-
+    private navService: NavService,
     // private dialogRef: MatDialogRef<MoveModalComponent>
   ) {
     this.router_1.events.subscribe((val) => {
@@ -57,9 +57,9 @@ export class PhotosComponent implements OnInit {
         let tmpList = this.currentPath.split("/");
         this.breadcrumbList = [];
         let path = "";
-        for(let i = 0; i< tmpList.length; i++) {
+        for (let i = 0; i < tmpList.length; i++) {
           let name;
-          if(!i) {
+          if (!i) {
             name = "Photo";
             path = "home";
 
@@ -68,13 +68,13 @@ export class PhotosComponent implements OnInit {
             name = tmpList[i];
             path += "/" + tmpList[i];
           }
-          this.breadcrumbList.push({"name": name, "category": "../../Photo", "path": path});
-          if(!i) path = "Photo";
+          this.breadcrumbList.push({ "name": name, "category": "../../Photo", "path": path });
+          if (!i) path = "Photo";
         }
       }
     });
   }
-  getItems(searchText = "") { 
+  getItems(searchText = "") {
     let requestPayload = {
       user_id: localStorage.getItem('user_id'),
       unique_id: localStorage.getItem('unique_id'),
@@ -96,7 +96,7 @@ export class PhotosComponent implements OnInit {
       }
     );
   }
-  
+
   ngOnInit(): void {
     this.navService.folderTree.subscribe(folderTree => this.folderTree = folderTree);
   }
@@ -115,14 +115,14 @@ export class PhotosComponent implements OnInit {
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(result)
         a.href = objectUrl
-        if(urlArray.length == 1) {
+        if (urlArray.length == 1) {
           a.download = urlArray[0]['title'];
         } else {
           a.download = 'archive.zip';
         }
         a.click();
         URL.revokeObjectURL(objectUrl);
-      },error => {
+      }, error => {
         // this.errors = error.error;
       }, () => {
         this.selection_list.clear();
@@ -131,20 +131,20 @@ export class PhotosComponent implements OnInit {
   }
   onDownloadAlbum() {
     let urlArray = this.cardItems;
-    if(urlArray.length == 0) return;
+    if (urlArray.length == 0) return;
     this.fileviewService.downloadFiles({ fileList: urlArray }).subscribe(
       result => {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(result);
         a.href = objectUrl;
-        if(urlArray.length == 1) {
+        if (urlArray.length == 1) {
           a.download = urlArray[0]['title'];
         } else {
           a.download = 'archive.zip';
         }
         a.click();
         URL.revokeObjectURL(objectUrl);
-      },error => {
+      }, error => {
         // this.errors = error.error;
       }, () => {
         this.selection_list.clear();
@@ -152,7 +152,7 @@ export class PhotosComponent implements OnInit {
     );
   }
   onRenameAlbum() {
-    if(localStorage.getItem("current_path") == "home") return;
+    if (localStorage.getItem("current_path") == "home") return;
     this.dialogRef = this.dialog.open(RenameModalComponent, {
       data: {
         data: null,
@@ -165,17 +165,17 @@ export class PhotosComponent implements OnInit {
     let requestPayload = this.selection_list.selected;
     if (requestPayload.length == 0) return;
 
-    let fileArray =[];
-    for(let index in requestPayload) {
-      fileArray.push ({
+    let fileArray = [];
+    for (let index in requestPayload) {
+      fileArray.push({
         unique_id: requestPayload[index]['unique_id'],
         title: requestPayload[index]['title'],
         url: requestPayload[index]['url']
       });
     }
-    let modalData ={
+    let modalData = {
       folderTree: this.folderTree,
-      fileList: fileArray, 
+      fileList: fileArray,
       action: m_action
     };
     this.dialogRef = this.dialog.open(MoveModalComponent, {
@@ -184,13 +184,13 @@ export class PhotosComponent implements OnInit {
     });
     this.dialogRef.afterClosed().subscribe(
       (result: any) => {
-        if(m_action == 'Move') {
-          this.cardItems = this.cardItems.filter(function(item) {
+        if (m_action == 'Move') {
+          this.cardItems = this.cardItems.filter(function (item) {
             return !requestPayload.includes(item);
           });
           this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
         }
-        this.selection_list.clear() ;
+        this.selection_list.clear();
       });
   }
   /** Whether the number of selected elements matches the total number of rows. */
@@ -223,24 +223,24 @@ export class PhotosComponent implements OnInit {
   convertoToString(param: any) {
     return new Date(param).toLocaleDateString('en-us');
   }
-  jsEncode(param: string){
-    if(param == null || param == "" ) return "";
+  jsEncode(param: string) {
+    if (param == null || param == "") return "";
     let re = /\//gi;
     param = param.replace(re, '>');
     return param;
   }
   viewImageThumbnail(item: CardItem) {
-    let wellknownExtensions = ['flv','html','mov','mp3','mp4','rtf','swf','tif','txt','wav'];
-    if(item.is_picture == 1)
-      return AppSettings.backendURL+"files/"+this.jsEncode(item.thumb_url);
-    else if(wellknownExtensions.includes(item.ext)) {
-      return "assets/img/thumb-"+item.ext+".png";
+    let wellknownExtensions = ['flv', 'html', 'mov', 'mp3', 'mp4', 'rtf', 'swf', 'tif', 'txt', 'wav'];
+    if (item.is_picture == 1)
+      return AppSettings.backendURL + "files/" + this.jsEncode(item.thumb_url);
+    else if (wellknownExtensions.includes(item.ext)) {
+      return "assets/img/thumb-" + item.ext + ".png";
     } else {
       return "assets/img/thumb-other.png";
     }
   }
   openDialog(type: string, item: CardItem) {
-    
+
     if (type === "privacy") {
       this.dialogRef = this.dialog.open(PrivacyModalComponent, {
         data: item,
@@ -248,18 +248,18 @@ export class PhotosComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         (result: any) => {
-          if(!result || result == undefined) return;
+          if (!result || result == undefined) return;
           item.is_protected = Number(result);
         });
     }
     else if (type === "share") {
-      if(localStorage.getItem('show_direct_link') == "0" &&
+      if (localStorage.getItem('show_direct_link') == "0" &&
         localStorage.getItem('show_forum_code') == "0" &&
         localStorage.getItem('show_html_code') == "0" &&
-        localStorage.getItem('show_social_share') == "0")
-      {
+        localStorage.getItem('show_social_share') == "0") {
         return;
       }
+
       this.dialog.open(ShareModalComponent, {
         data: {
           data: item
@@ -283,20 +283,20 @@ export class PhotosComponent implements OnInit {
       });
       this.dialogRef.afterClosed().subscribe(
         (result: any) => {
-          if(result != true) {
+          if (result != true) {
             this.deleteItems(result);
           }
-      })
+        })
     }
   }
   deleteItems(deletedItems: CardItem[]) {
-    this.cardItems = this.cardItems.filter(function(item) {
+    this.cardItems = this.cardItems.filter(function (item) {
       return !deletedItems.includes(item);
     });
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
   onDeleteFiles() {
-    if(this.selection_list.selected.length == 0) return;
+    if (this.selection_list.selected.length == 0) return;
     this.dialogRef = this.dialog.open(DeleteModalComponent, {
       data: this.selection_list.selected,
       width: '600px',
@@ -305,15 +305,15 @@ export class PhotosComponent implements OnInit {
       (result: any) => {
         this.deleteItems(result);
         this.selection_list.clear();
-    })
+      })
   }
   onSortClicked(change_flag = 1) {
-    if(change_flag)this.sort_mode = 1 - this.sort_mode;
+    if (change_flag) this.sort_mode = 1 - this.sort_mode;
     let sort_mode = this.sort_mode;
-    if(sort_mode == 0)
-      this.cardItems = this.cardItems.sort((a,b) => (a.created_at > b.created_at) ? -1 : ((b.created_at > a.created_at) ? 1 : 0));
-    else if(sort_mode == 1)
-      this.cardItems = this.cardItems.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
+    if (sort_mode == 0)
+      this.cardItems = this.cardItems.sort((a, b) => (a.created_at > b.created_at) ? -1 : ((b.created_at > a.created_at) ? 1 : 0));
+    else if (sort_mode == 1)
+      this.cardItems = this.cardItems.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : ((b.title.toLowerCase() > a.title.toLowerCase()) ? -1 : 0));
     this.dataSource = new MatTableDataSource<CardItem>(this.cardItems);
   }
   searchThis(data) {

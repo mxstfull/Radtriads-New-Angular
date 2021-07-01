@@ -4,20 +4,12 @@
 
 <h1 mat-dialog-title><img src="assets/img/share-icon.png" alt=""> Share Link</h1>
 <div mat-dialog-content>
-  <share-buttons [theme]="'material-dark'"
-  [include]="['facebook','twitter','pinterest','whatsapp','email']"
-  [show]="9"
-  [size]="1"
-  [url]="'https://www.eduforbetterment.com/generate-qr-code-in-angular/'"
-  [image] ="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
-  [autoSetMeta]="false"
-  ></share-buttons>
   <div class="share-icons" *ngIf="show_social_share">
-    <a target="_blank" href="{{setFacebookSharingParam()}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
-    <a target="_blank" href="{{setTwitterSharingParam()}}" ><i class="fa fa-twitter"></i><span>Twitter</span></a>
-    <a target="_blank" href="{{setPinterestSharingParam()}}" ><i class="fa fa-pinterest"></i><span>Pinterest</span></a>
-    <a target="_self" href="{{setWhatsappSharingParam()}}" ><i class="fa fa-whatsapp"></i><span>Whatsapp</span></a>
-    <a target="_self" href="{{setEmailSharingParam()}}" ><i class="fa fa-envelope" ></i><span>Email</span></a>
+    <button shareButton="facebook"><i class="fa fa-facebook"></i><span>Facebook</span></button>
+    <button shareButton="twitter"><i class="fa fa-twitter"></i><span>Twitter</span></button>
+    <button shareButton="pinterest"><i class="fa fa-pinterest"></i><span>Pinterest</span></button>
+    <button shareButton="whatsapp"><i class="fa fa-whatsapp"></i><span>Whatsapp</span></button>
+    <button shareButton="email"><i class="fa fa-envelope"></i><span>Email</span></button>
   </div>
   <div class="clear"></div>
   <div class="share-links">

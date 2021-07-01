@@ -2774,7 +2774,7 @@ input:checked+.slider:before {
     margin: 0 0 0.5em;
 }
 
-.share-icons a {
+.share-icons button {
     float: left;
     width: 120px;
     text-align: center;
@@ -2786,18 +2786,19 @@ input:checked+.slider:before {
     font-weight: 600;
     font-size: 0.9375em;
     margin: 0 15px 0 0;
+    border: none;
 }
 
-.share-icons a:last-child {
+.share-icons button:last-child {
     margin-right: 0;
 }
 
-.share-icons a span {
+.share-icons button span {
     display: block;
     margin-top: 2px;
 }
 
-.share-icons a:hover {
+.share-icons button:hover {
     background: #304156;
     color: #fff;
 }
