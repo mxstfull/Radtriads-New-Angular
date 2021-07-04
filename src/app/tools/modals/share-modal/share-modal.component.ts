@@ -34,7 +34,7 @@ export class ShareModalComponent {
   jsEncode(param: string) {
     if (param == null || param == "") return "";
     let re = /\//gi;
-    param = param.replace(re, '>');
+    param = param.replace(re, '~');
     return param;
   }
   copyText(val: string) {

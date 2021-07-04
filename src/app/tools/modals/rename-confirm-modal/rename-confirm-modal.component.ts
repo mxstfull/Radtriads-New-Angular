@@ -37,7 +37,7 @@ export class RenameConfirmModalComponent {
   }
   jsEncode(param: string) {
     let re = /\//gi;
-    param = param.replace(re, '>');
+    param = param.replace(re, '~');
     return param;
     //return encodeURIComponent(param);
   }

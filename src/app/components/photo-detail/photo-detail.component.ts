@@ -86,7 +86,7 @@ export class PhotoDetailComponent implements OnInit {
   jsEncode(param: string) {
     if (param == null || param == "") return "";
     let re = /\//gi;
-    param = param.replace(re, '>');
+    param = param.replace(re, '~');
     return param;
   }
   getCreatedDateAsString() {
