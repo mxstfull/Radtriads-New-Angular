@@ -55,7 +55,7 @@ const routes: Routes = [
   {
     path: 'photo-details',
     component: PhotoDetailComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'about',
