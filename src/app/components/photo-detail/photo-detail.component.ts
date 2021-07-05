@@ -84,6 +84,7 @@ export class PhotoDetailComponent implements OnInit {
     return AppSettings.backendURL + "files/" + this.jsEncode(item.url);
   }
   jsEncode(param: string) {
+    return "DDD";
     if (param == null || param == "") return "";
     let re = /\//gi;
     param = param.replace(re, '~');
