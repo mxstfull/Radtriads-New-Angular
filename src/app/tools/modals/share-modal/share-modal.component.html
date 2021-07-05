@@ -4,13 +4,15 @@
 
 <h1 mat-dialog-title><img src="assets/img/share-icon.png" alt=""> Share Link</h1>
 <div mat-dialog-content>
-  <div class="share-icons" *ngIf="show_social_share">
+  <!-- <div class="share-icons" *ngIf="show_social_share">
     <button shareButton="facebook"><i class="fa fa-facebook"></i><span>Facebook</span></button>
     <button shareButton="twitter"><i class="fa fa-twitter"></i><span>Twitter</span></button>
     <button shareButton="pinterest"><i class="fa fa-pinterest"></i><span>Pinterest</span></button>
     <button shareButton="whatsapp"><i class="fa fa-whatsapp"></i><span>Whatsapp</span></button>
     <button shareButton="email"><i class="fa fa-envelope"></i><span>Email</span></button>
-  </div>
+  </div> -->
+  <share-buttons [theme]="'material-dark'" [include]="['facebook','twitter','pinterest','whatsapp','whatsapp']"
+    [show]="5" [size]="1" [url]="share_url"  [autoSetMeta]="false"></share-buttons>
   <div class="clear"></div>
   <div class="share-links">
     <div class="share-link" *ngIf="show_direct_link">

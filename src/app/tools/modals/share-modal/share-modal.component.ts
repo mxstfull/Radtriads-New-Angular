@@ -20,6 +20,9 @@ export class ShareModalComponent {
   html_code: string;
   social_share: string;
 
+  share_url: string;
+  share_image: string;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.show_direct_link = parseInt(localStorage.getItem('show_direct_link'));
     this.show_forum_code = parseInt(localStorage.getItem('show_forum_code'));
@@ -29,7 +32,8 @@ export class ShareModalComponent {
     this.direct_link = AppSettings.backendURL+"files/" + this.jsEncode(data.data.url);
     this.forum_code = "[IMG]"+AppSettings.backendURL+"files/" + this.jsEncode(data.data.url) + "[/IMG]";
     this.html_code = "<a href='"+AppSettings.frontendURL+"/photo-details?id=" + data.data.unique_id + "'><img src='" + AppSettings.backendURL+"files/" + this.jsEncode(data.data.url) + "' /></a>";
-
+    this.share_url = AppSettings.frontendURL+"/photo-details?id=" + data.data.unique_id;
+    console.log(this.share_url);
   }
   jsEncode(param: string) {
     if (param == null || param == "") return "";
