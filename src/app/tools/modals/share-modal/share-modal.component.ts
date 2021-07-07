@@ -33,7 +33,6 @@ export class ShareModalComponent {
     this.forum_code = "[IMG]"+AppSettings.backendURL+"files/" + this.jsEncode(data.data.url) + "[/IMG]";
     this.html_code = "<a href='"+AppSettings.frontendURL+"/photo-details?id=" + data.data.unique_id + "'><img src='" + AppSettings.backendURL+"files/" + this.jsEncode(data.data.url) + "' /></a>";
     this.share_url = AppSettings.frontendURL+"/photo-details?id=" + data.data.unique_id;
-    console.log(this.share_url);
   }
   jsEncode(param: string) {
     if (param == null || param == "") return "";
